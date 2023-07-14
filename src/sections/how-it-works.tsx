@@ -23,7 +23,7 @@ const how = [
 const HowSection: React.FC = () => {
     return (
         <section className="px-[200px] py-[80px] akatab">
-            <h2 className="text-4xl outfit font-[600]">
+            <h2 className="text-4xl outfit font-[600] tracking-tight">
                 How it Works
             </h2>
 

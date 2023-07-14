@@ -43,7 +43,7 @@ const FeaturedSection: React.FC = () => {
     return (
         <section className='w-full flex flex-col px-[200px] py-[80px]'>
             <div className='flex flex-row items-center'>
-                <h2 className='text-4xl outfit font-[600]'>
+                <h2 className='text-4xl outfit font-[600] tracking-tight'>
                     Featured Stars
                 </h2>
 

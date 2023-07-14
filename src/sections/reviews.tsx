@@ -39,19 +39,35 @@ const dummyReviews = [
 
 const ReviewsSection: React.FC = () => {
     return (
-        <section className="px-[200px] py-[80px] akatab">
-            <h2 className="text-4xl outfit font-[600]">
+        <section className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[80px] akatab">
+            <h2 className="text-4xl outfit font-[600] tracking-tight">
                 Reviews
             </h2>
 
-            <Swiper slidesPerView={4} className="mySwiper cursor-grab mt-[45px]">
+            <Swiper 
+                slidesPerView={1}
+                className="mySwiper cursor-grab mt-[45px]"
+                breakpoints={{
+                    768: {
+                        slidesPerView: 2
+                    },
+                    1180: {
+                        slidesPerView: 3
+                    },
+                    1720: {
+                        slidesPerView: 4
+                    }
+                }}>
                 {dummyReviews.map((rev, index) =>
                     <SwiperSlide key={index} className={`${index !== 0 && 'ml-[20px]'}`}>
                         <div className={`${(index+1)%2 === 0 ? 'bg-[#eff2fe]' : 'bg-[#f6f8fd]'} rounded-[40px] px-[35px] py-[30px]`}>
-                            <h4 className="text-xl font-[800]">{rev.title}</h4>
-                            <p className="mt-[20px] font-[500]">{rev.description}</p>
+                            <h4 className="text-xl font-[800] text-center md:text-left">{rev.title}</h4>
+                            <p className="mt-[20px] font-[500] text-sm lg:text-base max-w-[48ch] md:max-w-none 
+                            text-justify xl:text-left mx-auto md:mx-0">
+                                {rev.description}
+                            </p>
 
-                            <div className="flex flex-row mt-[20px] items-center">
+                            <div className="flex flex-row mt-[20px] items-center justify-center md:justify-normal">
                                 <div className="flex flex-row text-[#fb5971] gap-[5px]">
                                     <AiFillStar />
                                     <AiFillStar />
