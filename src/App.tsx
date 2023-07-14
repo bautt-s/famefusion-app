@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import BenefitsSection from "./sections/benefits";
+import FeaturedSection from "./sections/featured-stars";
+import HeroSection from "./sections/hero";
+import HowSection from "./sections/how-it-works";
+import NavSection from "./sections/nav";
+import ReviewsSection from "./sections/reviews";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="w-screen overflow-x-hidden">
+            <NavSection />
+            <HeroSection />
+            <FeaturedSection />
+            <HowSection />
+            <ReviewsSection />
+            <BenefitsSection />
+        </div>
+    );
 }
 
 export default App;
