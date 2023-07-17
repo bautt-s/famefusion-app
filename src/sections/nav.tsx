@@ -49,7 +49,7 @@ const NavSection: React.FC = () => {
             <div className={`flex flex-row items-center ${visible ? 'md:flex' : 'md:hidden'}`}>
                 <img src={logo} className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' />
 
-                <ul className="hidden lg:flex flex-row text-base akatab font-[600] lg:gap-[15px] xl:gap-[25px] 
+                <ul className="hidden lg:flex flex-row text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 
                 2xl:gap-[35px] mt-[5px] lg:ml-[25px] xl:ml-[40px] ml-[65px] nav-items">
                     <li>Browse celebrity</li>
                     <li>How it works</li>
@@ -59,7 +59,7 @@ const NavSection: React.FC = () => {
             </div>
 
             <div className={`hidden flex-row ml-auto lg:gap-[10px] xl:gap-[20px] 2xl:gap-[25px] items-center ${visible ? 'lg:flex' : 'lg:hidden'}`}>
-                <div className='bg-white border-[#bec2c2] border-[2px] flex flex-row items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] rounded-xl py-[5px]'>
+                <div className='bg-white border-[#bec2c2] border-[1px] flex flex-row items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] rounded-xl py-[5px]'>
                     <CiSearch className='text-2xl text-[#505252]' />
 
                     <form>

@@ -71,7 +71,7 @@ const FeaturedSection: React.FC = () => {
                         <GoHeartFill className='absolute top-0 right-0 text-3xl text-[#B1B4B4] heart-shadow mt-[10px] mr-[10px]' />
 
                         <div className='flex flex-row items-center mt-[15px]'>
-                            <h4 className='text-2xl font-[800]'>{c.name}</h4>
+                            <h4 className='text-2xl font-[600]'>{c.name}</h4>
 
                             <div className='flex flex-row items-center ml-auto'>
                                 <BsStarFill className='text-sm' />
@@ -81,7 +81,7 @@ const FeaturedSection: React.FC = () => {
 
                         <p className='text-lg leading-[25px] my-[15px] text-[#646868]'>{c.description}</p>
 
-                        <span className='font-[800] text-lg absolute bottom-[-20px]'>From €{c.startingPrice}</span>
+                        <span className='font-[600] text-lg absolute bottom-[-20px]'>From €{c.startingPrice}</span>
                     </div>
                 )}
             </div>

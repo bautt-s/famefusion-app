@@ -8,7 +8,7 @@ import ReviewsSection from "./sections/reviews";
 
 function App() {
     return (
-        <div className="w-screen overflow-x-hidden">
+        <div className="w-screen overflow-x-hidden antialiased">
             <NavSection />
             <HeroSection />
             <FeaturedSection />

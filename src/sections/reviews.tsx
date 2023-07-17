@@ -22,7 +22,7 @@ const dummyReviews = [
     },
     {
         title: 'Coffee with celebrity',
-        description: `“I've always admired this celebrity. The team went above and beyond to make the experience special and tailored to my preferences. The moments shared were truly inspirational, and I am grateful for this opportunity. It was an unforgettable e”`,
+        description: `“I've always admired this celebrity. The team went above and beyond to make the experience special and tailored to my preferences. The moments shared were truly inspirational, and I am grateful for this opportunity. It was an unforgettable experience!”`,
         name: 'David M.'
     },
     {
@@ -31,7 +31,7 @@ const dummyReviews = [
         name: 'Sarah J.'
     },
     {
-        title: 'Guitar lesson',
+        title: 'Social media promo',
         description: '"As a business owner, collaborating with a celebrity through this platform was a game-changer for my brand. The team understood our marketing goals and facilitated a seamless partnership. The impact on our brand has been tremendous. Highly recommended!”',
         name: 'Mark R.'
     },
@@ -61,8 +61,8 @@ const ReviewsSection: React.FC = () => {
                 {dummyReviews.map((rev, index) =>
                     <SwiperSlide key={index} className={`${index !== 0 && 'ml-[20px]'}`}>
                         <div className={`${(index+1)%2 === 0 ? 'bg-[#eff2fe]' : 'bg-[#f6f8fd]'} rounded-[40px] px-[35px] py-[30px]`}>
-                            <h4 className="text-xl font-[800] text-center md:text-left">{rev.title}</h4>
-                            <p className="mt-[20px] font-[500] text-sm lg:text-base max-w-[48ch] md:max-w-none 
+                            <h4 className="text-xl font-[600] text-center md:text-left">{rev.title}</h4>
+                            <p className="mt-[20px] font-[400] text-sm lg:text-base max-w-[48ch] md:max-w-none 
                             text-justify xl:text-left mx-auto md:mx-0">
                                 {rev.description}
                             </p>
@@ -76,7 +76,7 @@ const ReviewsSection: React.FC = () => {
                                     <AiFillStar />
                                 </div>
 
-                                <span className="font-[800] ml-[25px]">{rev.name}</span>
+                                <span className="font-[600] ml-[25px]">{rev.name}</span>
                             </div>
                         </div>
                     </SwiperSlide>

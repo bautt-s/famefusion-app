@@ -32,8 +32,8 @@ const HowSection: React.FC = () => {
                     <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-[50px] z-50">
                         {item.icon}
 
-                        <h4 className="text-2xl font-[800] mt-[25px]">{item.title}</h4>
-                        <p className="mt-[15px] max-w-[30ch] font-[500]">{item.description}</p>
+                        <h4 className="text-2xl font-[600] mt-[25px]">{item.title}</h4>
+                        <p className="mt-[15px] max-w-[24ch] font-[400] text-lg">{item.description}</p>
                     </div>
                 )}
             </div>

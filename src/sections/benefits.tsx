@@ -8,11 +8,11 @@ const BenefitsSection: React.FC = () => {
             <div className='relative z-50 flex flex-col items-center justify-center sm:items-start sm:justify-normal'>
                 <span className="text-[#959b9b] font-[500] text-lg">BENEFITS</span>
 
-                <h2 className="text-5xl 2xl:text-6xl outfit font-[600] mt-[10px] tracking-tight">
+                <h2 className="text-5xl 2xl:text-6xl outfit font-[700] mt-[10px] tracking-tight">
                     Memorable Experiences
                 </h2>
 
-                <p className="mt-[40px] text-xl max-w-[60ch] text-center sm:text-left">
+                <p className="mt-[40px] text-xl max-w-[60ch] text-center sm:text-left font-[400]">
                     Interact with celebrities for unforgettable moments, gaining motivation, guidance, and personal inspiration for your own aspirations.
                 </p>
 

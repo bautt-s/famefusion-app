@@ -4,16 +4,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'CocoSharp';
+    src: url('./static/fonts/cocosharp-regular.ttf') format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'CocoSharp';
+    src: url('./static/fonts/cocosharp-bold.ttf') format("truetype");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'TT Hoves Pro';
+    src: url('./static/fonts/tthovespro-regular.ttf') format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'TT Hoves Pro';
+    src: url('./static/fonts/tthovespro-medium.ttf') format("truetype");
+    font-weight: 500;
+}
+
 body {
     overflow-x: hidden
 }
 
 .akatab {
-    font-family: 'Akatab', sans-serif;
+    font-family: 'TT Hoves Pro', sans-serif;
 }
 
 .outfit {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'CocoSharp', sans-serif;
 }
 
 .heart-shadow {

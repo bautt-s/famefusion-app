@@ -33,11 +33,11 @@ const FooterSection: React.FC = () => {
                 <div className='grid grid-cols-2 lg:gap-[80px] xl:gap-[100px] mt-[35px] lg:mt-0 lg:ml-auto'>
                     {navColumns.map((col, index) =>
                         <div key={index} >
-                            <h5 className='font-[800]'>{col.title}</h5>
+                            <h5 className='font-[600]'>{col.title}</h5>
 
                             <ul className='mt-[25px]'>
                                 {col.items.map((item, itemIndex) =>
-                                    <li key={itemIndex} className='mt-[15px] text-[#1f1f1f] w-fit font-[500]'>{item}</li>
+                                    <li key={itemIndex} className='mt-[15px] text-[#1f1f1f] w-fit font-[400]'>{item}</li>
                                 )}
                             </ul>
                         </div>
@@ -45,11 +45,11 @@ const FooterSection: React.FC = () => {
                 </div>
 
                 <div className='flex flex-col mx-auto lg:mr-0 mt-[35px] lg:mt-0 lg:ml-auto w-full lg:w-auto'>
-                    <h5 className='font-[800]'>Subscribe to Newsletter</h5>
+                    <h5 className='font-[600]'>Subscribe to Newsletter</h5>
 
                     <form className='flex flex-row mt-[25px]'>
                         <input type="text" placeholder="Enter email address"
-                            className='bg-[#F7F8FC] border-[#bec2c2] border-[2px] py-[10px] px-[15px] rounded-l-2xl border-r-0 w-full lg:w-[180px] 2xl:w-[300px]' />
+                            className='bg-[#F7F8FC] border-[#bec2c2] border-[1px] py-[10px] px-[15px] rounded-l-2xl border-r-0 w-full lg:w-[180px] 2xl:w-[300px]' />
 
                         <button className='bg-[#1f1e1f] hover:bg-[#353435] text-white py-[12px] w-[50%] lg:px-[30px] 
                         rounded-r-2xl font-[500] transition-colors duration-300'>
@@ -64,7 +64,7 @@ const FooterSection: React.FC = () => {
                 <div className='w-[40%] h-[60px] bg-white rounded-l-full ml-auto'></div>
             </div>
 
-            <div className='flex flex-col lg:flex-row items-center akatab mt-[-60px] lg:mt-[-20px] font-[500] lg:px-[60px] xl:px-[140px] 2xl:px-[200px]'>
+            <div className='flex flex-col lg:flex-row items-center akatab mt-[-60px] lg:mt-[-20px] font-[400] lg:px-[60px] xl:px-[140px] 2xl:px-[200px]'>
                 <div className='flex flex-row items-center'>
                     <img src={iconUK} className='w-[32px] h-[32px]' />
                     <span className='ml-[15px]'>English (EN)</span>
