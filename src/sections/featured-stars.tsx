@@ -1,5 +1,14 @@
 import { GoChevronLeft, GoChevronRight, GoHeartFill } from 'react-icons/go'
 import { BsStarFill } from 'react-icons/bs'
+import { useEffect, useState } from 'react'
+
+type StarType = {
+    name: string,
+    description: string,
+    rating: number,
+    startingPrice: number,
+    img: string
+}
 
 const dummyCelebrities = [
     {
@@ -36,10 +45,40 @@ const dummyCelebrities = [
         rating: 4.97,
         startingPrice: 120,
         img: 'https://assets.ynap-content.com/story-metadata-image-1639991679929.jpeg'
+    },
+    {
+        name: 'Tom Hiddleston',
+        description: 'Famous English actor',
+        rating: 5,
+        startingPrice: 100,
+        img: 'https://images.hdqwalls.com/wallpapers/tom-hiddleston-nm.jpg'
+    },
+    {
+        name: 'Zoe Kravitz',
+        description: 'American singer, model and actress',
+        rating: 4.97,
+        startingPrice: 80,
+        img: 'https://media.vogue.es/photos/5f35007dbd28f824f895f5da/2:3/w_1920,c_limit/hf_105_pc_01258r-1.jpg'
     }
 ]
 
 const FeaturedSection: React.FC = () => {
+    const [featured, setFeatured] = useState<StarType[]>([])
+    const [limit, setLimit] = useState(5)
+
+    const handleFeatured = (mode: 'asc' | 'desc') => {
+        if (mode === 'asc') {
+            if (limit < dummyCelebrities.length) setLimit(limit+1)
+        } else {
+            if (limit > 5) setLimit(limit-1)
+        }
+    }
+
+    useEffect(() => {
+        setFeatured(dummyCelebrities.slice(limit-5, limit))
+        console.log(limit)
+    }, [limit])
+
     return (
         <section className='w-full flex flex-col px-[200px] py-[80px]'>
             <div className='flex flex-row items-center'>
@@ -53,11 +92,13 @@ const FeaturedSection: React.FC = () => {
                     </button>
 
                     <div className='flex flex-row gap-[15px]'>
-                        <button className='rounded-full border p-[7px] text-xl hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
+                        <button onClick={() => handleFeatured('desc')}
+                        className='rounded-full border p-[7px] text-xl hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
                             <GoChevronLeft />
                         </button>
 
-                        <button className='rounded-full border p-[7px] text-xl hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
+                        <button onClick={() => handleFeatured('asc')}
+                        className='rounded-full border p-[7px] text-xl hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
                             <GoChevronRight />
                         </button>
                     </div>
@@ -65,7 +106,7 @@ const FeaturedSection: React.FC = () => {
             </div>
 
             <div className='flex flex-row mt-[45px] gap-[25px]'>
-                {dummyCelebrities.map((c, index) =>
+                {featured.map((c: StarType, index: number) =>
                     <div key={index} className='akatab relative w-full max-h-[600px] '>
                         <img src={c.img} className='w-full h-[380px] object-cover rounded-2xl' />
                         <GoHeartFill className='absolute top-0 right-0 text-3xl text-[#B1B4B4] heart-shadow mt-[10px] mr-[10px]' />
