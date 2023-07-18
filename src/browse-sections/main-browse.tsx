@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Filters from '../components/filters/filters'
 
 const filterItems = ['Show All', 'Featured', 'Actors', 'Athletes',
     'Comedians', 'Creators', 'Musicians', 'Professionals', 'Reality TV']
@@ -33,6 +34,10 @@ const MainBrowse: React.FC = () => {
                     </div>
                     <div className="w-[150px] h-[35px] bg-[#F7F8FC] rounded-bl-[27px] z-20"></div>
                 </div>
+            </div>
+
+            <div className='flex flex-row justify-center pt-[60px]'>
+                <Filters />
             </div>
         </div>
     )

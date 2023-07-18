@@ -28,6 +28,12 @@
     font-weight: 500;
 }
 
+@font-face {
+    font-family: 'TT Hoves Pro';
+    src: url('./static/fonts/tthovespro-bold.ttf') format("truetype");
+    font-weight: 600;
+}
+
 ::-moz-selection {
     /* Code for Firefox */
     background: #FB5870;
