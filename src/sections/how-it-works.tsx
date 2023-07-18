@@ -28,8 +28,10 @@ const HowSection: React.FC = () => {
             </h2>
 
             <div className="hidden lg:flex flex-row mt-[45px] relative text-[#1F1F1F]">
-                <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-l-[50px] rounded-tr-[50px] rounded-br-none z-40">
-                    {how[0].icon}
+                <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-l-[50px] rounded-tr-[50px] rounded-br-none z-40 group">
+                    <div className="group-hover:scale-105 transition-all duration-300">
+                        {how[0].icon}
+                    </div>
 
                     <h4 className="text-xl xl:text-2xl font-[600] mt-[25px]">{how[0].title}</h4>
                     <p className="mt-[15px] max-w-[24ch] font-[400] text-base xl:text-lg">{how[0].description}</p>
@@ -39,8 +41,10 @@ const HowSection: React.FC = () => {
                     <div className="w-full h-1/2 bg-white rounded-b-full"></div>
                 </div>
 
-                <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-tl-[50px] rounded-br-[50px] z-40">
-                    {how[1].icon}
+                <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-tl-[50px] rounded-br-[50px] z-40 group">
+                    <div className="group-hover:scale-105 transition-all duration-300">
+                        {how[1].icon}
+                    </div>
 
                     <h4 className="text-xl xl:text-2xl font-[600] mt-[25px]">{how[1].title}</h4>
                     <p className="mt-[15px] max-w-[24ch] font-[400] text-base xl:text-lg">{how[1].description}</p>
@@ -50,8 +54,10 @@ const HowSection: React.FC = () => {
                     <div className="w-full h-1/2 bg-white rounded-t-full mt-auto"></div>
                 </div>
 
-                <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-[50px] rounded-tl-none z-40">
-                    {how[2].icon}
+                <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-[50px] rounded-tl-none z-40 group">
+                    <div className="group-hover:scale-105 transition-all duration-300">
+                        {how[2].icon}
+                    </div>
 
                     <h4 className="text-xl xl:text-2xl font-[600] mt-[25px]">{how[2].title}</h4>
                     <p className="mt-[15px] max-w-[24ch] font-[400] text-base xl:text-lg">{how[2].description}</p>

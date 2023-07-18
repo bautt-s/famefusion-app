@@ -66,21 +66,23 @@ const FeaturedSection: React.FC = () => {
     const [featured, setFeatured] = useState<StarType[]>([])
     const [limit, setLimit] = useState(5)
 
+    const screenWidth = window.innerWidth
+    const starsShowed = screenWidth > 1024 ? 5 : 4
+    
     const handleFeatured = (mode: 'asc' | 'desc') => {
         if (mode === 'asc') {
             if (limit < dummyCelebrities.length) setLimit(limit+1)
         } else {
-            if (limit > 5) setLimit(limit-1)
+            if (limit > starsShowed) setLimit(limit-1)
         }
     }
 
     useEffect(() => {
-        setFeatured(dummyCelebrities.slice(limit-5, limit))
-        console.log(limit)
-    }, [limit])
+        setFeatured(dummyCelebrities.slice(limit-starsShowed, limit))
+    }, [limit, starsShowed])
 
     return (
-        <section className='w-full flex flex-col px-[200px] py-[80px]'>
+        <section className='w-full flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[80px]'>
             <div className='flex flex-row items-center'>
                 <h2 className='text-4xl outfit font-[600] tracking-tight'>
                     Featured Stars
@@ -105,11 +107,12 @@ const FeaturedSection: React.FC = () => {
                 </div>
             </div>
 
-            <div className='flex flex-row mt-[45px] gap-[25px]'>
+            <div className='grid grid-cols-2 gap-y-[80px] lg:flex flex-row mt-[45px] gap-[25px] lg:h-[600px]'>
                 {featured.map((c: StarType, index: number) =>
-                    <div key={index} className='akatab relative w-full max-h-[600px] '>
-                        <img src={c.img} className='w-full h-[380px] object-cover rounded-2xl' />
-                        <GoHeartFill className='absolute top-0 right-0 text-3xl text-[#B1B4B4] heart-shadow mt-[10px] mr-[10px]' />
+                    <div key={index} className='akatab relative w-full group'>
+                        <img src={c.img} className='w-full h-[380px] lg:group-hover:h-[420px] object-cover rounded-2xl featured-img transition-all duration-300' alt={c.name} />
+                        <GoHeartFill className='absolute top-0 right-0 text-3xl text-[#B1B4B4] cursor-pointer
+                        hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300' />
 
                         <div className='flex flex-row items-center mt-[15px]'>
                             <h4 className='text-2xl font-[600]'>{c.name}</h4>
@@ -120,9 +123,9 @@ const FeaturedSection: React.FC = () => {
                             </div>
                         </div>
 
-                        <p className='text-lg leading-[25px] my-[15px] text-[#646868]'>{c.description}</p>
+                        <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px]'>{c.description}</p>
 
-                        <span className='font-[600] text-lg absolute bottom-[-20px]'>From €{c.startingPrice}</span>
+                        <span className='font-[600] text-lg '>From €{c.startingPrice}</span>
                     </div>
                 )}
             </div>

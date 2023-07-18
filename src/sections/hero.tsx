@@ -19,15 +19,17 @@ const HeroSection: React.FC = () => {
                     with your favourite stars like never before. Connecting Worlds, Creating Memories
                 </p>
 
-                <button className='flex flex-row items-center mt-[60px] text-lg text-white bg-[#FB5870] rounded-xl px-[35px] py-[12px] w-fit'>
+                <button className='flex flex-row items-center mt-[60px] text-lg text-white bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]
+                 rounded-xl px-[35px] py-[12px] w-fit transition-colors duration-300'>
                     Browse celebrities
                     <FaArrowRightLong className='text-lg ml-[20px]'/>
                 </button>
             </div>
 
-            <img src={heroImage} className='ml-auto hero-img hidden xl:flex' />
+            <img src={heroImage} className='ml-auto hero-img hidden xl:flex' alt='Some of our stars.' />
 
-            <img src={heroSmallImage} className='hidden md:flex xl:hidden ml-auto lg:w-[400px] h-[400px] object-cover object-top rounded-2xl hero-small-img' />
+            <img src={heroSmallImage} alt='One of our stars.'
+            className='hidden md:flex xl:hidden ml-auto lg:w-[400px] h-[400px] object-cover object-top rounded-2xl hero-small-img' />
         </section>
     )
 }

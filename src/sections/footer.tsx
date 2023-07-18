@@ -20,13 +20,13 @@ const FooterSection: React.FC = () => {
         <section className="bg-[#f7f8fc] py-[30px] akatab relative">
             <div className="flex flex-col lg:flex-row px-[80px] lg:px-[60px] xl:px-[140px] 2xl:px-[200px] relative z-50">
                 <div className="flex flex-col mx-auto lg:mx-0">
-                    <img src={logo} className='w-[170px] h-[25px]' />
+                    <img src={logo} className='w-[170px] h-[25px]' alt='FameFusion Logo' />
 
                     <div className='flex flex-row gap-[15px] mt-[25px] text-[#1f1f1f] items-center mx-auto lg:mx-0'>
-                        <IoMailOutline className='text-2xl' />
-                        <PiInstagramLogo className='text-2xl' />
-                        <PiFacebookLogo className='text-2xl' />
-                        <PiTwitterLogo className='text-2xl' />
+                        <IoMailOutline className='text-2xl hover:skew-y-12 transition-all duration-300 cursor-pointer' />
+                        <PiInstagramLogo className='text-2xl hover:skew-y-[-12deg] transition-all duration-300 cursor-pointer' />
+                        <PiFacebookLogo className='text-2xl hover:skew-y-12 transition-all duration-300 cursor-pointer' />
+                        <PiTwitterLogo className='text-2xl hover:skew-y-[-12deg] transition-all duration-300 cursor-pointer' />
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@ const FooterSection: React.FC = () => {
 
                     <form className='flex flex-row mt-[25px]'>
                         <input type="text" placeholder="Enter email address"
-                            className='bg-[#F7F8FC] border-[#bec2c2] border-[1px] py-[10px] px-[15px] rounded-l-2xl border-r-0 w-full lg:w-[180px] 2xl:w-[300px]' />
+                            className='bg-[#F7F8FC] outline-none border-[#bec2c2] border-[1px] py-[10px] px-[15px] rounded-l-2xl border-r-0 w-full lg:w-[180px] 2xl:w-[300px]' />
 
                         <button className='bg-[#1f1e1f] hover:bg-[#353435] text-white py-[12px] w-[50%] lg:px-[30px] 
                         rounded-r-2xl font-[500] transition-colors duration-300'>
@@ -66,7 +66,7 @@ const FooterSection: React.FC = () => {
 
             <div className='flex flex-col lg:flex-row items-center akatab mt-[-60px] lg:mt-[-20px] font-[400] lg:px-[60px] xl:px-[140px] 2xl:px-[200px]'>
                 <div className='flex flex-row items-center'>
-                    <img src={iconUK} className='w-[32px] h-[32px]' />
+                    <img src={iconUK} className='w-[32px] h-[32px]' alt='Language Icon' />
                     <span className='ml-[15px]'>English (EN)</span>
                 </div>
 

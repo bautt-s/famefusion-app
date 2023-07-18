@@ -1,10 +1,11 @@
 import { CiSearch } from 'react-icons/ci'
-import { GoChevronDown } from 'react-icons/go'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
 
 const logo = require('../static/logo.png')
 const portugalIcon = require('../static/icon-portugal.png')
+
+const navItems = ['Browse celebrity', 'How it works', 'For business', 'Join as talent']
 
 const NavSection: React.FC = () => {
     const [menu, setMenu] = useState(false)
@@ -19,42 +20,29 @@ const NavSection: React.FC = () => {
 
         if (currentScrollPos > prevScrollPos) setVisible(false)
         else setVisible(true)
-        
+
         setPrevScrollPos(currentScrollPos)
     }
 
-    // state and variants used to animate nav elements only on initial render
-    const [animate, setAnimate] = useState(false)
-
-    const variants = {
-        render: { opacity: 1, translateY: 0 },
-    }
-
-    const handleButtonClick = () => {
-        const pdfUrl = '/resume.pdf'
-        window.open(pdfUrl, '_blank')
-    };
-    
-
     useEffect(() => {
-        setTimeout(() => setAnimate(true), 1000)
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll)
     })
 
     return (
-        <nav className={`z-[999] transition-all duration-300 bg-white w-full fixed px-[40px] lg:px-[60px] ${prevScrollPos && 'shadow-2xl'}
+        <nav className={`z-[999] transition-all duration-300 bg-white w-full fixed px-[40px] lg:px-[60px] ${prevScrollPos && 'shadow-xl'}
         xl:px-[120px] 2xl:px-[200px] flex flex-row items-center border-b-[1px] ${visible ? 'h-[90px] py-[25px]' : 'h-0'}`}>
             <div className={`flex flex-row items-center ${visible ? 'md:flex' : 'md:hidden'}`}>
-                <img src={logo} className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' />
+                <img src={logo} className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' alt={'FameFusion Logo'} />
 
                 <ul className="hidden lg:flex flex-row text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 
                 2xl:gap-[35px] mt-[5px] lg:ml-[25px] xl:ml-[40px] ml-[65px] nav-items">
-                    <li>Browse celebrity</li>
-                    <li>How it works</li>
-                    <li>For business</li>
-                    <li>Join as talent</li>
+                    {navItems.map((item, index) =>
+                        <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
+                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">{item}</div>
+                    )}
                 </ul>
             </div>
 
@@ -66,13 +54,12 @@ const NavSection: React.FC = () => {
                         <input type="text" placeholder="Search" className="bg-white ml-[15px] lg:w-[80px] 2xl:w-[100px] 
                         2xl:focus:w-[200px] transition-all duration-500 akatab outline-none searchbar" />
                     </form>
-
-                    <GoChevronDown />
                 </div>
 
-                <img src={portugalIcon} className='w-[32px] h-[32px] hidden xl:flex' />
+                <img src={portugalIcon} className='w-[32px] h-[32px] hidden xl:flex' alt='Country Icon' />
 
-                <button className='bg-[#1E1F1E] text-white lg:px-[20px] 2xl:px-[35px] rounded-xl akatab py-[8px] font-[500]'>
+                <button className='bg-[#1E1F1E] hover:bg-[#2b2b2b] active:bg-[#313131] text-white 
+                lg:px-[20px] 2xl:px-[35px] rounded-xl akatab py-[8px] font-[500] transition-colors duration-300'>
                     Sign In
                 </button>
             </div>
@@ -89,11 +76,9 @@ const NavSection: React.FC = () => {
                             <form>
                                 <input type="text" placeholder="Search" className="bg-white ml-[15px] akatab outline-none w-[200px]" />
                             </form>
-
-                            <GoChevronDown />
                         </div>
 
-                        <img src={portugalIcon} className='w-[48px] h-[48px] ml-[10px]' />
+                        <img src={portugalIcon} className='w-[48px] h-[48px] ml-[10px]' alt='Country Icon' />
                     </div>
 
                     <div className={`flex flex-col items-center mt-[40px] ${menu ? 'flex' : 'hidden'}`}>

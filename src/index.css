@@ -44,32 +44,61 @@ body {
     filter: drop-shadow(1px -1px 0 rgb(255, 255, 255)) drop-shadow(-1px -1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 0 rgb(255, 255, 255)) drop-shadow(-1px 1px 0 rgb(255, 255, 255));
 }
 
+.swiper-slide-active + * + * + * {
+    opacity: 0.4;
+    transition: all 2s;
+}
+
+.button-slide-1 {
+    background-color: #fb5971;
+}
+
+.button-slide-1:hover {
+    background-color: #e64c63;
+}
+
+.button-slide-2 {
+    background-color: #6558FB;
+}
+
+.button-slide-2:hover {
+    background-color: #584ce0;
+}
+
+.button-slide-3 {
+    background-color: #1f1f1f;
+}
+
+.button-slide-3:hover {
+    background-color: #313131;
+}
+
 @media (min-width: 1537px) and (max-width: 1650px) {
     .hero-img {
-        width: 550px;  
+        width: 550px;
     }
 }
 
 @media (min-width: 1280px) and (max-width: 1465px) {
     .hero-img {
-        width: 550px;   
+        width: 550px;
     }
 }
 
 @media (min-width: 970px) and (max-width: 1024px) {
     .hero-small-img {
-        width: 500px;   
+        width: 500px;
     }
 }
 
 @media (min-width: 920px) and (max-width: 970px) {
     .hero-small-img {
-        width: 450px;   
+        width: 450px;
     }
 }
 
 @media (min-width: 850px) and (max-width: 920px) {
     .hero-small-img {
-        width: 370px;   
+        width: 370px;
     }
 }
