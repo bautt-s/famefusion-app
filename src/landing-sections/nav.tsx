@@ -1,11 +1,10 @@
 import { CiSearch } from 'react-icons/ci'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const logo = require('../static/logo.png')
 const portugalIcon = require('../static/icon-portugal.png')
-
-const navItems = ['Browse celebrity', 'How it works', 'For business', 'Join as talent']
 
 const NavSection: React.FC = () => {
     const [menu, setMenu] = useState(false)
@@ -34,15 +33,27 @@ const NavSection: React.FC = () => {
         <nav className={`z-[999] transition-all duration-300 bg-white w-full fixed px-[40px] lg:px-[60px] ${prevScrollPos && 'shadow-xl'}
         xl:px-[120px] 2xl:px-[200px] flex flex-row items-center border-b-[1px] ${visible ? 'h-[90px] py-[25px]' : 'h-0'}`}>
             <div className={`flex flex-row items-center ${visible ? 'md:flex' : 'md:hidden'}`}>
-                <img src={logo} className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' alt={'FameFusion Logo'} />
+                <Link to='/'>
+                    <img src={logo} className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' alt={'FameFusion Logo'} />
+                </Link>
 
                 <ul className="hidden lg:flex flex-row text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 
                 2xl:gap-[35px] mt-[5px] lg:ml-[25px] xl:ml-[40px] ml-[65px] nav-items">
-                    {navItems.map((item, index) =>
-                        <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
+                    <Link className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
                         after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
-                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">{item}</div>
-                    )}
+                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer" to='/browse'>Browse celebrity</Link>
+
+                    <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
+                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">How it works</div>
+
+                    <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
+                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">For business</div>
+
+                    <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
+                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">Join as talent</div>
                 </ul>
             </div>
 
@@ -83,7 +94,7 @@ const NavSection: React.FC = () => {
 
                     <div className={`flex flex-col items-center mt-[40px] ${menu ? 'flex' : 'hidden'}`}>
                         <ul className='akatab text-white text-lg text-center'>
-                            <li>Browse celebrity</li>
+                            <Link to='/browse'>Browse celebrity</Link>
                             <li className='mt-[20px]'>How it works</li>
                             <li className='mt-[20px]'>For business</li>
                             <li className='mt-[20px]'>Join as talent</li>

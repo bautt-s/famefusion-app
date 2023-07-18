@@ -28,6 +28,15 @@
     font-weight: 500;
 }
 
+::-moz-selection {
+    /* Code for Firefox */
+    background: #FB5870;
+}
+
+::selection {
+    background: #FB5870;
+}
+
 body {
     overflow-x: hidden
 }

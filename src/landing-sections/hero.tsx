@@ -1,4 +1,5 @@
 import { FaArrowRightLong } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
 
 const heroImage = require('../static/hero-image.png')
 const heroSmallImage = require('../static/hero-small-image.png')
@@ -19,11 +20,11 @@ const HeroSection: React.FC = () => {
                     with your favourite stars like never before. Connecting Worlds, Creating Memories
                 </p>
 
-                <button className='flex flex-row items-center mt-[60px] text-lg text-white bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]
-                 rounded-xl px-[35px] py-[12px] w-fit transition-colors duration-300'>
+                <Link className='flex flex-row items-center mt-[60px] text-lg text-white bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]
+                 rounded-xl px-[35px] py-[12px] w-fit transition-colors duration-300' to='/browse'>
                     Browse celebrities
                     <FaArrowRightLong className='text-lg ml-[20px]'/>
-                </button>
+                </Link>
             </div>
 
             <img src={heroImage} className='ml-auto hero-img hidden xl:flex' alt='Some of our stars.' />
