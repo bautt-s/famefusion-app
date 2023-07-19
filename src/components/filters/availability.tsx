@@ -15,7 +15,7 @@ const options = {
         clearBtn: "bg-white text-[#1f1f1f]",
         icons: "",
         text: "font-normal",
-        disabledText: "text-gray-400 font-normal",
+        disabledText: "text-gray-400",
         input: "bg-white outline-none",
         inputIcon: "",
         selected: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]",
@@ -41,7 +41,7 @@ const AvailabilityAcc: React.FC = () => {
          input date, use the onChange attribute.*/ }
 
     return (
-        <div>
+        <div className='flex flex-col justify-center'>
             <div className='relative akatab flex flex-col'>
                 <span className='text-gray-400 font-[500]'>Add start date:</span>
                 <Datepicker options={options} show={show1} setShow={handleClose1} />

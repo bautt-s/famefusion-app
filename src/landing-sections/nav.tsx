@@ -30,14 +30,14 @@ const NavSection: React.FC = () => {
     })
 
     return (
-        <nav className={`z-[999] transition-all duration-300 bg-white w-full fixed px-[40px] lg:px-[60px] ${prevScrollPos && 'shadow-xl'}
-        xl:px-[120px] 2xl:px-[200px] flex flex-row items-center border-b-[1px] ${visible ? 'h-[90px] py-[25px]' : 'h-0'}`}>
-            <div className={`flex flex-row items-center ${visible ? 'md:flex' : 'md:hidden'}`}>
+        <nav className={`z-[999] transition-all duration-500 bg-white w-full fixed px-[40px] lg:px-[60px] border-b-[1px]
+        xl:px-[120px] 2xl:px-[200px] flex flex-row items-center h-[90px] py-[25px] ${prevScrollPos ? 'border-gray-300' : 'border-white'}`}>
+            <div className='flex flex-row items-center'>
                 <Link to='/'>
                     <img src={logo} className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' alt={'FameFusion Logo'} />
                 </Link>
 
-                <ul className="hidden lg:flex flex-row text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 
+                <ul className="hidden lg:flex flex-row lg:text-sm xl:text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 
                 2xl:gap-[35px] mt-[5px] lg:ml-[25px] xl:ml-[40px] ml-[65px] nav-items">
                     <Link className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
                         after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
@@ -57,7 +57,7 @@ const NavSection: React.FC = () => {
                 </ul>
             </div>
 
-            <div className={`hidden flex-row ml-auto lg:gap-[10px] xl:gap-[20px] 2xl:gap-[25px] items-center ${visible ? 'lg:flex' : 'lg:hidden'}`}>
+            <div className={`hidden flex-row ml-auto lg:gap-[10px] xl:gap-[20px] 2xl:gap-[25px] items-center lg:flex`}>
                 <div className='bg-white border-[#bec2c2] border-[1px] flex flex-row items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] rounded-xl py-[5px]'>
                     <CiSearch className='text-2xl text-[#505252]' />
 
@@ -67,7 +67,7 @@ const NavSection: React.FC = () => {
                     </form>
                 </div>
 
-                <img src={portugalIcon} className='w-[32px] h-[32px] hidden xl:flex' alt='Country Icon' />
+                <img src={portugalIcon} className='w-[32px] h-[32px] hidden lg:flex' alt='Country Icon' />
 
                 <button className='bg-[#1E1F1E] hover:bg-[#2b2b2b] active:bg-[#313131] text-white 
                 lg:px-[20px] 2xl:px-[35px] rounded-xl akatab py-[8px] font-[500] transition-colors duration-300'>

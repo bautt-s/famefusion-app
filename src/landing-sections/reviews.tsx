@@ -60,7 +60,7 @@ const ReviewsSection: React.FC = () => {
                 }}>
                 {dummyReviews.map((rev, index) =>
                     <SwiperSlide key={index} className={`${index !== 0 && 'ml-[20px]'}`}>
-                        <div className={`${(index+1)%2 === 0 ? 'bg-[#eff2fe]' : 'bg-[#f6f8fd]'} rounded-[40px] px-[35px] py-[30px]`}>
+                        <div className={`${(index+1)%2 === 0 ? 'bg-[#eff2fe]' : 'bg-[#f6f8fd]'} rounded-[40px] px-[35px] py-[30px] min-h-[350px]`}>
                             <h4 className="text-xl font-[600] text-center md:text-left">{rev.title}</h4>
                             <p className="mt-[20px] font-[400] text-sm lg:text-base max-w-[48ch] md:max-w-none 
                             text-justify xl:text-left mx-auto md:mx-0">

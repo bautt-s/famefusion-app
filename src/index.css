@@ -59,7 +59,7 @@ body {
     filter: drop-shadow(1px -1px 0 rgb(255, 255, 255)) drop-shadow(-1px -1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 0 rgb(255, 255, 255)) drop-shadow(-1px 1px 0 rgb(255, 255, 255));
 }
 
-.swiper-slide-active + * + * + * {
+.swiper-slide-active+*+*+* {
     opacity: 0.4;
     transition: all 2s;
 }
@@ -116,4 +116,47 @@ body {
     .hero-small-img {
         width: 370px;
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------------------ BROWSE PAGE -------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+.MuiSlider-rail {
+    color: rgb(189, 189, 189);
+}
+
+.input-group {
+    position: relative;
+    display: inline-block;
+}
+
+.input-group:before {
+    content: '\20AC';
+    /* Euro sign */
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 14px
+}
+
+.input-group input[type="number"] {
+    text-align: right;
+    padding-left: 20px;
+    /* Leave space for the euro sign */
+    -moz-appearance: textfield;
+    /* Firefox */
+    appearance: textfield;
+    /* Rest of the browsers */
+}
+
+.input-group input[type="number"]::-webkit-inner-spin-button,
+.input-group input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    /* WebKit browsers */
+    appearance: none;
+    /* Rest of the browsers */
+    margin: 0;
+    /* Remove the default margin */
 }
