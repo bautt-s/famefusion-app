@@ -12,8 +12,8 @@ const Filters: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
 
     return (
-        <div className='w-[300px] flex flex-col akatab text-[#1f1f1f] border-b h-fit'>
-            <div className='text-2xl font-[600] p-5 border border-b-0 rounded-t-2xl'>
+        <div className='grid grid-cols-1 lg:w-[300px] lg:flex lg:flex-col akatab text-[#1f1f1f] border-b h-fit mb-[45px] lg:mb-0'>
+            <div className='hidden lg:flex text-2xl font-[600] p-5 border border-b-0 lg:rounded-t-2xl'>
                 Filters
             </div>
 
