@@ -42,14 +42,14 @@ const BenefitsSection: React.FC = () => {
 
     return (
         <section className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[80px] akatab flex flex-row">
-            <div className='relative z-20 flex flex-col items-center justify-center md:items-start md:justify-normal'>
+            <div className='relative z-50 flex flex-col items-center justify-center md:items-start md:justify-normal'>
                 <span className="text-[#959b9b] font-[500] text-lg">BENEFITS</span>
 
                 <h2 className="text-4xl md:text-5xl 2xl:text-6xl outfit font-[700] mt-[10px] tracking-tight">
                     Memorable Experiences
                 </h2>
 
-                <p className="mt-[20px] md:mt-[40px] text-xl max-w-[50ch] text-center md:text-left font-[400]">
+                <p className="mt-[20px] md:mt-[40px] text-xl md:max-w-[35ch] lg:max-w-[50ch] text-center md:text-left font-[400]">
                     {selectedSlide.description}
                 </p>
 
@@ -70,18 +70,18 @@ const BenefitsSection: React.FC = () => {
                 </button>
             </div>
 
-            <div className='hidden md:flex ml-auto relative'>
+            <div className='hidden md:flex ml-auto relative mt-[80px] lg:mt-[60px] 2xl:mt-0'>
                 <img src={selectedSlide.img} alt='Our clients!'
                 className='h-[400px] w-auto z-50 mr-[150px] md:mt-[60px] lg:mt-0' />
 
-                <div className='bg-[#ffeff1] sm:w-[120%] md:w-[140%] lg:w-[150%] xl:w-[700px] h-[270px] rounded-[40px] absolute bottom-0 right-0 z-10'></div>
+                <div className='bg-[#ffeff1] md:w-[350px] lg:w-[550px] h-[270px] rounded-[40px] absolute bottom-0 right-0 z-10'></div>
 
-                <div className='bg-[#ffeff1] w-[350px] h-[100px] absolute bottom-0 lg:right-[400px] xl:right-[650px] z-20 rounded-l-full flex items-center'>
+                <div className='bg-[#ffeff1] w-[350px] h-[100px] absolute bottom-0 md:right-[300px] lg:right-[500px] z-20 rounded-l-full flex items-center'>
                     <button className={`${selectedSlide.color} text-white w-[160px] py-[15px] rounded-2xl ml-[40px] z-50 transition-colors duration-300`}>
                         {selectedSlide.cta}
                     </button>
 
-                    <div className='relative hidden xl:flex'>
+                    <div className='relative flex'>
                         <div className='w-[100px] h-[100px] bg-[#ffeff1] absolute bottom-[50px] z-0'>
                             <div className='w-full h-full bg-white rounded-br-full'></div>
                         </div>

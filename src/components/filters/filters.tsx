@@ -1,4 +1,5 @@
 import 'flowbite'
+import { FilterProps } from '../../browse-sections/main-browse'
 import AvailabilityAcc from './availability'
 import PriceAcc from './price'
 import AgeGroupAcc from './age-group'
@@ -7,9 +8,11 @@ import GenderAcc from './gender'
 import InterestAcc from './interest'
 import OpportunitiesAcc from './opportunities'
 
-const Filters: React.FC = () => {
+const Filters: React.FC<FilterProps> = (props) => {
+    const { selectedFilters, setSelectedFilters } = props
+
     return (
-        <div className='w-[250px] flex flex-col akatab text-[#1f1f1f] border-b h-fit'>
+        <div className='w-[300px] flex flex-col akatab text-[#1f1f1f] border-b h-fit'>
             <div className='text-2xl font-[600] p-5 border border-b-0 rounded-t-2xl'>
                 Filters
             </div>
@@ -45,7 +48,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-2" className="hidden" aria-labelledby="accordion-collapse-heading-2">
                     <div className="px-5 pb-5 border border-b-0 border-gray-200 border-t-0">
-                        <PriceAcc />
+                        <PriceAcc setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>
@@ -63,7 +66,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-3" className="hidden" aria-labelledby="accordion-collapse-heading-3">
                     <div className="px-5 pb-5 border border-b-0 border-gray-200 border-t-0">
-                        <AvailabilityAcc />
+                        <AvailabilityAcc setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>
@@ -81,7 +84,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-4" className="hidden" aria-labelledby="accordion-collapse-heading-4">
                     <div className="px-5 pb-5 border border-b-0 border-gray-200 border-t-0">
-                        <AgeGroupAcc />
+                        <AgeGroupAcc setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>
@@ -99,7 +102,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-5" className="hidden" aria-labelledby="accordion-collapse-heading-5">
                     <div className="px-5 pb-5 border border-b-0 border-gray-200 border-t-0">
-                        <LanguageGroup />
+                        <LanguageGroup setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>
@@ -117,7 +120,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-6" className="hidden" aria-labelledby="accordion-collapse-heading-6">
                     <div className="px-5 pb-5 border border-b-0 border-gray-200 border-t-0">
-                        <GenderAcc />
+                        <GenderAcc setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>
@@ -135,7 +138,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-7" className="hidden" aria-labelledby="accordion-collapse-heading-7">
                     <div className="px-5 pb-5 border border-b-0 border-gray-200 border-t-0">
-                        <InterestAcc />
+                        <InterestAcc setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>
@@ -153,7 +156,7 @@ const Filters: React.FC = () => {
                 </h2>
                 <div id="accordion-collapse-body-8" className="hidden" aria-labelledby="accordion-collapse-heading-8">
                     <div className="px-5 pb-5 border border-gray-200 border-y-0">
-                        <OpportunitiesAcc />
+                        <OpportunitiesAcc setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters} />
                     </div>
                 </div>
             </div>

@@ -55,13 +55,12 @@ body {
     font-family: 'CocoSharp', sans-serif;
 }
 
-.heart-shadow {
-    filter: drop-shadow(1px -1px 0 rgb(255, 255, 255)) drop-shadow(-1px -1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 0 rgb(255, 255, 255)) drop-shadow(-1px 1px 0 rgb(255, 255, 255));
+.featured-img {
+    aspect-ratio: 1/1;
 }
 
-.swiper-slide-active+*+*+* {
-    opacity: 0.4;
-    transition: all 2s;
+.heart-shadow {
+    filter: drop-shadow(1px -1px 0 rgb(255, 255, 255)) drop-shadow(-1px -1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 0 rgb(255, 255, 255)) drop-shadow(-1px 1px 0 rgb(255, 255, 255));
 }
 
 .button-slide-1 {
@@ -115,6 +114,27 @@ body {
 @media (min-width: 850px) and (max-width: 920px) {
     .hero-small-img {
         width: 370px;
+    }
+}
+
+@media (max-width: 1180px) {
+    .swiper-slide-active+* {
+        opacity: 0.4;
+        transition: all 2s;
+    }
+}
+
+@media (min-width: 1180px) and (max-width: 1720px) {
+    .swiper-slide-active+*+* {
+        opacity: 0.4;
+        transition: all 2s;
+    }
+}
+
+@media (min-width: 1720px) {
+    .swiper-slide-active+*+*+* {
+        opacity: 0.4;
+        transition: all 2s;
     }
 }
 

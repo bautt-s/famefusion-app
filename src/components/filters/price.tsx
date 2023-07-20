@@ -1,6 +1,7 @@
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { useState, ChangeEvent } from 'react'
+import { FilterProps } from '../../browse-sections/main-browse';
 
 const minDistance = 0;
 
@@ -31,8 +32,11 @@ const PriceSlider = styled(Slider)({
     }
 })
 
-const PriceAcc: React.FC = () => {
-    const [value, setValue] = useState<any[]>([20, 37]);
+const PriceAcc: React.FC<FilterProps> = (props) => {
+    const { selectedFilters, setSelectedFilters } = props
+
+    const [value, setValue] = useState<any[]>([10, 90]);
+    const [rangeChecked, setRangeChecked] = useState(false)
 
     const handleChange1 = (
         event: Event,
@@ -56,9 +60,26 @@ const PriceAcc: React.FC = () => {
         }
     }
 
+    const applyFilter = () => {
+        if (rangeChecked !== selectedFilters.priceFilter.range || value[0] !== selectedFilters.priceFilter.min || value[1] !== selectedFilters.priceFilter.max) {
+            setSelectedFilters({
+                ...selectedFilters,
+                priceFilter: {
+                    range: rangeChecked,
+                    min: value[0],
+                    max: value[1]
+                }
+            })
+        }
+    }
+
     return (
         <div className='flex flex-col'>
-            <span>Select range</span>
+            <div className='flex flex-row'>
+                <span>Select range</span>
+                <input type="checkbox" className="accent-[#EB5269] ml-auto" 
+                checked={rangeChecked} onChange={() => setRangeChecked(!rangeChecked)} />
+            </div>
 
             <div className='price-slider mt-[45px]'>
                 <PriceSlider
@@ -66,28 +87,35 @@ const PriceAcc: React.FC = () => {
                     onChange={handleChange1}
                     valueLabelDisplay="on"
                     valueLabelFormat={(value) => `€${value}`}
-                    
                     sx={{ color: '#FB5870' }}
+                    disabled={!rangeChecked}
                 />
             </div>
 
             <div className='flex flex-row gap-[20px] akatab'>
                 <div className='flex flex-col'>
                     <span className='text-sm'>Min.</span>
-                    <div className="input-group">
-                        <input type="number" value={value[0]} onChange={(e) => inputChange('min', e)}
-                            className='w-full border border-[#a1a1a1] rounded-lg pr-[15px] h-[30px] outline-[#a1a1a1]' />
+                    <div className={`input-group ${!rangeChecked && 'text-gray-400'}`}>
+                        <input type="number" value={value[0]} disabled={!rangeChecked} onChange={(e) => inputChange('min', e)}
+                        className={`w-full border border-[#a1a1a1] rounded-lg pr-[15px] h-[30px] outline-[#a1a1a1] 
+                        bg-white ${!rangeChecked && 'bg-[#fafafa] border-[#d3d3d3]'}`} />
                     </div>
                 </div>
 
                 <div className='flex flex-col'>
                     <span className='text-sm'>Max.</span>
-                    <div className="input-group">
-                        <input type="number" value={value[1]} onChange={(e) => inputChange('max', e)}
-                            className='w-full border border-[#a1a1a1] rounded-lg pr-[15px] h-[30px] outline-[#a1a1a1]' />
+                    <div className={`input-group ${!rangeChecked && 'text-gray-400'}`}>
+                        <input type="number" value={value[1]} disabled={!rangeChecked} onChange={(e) => inputChange('max', e)} 
+                        className={`w-full border border-[#a1a1a1] rounded-lg pr-[15px] h-[30px] outline-[#a1a1a1] 
+                        bg-white ${!rangeChecked && 'bg-[#fafafa] border-[#d3d3d3]'}`} />
                     </div>
                 </div>
             </div>
+
+            <button onClick={() => applyFilter()}
+            className='bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white font-[500] px-[35px] py-[5px] rounded-xl mt-[25px]'>
+                Apply
+            </button>
         </div>
     )
 }
