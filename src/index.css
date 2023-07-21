@@ -30,7 +30,7 @@
 
 @font-face {
     font-family: 'TT Hoves Pro';
-    src: url('./static/fonts/tthovespro-bold.ttf') format("truetype");
+    src: url('./static/fonts/tthovespro-demibold.ttf') format("truetype");
     font-weight: 600;
 }
 

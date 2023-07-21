@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Filters from '../components/filters/filters'
 import { GoHeartFill } from 'react-icons/go'
 import { BsStarFill } from 'react-icons/bs'
 import FilterTag from '../components/filters/filter-tag'
+import { Link } from 'react-router-dom'
 
 export type FilterProps = {
     setSelectedFilters: Function,
@@ -32,6 +33,7 @@ export type FilterProps = {
 
 const dummyCelebrities = [
     {
+        id: 0,
         name: 'Hailey Bieber',
         description: 'American model',
         rating: 4.97,
@@ -39,13 +41,15 @@ const dummyCelebrities = [
         img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
     },
     {
+        id: 0,
         name: 'Tom Hardy',
-        description: 'English actor, producer and screenwriter',
+        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
         rating: 5.00,
         startingPrice: 150,
         img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
     },
     {
+        id: 0,
         name: 'Ariana Grande',
         description: 'American singer and songwriter',
         rating: 4.98,
@@ -53,6 +57,7 @@ const dummyCelebrities = [
         img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
     },
     {
+        id: 0,
         name: 'Chris Hemsworth',
         description: 'Australian actor',
         rating: 4.99,
@@ -60,6 +65,7 @@ const dummyCelebrities = [
         img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
     },
     {
+        id: 0,
         name: 'Hailey Bieber',
         description: 'American model',
         rating: 4.97,
@@ -67,13 +73,15 @@ const dummyCelebrities = [
         img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
     },
     {
+        id: 0,
         name: 'Tom Hardy',
-        description: 'English actor, producer and screenwriter',
+        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
         rating: 5.00,
         startingPrice: 150,
         img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
     },
     {
+        id: 0,
         name: 'Ariana Grande',
         description: 'American singer and songwriter',
         rating: 4.98,
@@ -81,6 +89,7 @@ const dummyCelebrities = [
         img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
     },
     {
+        id: 0,
         name: 'Chris Hemsworth',
         description: 'Australian actor',
         rating: 4.99,
@@ -88,6 +97,7 @@ const dummyCelebrities = [
         img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
     },
     {
+        id: 0,
         name: 'Hailey Bieber',
         description: 'American model',
         rating: 4.97,
@@ -95,13 +105,15 @@ const dummyCelebrities = [
         img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
     },
     {
+        id: 0,
         name: 'Tom Hardy',
-        description: 'English actor, producer and screenwriter',
+        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
         rating: 5.00,
         startingPrice: 150,
         img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
     },
     {
+        id: 0,
         name: 'Ariana Grande',
         description: 'American singer and songwriter',
         rating: 4.98,
@@ -109,6 +121,7 @@ const dummyCelebrities = [
         img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
     },
     {
+        id: 0,
         name: 'Chris Hemsworth',
         description: 'Australian actor',
         rating: 4.99,
@@ -116,6 +129,7 @@ const dummyCelebrities = [
         img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
     },
     {
+        id: 0,
         name: 'Hailey Bieber',
         description: 'American model',
         rating: 4.97,
@@ -123,13 +137,15 @@ const dummyCelebrities = [
         img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
     },
     {
+        id: 0,
         name: 'Tom Hardy',
-        description: 'English actor, producer and screenwriter',
+        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
         rating: 5.00,
         startingPrice: 150,
         img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
     },
     {
+        id: 0,
         name: 'Ariana Grande',
         description: 'American singer and songwriter',
         rating: 4.98,
@@ -137,6 +153,7 @@ const dummyCelebrities = [
         img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
     },
     {
+        id: 0,
         name: 'Chris Hemsworth',
         description: 'Australian actor',
         rating: 4.99,
@@ -144,6 +161,7 @@ const dummyCelebrities = [
         img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
     },
     {
+        id: 0,
         name: 'Hailey Bieber',
         description: 'American model',
         rating: 4.97,
@@ -151,13 +169,15 @@ const dummyCelebrities = [
         img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
     },
     {
+        id: 0,
         name: 'Tom Hardy',
-        description: 'English actor, producer and screenwriter',
+        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
         rating: 5.00,
         startingPrice: 150,
         img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
     },
     {
+        id: 0,
         name: 'Ariana Grande',
         description: 'American singer and songwriter',
         rating: 4.98,
@@ -165,6 +185,7 @@ const dummyCelebrities = [
         img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
     },
     {
+        id: 0,
         name: 'Chris Hemsworth',
         description: 'Australian actor',
         rating: 4.99,
@@ -304,11 +325,11 @@ const MainBrowse: React.FC = () => {
                         {noFilters && <button onClick={handleClear} className='text-[#D20505]'>Clear filters</button>}
                     </div>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full transition-all duration-300'>
+                    <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full transition-all duration-300'>
                         {dummyCelebrities.map((c, index) =>
-                            <div key={index} className='akatab relative w-full group'>
+                            <Link key={index} className='akatab relative w-full group' to={`/browse/${c.id}`}>
                                 <img src={c.img} className='w-full object-cover object-top rounded-2xl featured-img' alt={c.name} />
-                                <GoHeartFill className='absolute top-0 right-0 text-3xl text-[#B1B4B4] cursor-pointer
+                                <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
                                 hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300' />
 
                                 <div className='flex flex-row items-center mt-[15px]'>
@@ -320,10 +341,12 @@ const MainBrowse: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px]'>{c.description}</p>
+                                <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px] text-left'>
+                                    {c.description.length > 62 ? c.description.slice(0, 62)+'...' : c.description}
+                                </p>
 
                                 <span className='font-[600] text-lg '>From €{c.startingPrice}</span>
-                            </div>
+                            </Link>
                         )}
                     </div>
                 </div>

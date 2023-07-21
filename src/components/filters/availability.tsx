@@ -7,35 +7,58 @@ const today = new Date();
 const yesterday = new Date(today);
 yesterday.setDate(today.getDate() - 1);
 
-const options = {
-    autoHide: true,
-    todayBtn: true,
-    clearBtn: true,
-    weekDays: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    maxDate: new Date("2030-01-01"),
-    minDate: yesterday,
-    theme: {
-        background: "bg-white",
-        todayBtn: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]",
-        clearBtn: "",
-        icons: "",
-        text: "font-normal",
-        disabledText: "text-gray-200",
-        input: "",
-        inputIcon: "",
-        selected: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] hover:text-[#FB5870]",
-    },
-    datepickerClassNames: "top-12",
-    inputNameProp: 'Select start date:',
-    language: "en",
-}
-
 const AvailabilityAcc: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
 
     const [show1, setShow1] = useState(false)
     const [show2, setShow2] = useState(false)
     const [dates, setDates] = useState<Date[]>([new Date(), new Date()])
+
+    const options = {
+        autoHide: true,
+        todayBtn: true,
+        clearBtn: true,
+        weekDays: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        maxDate: new Date("2030-01-01"),
+        minDate: yesterday,
+        theme: {
+            background: "bg-white",
+            todayBtn: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]",
+            clearBtn: "",
+            icons: "",
+            text: "font-normal",
+            disabledText: "text-gray-200",
+            input: "",
+            inputIcon: "",
+            selected: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] hover:text-[#FB5870]",
+        },
+        datepickerClassNames: "top-12",
+        inputNameProp: 'Select start date:',
+        language: "en",
+    }
+    
+    const options2 = {
+        autoHide: true,
+        todayBtn: true,
+        clearBtn: true,
+        weekDays: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        maxDate: new Date("2030-01-01"),
+        minDate: dates[0],
+        theme: {
+            background: "bg-white",
+            todayBtn: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63]",
+            clearBtn: "",
+            icons: "",
+            text: "font-normal",
+            disabledText: "text-gray-200",
+            input: "",
+            inputIcon: "",
+            selected: "bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] hover:text-[#FB5870]",
+        },
+        datepickerClassNames: "top-12",
+        inputNameProp: 'Select end date:',
+        language: "en",
+    }
 
     const handleClose1 = (state: boolean) => {
         setShow1(state)
@@ -69,7 +92,7 @@ const AvailabilityAcc: React.FC<FilterProps> = (props) => {
 
             <div className='relative akatab mt-[25px] flex flex-col mb-[5px]'>
                 <span className='text-gray-400 font-[500]'>Add end date:</span>
-                <Datepicker options={options} show={show2} setShow={handleClose2} onChange={handleChange2} />
+                <Datepicker options={options2} show={show2} setShow={handleClose2} onChange={handleChange2} />
             </div>
 
             <button onClick={() => applyDateFilter()}

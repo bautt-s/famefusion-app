@@ -113,7 +113,8 @@ const PriceAcc: React.FC<FilterProps> = (props) => {
             </div>
 
             <button onClick={() => applyFilter()}
-            className='bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white font-[500] px-[35px] py-[5px] rounded-xl mt-[25px]'>
+            className='bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300
+            text-white font-[500] px-[35px] py-[5px] rounded-xl mt-[25px]'>
                 Apply
             </button>
         </div>
