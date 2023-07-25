@@ -1,6 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProfileSidebar from "../components/profile-view/side-bar"
 import AboutPanel from "../components/profile-view/about"
+import ExperiencesPanel from "../components/profile-view/experiences"
+import OpportunitiesPanel from "../components/profile-view/opportunities"
+import AvailabilityPanel from "../components/profile-view/availability"
+import ReviewsPanel from "../components/profile-view/reviews"
 
 // notes: there's an attribute missing for social network links
 const hailey = {
@@ -22,21 +26,135 @@ const hailey = {
     interests: ['fitness', 'travel', 'photography', 'philantrophy'],
     followers: { instagram: 123000, twitter: 85000, tiktok: 465000, facebook: 243000 },
     experiences: {
-        offlineExp: [],
-        onlineExp: []
+        offlineExp: [{
+            title: 'Shopping',
+            price: 100,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }, 
+        {
+            title: 'Lunch',
+            price: 100,
+            description: 'Savor a memorable meal in the company of Hailey Bieber.',
+            duration: '4 hours'
+        },
+        {
+            title: 'Model Lesson',
+            price: 100,
+            description: 'Unlock the secrets of the runway with Hailey Bieber.',
+            duration: '4 hours'
+        },
+        {
+            title: 'Shopping',
+            price: 100,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }],
+        onlineExp: [{
+            title: 'Video Call',
+            price: 100,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }, 
+        {
+            title: 'Personal Video',
+            price: 100,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        },
+        {
+            title: 'Message',
+            price: 100,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        },
+        {
+            title: 'Video Call',
+            price: 100,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }]
     },
     collaborations: {
-        offlineCollabs: [],
-        onlineCollabs: []
+        offlineCollabs: [{
+            title: 'Party Attendance',
+            price: 1200,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }, 
+        {
+            title: 'Modelling',
+            price: 540,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '1 hours'
+        },
+        {
+            title: 'Movie Attendance',
+            price: 1000,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '2 hours'
+        },
+        {
+            title: 'Party Attendance',
+            price: 1200,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }],
+        onlineCollabs: [{
+            title: 'Social Media Promo',
+            price: 2300,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }, 
+        {
+            title: 'Restaurant Review',
+            price: 1070,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        },
+        {
+            title: 'Promo Code',
+            price: 900,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        },
+        {
+            title: 'Social Media Promo',
+            price: 2300,
+            description: 'Join Hailey Bieber on an exclusive shopping experience.',
+            duration: '4 hours'
+        }]
     },
-    reviews: [],
+
+    reviews: [{
+        title: 'Guitar Lesson',
+        date: 'June 15th, 2023',
+        description: '“Connecting with my favorite celebrity through this platform was a dream come true! The personalized experience exceeded my expectations, and the memories I created will stay with me forever.',
+        author: 'Sarah J.',
+        images: [],
+        stars: 4.5
+    },
+    {
+        title: 'Lunch',
+        date: 'June 14th, 2023',
+        description: '“Meeting a celebrity offline was an experience I will cherish forever. The platform made it really easy to submit my request. The attention to detail were remarkable. I am grateful for the opportunity and would definitely use this platform again.”',
+        author: 'Emily T.',
+        images: ['https://people.com/thmb/5hLV0myPundzzVVnNimru43GyJU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/hailey-baldwin7-1-2000-5458768a4cb1449681decf53ebfb250e.jpg',
+                'https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/e7ljykbveautcte-1627688334.jpg?resize=660:*'],
+        stars: 5
+    }],
+
     video: 'https://media.vogue.co.jp/photos/5d311a774946e60008bda672/master/w_1600%2Cc_limit/hailey-baldwin1.jpg'
 }
 
 const sectionsList = ['About', 'Experiences', 'Business Opportunities', 'Availability', 'Reviews']
 
 const MainView: React.FC = () => {
-    const [section, setSection] = useState(sectionsList[0])
+    const [section, setSection] = useState(sectionsList[4])
+
+    useEffect(() => {
+        document.title = `FameFusion | ${hailey.name}`
+    }, [])
 
     return (
         <div className="mt-[120px] flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px]">
@@ -82,8 +200,21 @@ const MainView: React.FC = () => {
                         )}
                     </ul>
 
+                    {section === 'About' && 
                     <AboutPanel name={hailey.name} imgGallery={hailey.imgGallery} associatedBrands={hailey.associatedBrands} 
-                    longDescription={hailey.longDescription} followers={hailey.followers} interests={hailey.interests} video={hailey.video} />
+                    longDescription={hailey.longDescription} followers={hailey.followers} interests={hailey.interests} video={hailey.video} />}
+
+                    {section === 'Experiences' &&
+                    <ExperiencesPanel experiences={hailey.experiences} />}
+                    
+                    {section === 'Business Opportunities' &&
+                    <OpportunitiesPanel collaborations={hailey.collaborations} />}
+
+                    {section === 'Availability' &&
+                    <AvailabilityPanel />}
+
+                    {section === 'Reviews' &&
+                    <ReviewsPanel reviews={hailey.reviews} />}
                 </div>
             </div>
 

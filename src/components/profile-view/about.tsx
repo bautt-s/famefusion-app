@@ -14,19 +14,19 @@ type AboutProps = {
 }
 
 function formatNumber(number: number) {
-    let absNumber = Math.abs(number);
-    const suffixes = ["", "k", "M", "B", "T"]; // Add more suffixes as needed for larger numbers
-    let suffixIndex = 0;
+    let absNumber = Math.abs(number)
+    const suffixes = ["", "k", "M", "B", "T"]
+    let suffixIndex = 0
 
     while (absNumber >= 1000 && suffixIndex < suffixes.length - 1) {
-        absNumber /= 1000;
-        suffixIndex++;
-        const decimalPlaces = (suffixIndex === 0 || absNumber >= 100) ? 0 : 1;
-
-        return (number < 0 ? '-' : '') + absNumber.toFixed(decimalPlaces) + suffixes[suffixIndex];
+        absNumber /= 1000
+        suffixIndex++
     }
-}
 
+    const decimalPlaces = (suffixIndex === 0 || absNumber >= 100) ? 0 : (absNumber >= 10) ? 1 : 2
+
+    return (number < 0 ? '-' : '') + absNumber.toFixed(decimalPlaces).replace(/\.?0+$/, '') + suffixes[suffixIndex]
+}
 
 const AboutPanel: React.FC<AboutProps> = (props) => {
     const { name, imgGallery, associatedBrands, longDescription, followers, interests, video } = props
@@ -53,7 +53,7 @@ const AboutPanel: React.FC<AboutProps> = (props) => {
                 <div className='relative'>
                     <img src={video} className='rounded-[25px] h-[300px] w-[400px] object-cover' />
 
-                    <div className='p-[5px] rounded-full backdrop-blur-md absolute bottom-[42%] left-[50%] 
+                    <div className='p-[5px] rounded-full backdrop-blur-md absolute top-[48%] left-[50%] 
                     translate-x-[-50%] translate-y-[-50%] hover:bg-[#0000003f] transition-colors duration-300'>
                         <RxTriangleRight className='text-6xl text-white cursor-pointer' />
                     </div>
@@ -75,11 +75,11 @@ const AboutPanel: React.FC<AboutProps> = (props) => {
                 </div>
 
                 <div className='flex flex-row gap-[20px] ml-auto'>
-                    <div className='text-xl border rounded-full p-[7px]'>
+                    <div className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
                         <GoChevronLeft />
                     </div>
 
-                    <div className='text-xl border rounded-full p-[7px]'>
+                    <div className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
                         <GoChevronRight />
                     </div>
                 </div>
