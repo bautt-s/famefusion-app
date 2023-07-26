@@ -2,8 +2,13 @@ import { FaArrowRightLong } from "react-icons/fa6"
 import FooterSection from "../landing-sections/footer"
 import NavSection from "../landing-sections/nav"
 import { Link } from "react-router-dom"
+import { useEffect } from 'react'
 
 const Error404 = () => {
+    useEffect(() => {
+        document.title = 'FameFusion | 404'
+    }, [])
+
     return (
         <div>
             <NavSection />
