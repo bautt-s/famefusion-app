@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from './pages/Profile';
+import Error404 from './pages/404';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/browse/:id",
     element: <Profile />
+  },
+  {
+    path: '*',
+    element: <Error404 />
   }
 ]);
 
