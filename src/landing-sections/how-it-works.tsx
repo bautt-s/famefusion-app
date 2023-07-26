@@ -66,8 +66,8 @@ const HowSection: React.FC = () => {
 
             <div className="flex lg:hidden flex-col mt-[45px] text-[#1F1F1F] gap-[15px]">
                 {how.map((item, index) =>
-                    <div key={index} className="flex flex-row items-center bg-[#FCF6F6] rounded-full pr-[30px]">
-                        <div className="ml-[10px]">
+                    <div key={index} className="flex flex-row items-center bg-[#FCF6F6] rounded-full sm:pr-[30px] text-center sm:text-left">
+                        <div className="ml-[10px] hidden sm:flex">
                             {item.icon}
                         </div>
 

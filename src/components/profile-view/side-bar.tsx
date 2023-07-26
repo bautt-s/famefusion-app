@@ -19,7 +19,7 @@ const ProfileSidebar: React.FC<SidebarProps> = (props) => {
     const { name, description, rating, startingPrice, age, img, gender, languages, location } = props
 
     return (
-        <div className="w-[22%] flex flex-col shadow-xl rounded-b-[25px] self-start">
+        <div className="w-[550px] xl:w-[500px] 2xl:w-[335px] flex flex-col shadow-xl rounded-b-[25px] self-start">
             <img src={img} className="w-full h-[400px] object-top object-cover rounded-t-[25px]" />
 
             <div className='flex flex-col px-[25px] py-[32px] akatab rounded-b-[25px] border'>

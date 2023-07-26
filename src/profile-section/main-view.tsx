@@ -150,14 +150,14 @@ const hailey = {
 const sectionsList = ['About', 'Experiences', 'Business Opportunities', 'Availability', 'Reviews']
 
 const MainView: React.FC = () => {
-    const [section, setSection] = useState(sectionsList[4])
+    const [section, setSection] = useState(sectionsList[0])
 
     useEffect(() => {
         document.title = `FameFusion | ${hailey.name}`
     }, [])
 
     return (
-        <div className="mt-[120px] flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px]">
+        <div className="mt-[120px] flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] mb-[120px]">
 
             <div className="flex akatab font-[500]" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -190,7 +190,7 @@ const MainView: React.FC = () => {
                     startingPrice={hailey.startingPrice} age={hailey.age} gender={hailey.gender} languages={hailey.languages} />
 
                 <div className="flex flex-col ml-[35px] grow">
-                    <ul className="flex flex-row gap-[25px]">
+                    <ul className="flex flex-row flex-wrap gap-[25px]">
                         {sectionsList.map((item, index) =>
                             <li onClick={() => setSection(sectionsList[index])} className={`px-[16px] py-[8px] rounded-full 
                         border text-[#646868] ${section === item ? 'bg-[#1f1f1f] text-white' : 'bg-white'}

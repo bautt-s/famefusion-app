@@ -6,7 +6,7 @@ const SearchbarSection: React.FC = () => {
             <form className='flex flex-row mt-[25px] border-[#bec2c2] border-[1px] border-r-0 rounded-2xl'>
                 <input type="text" placeholder="Enter the name, keywords, category"
                     className='bg-white outline-none rounded-l-2xl
-                    border-r-0 w-[340px] lg:w-[610px] py-[10px] pl-[15px] pr-[30px]' />
+                    border-r-0 sm:w-[340px] lg:w-[610px] py-[10px] pl-[15px] pr-[30px]' />
 
                 <button className='bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white 
                         rounded-2xl font-[500] transition-colors duration-300 py-[12px] px-[32px] relative '>

@@ -45,7 +45,7 @@ const BenefitsSection: React.FC = () => {
             <div className='relative z-50 flex flex-col items-center justify-center md:items-start md:justify-normal'>
                 <span className="text-[#959b9b] font-[500] text-lg">BENEFITS</span>
 
-                <h2 className="text-4xl md:text-5xl 2xl:text-6xl outfit font-[700] mt-[10px] tracking-tight">
+                <h2 className="text-4xl md:text-5xl 2xl:text-6xl outfit font-[700] mt-[10px] tracking-tight text-center sm:text-left">
                     Memorable Experiences
                 </h2>
 

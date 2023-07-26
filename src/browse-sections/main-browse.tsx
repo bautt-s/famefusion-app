@@ -255,11 +255,11 @@ const MainBrowse: React.FC = () => {
 
     return (
         <div className="w-full flex flex-col pb-[120px]">
-            <div className="flex flex-col justify-center w-full bg-[#F7F8FC] h-[180px] sm:h-[120px] xl:h-[100px] relative 
+            <div className="flex flex-col justify-center w-full bg-[#F7F8FC] h-[240px] sm:h-[120px] xl:h-[100px] relative 
             px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] items-center">
-                <ul className="flex flex-row flex-wrap gap-[20px] 2xl:gap-[25px] justify-center w-[370px] sm:w-auto lg:w-[700px] xl:w-auto">
+                <ul className="flex flex-row flex-wrap gap-[20px] 2xl:gap-[25px] justify-center w-full sm:w-auto lg:w-[700px] xl:w-auto">
                     {filterItems.map((item, index) =>
-                        <li onClick={() => setSelectedCategory(filterItems[index])} className={`px-[13px] py-[5px] rounded-full 
+                        <li onClick={() => setSelectedCategory(filterItems[index])} className={`px-[13px] py-[5px] rounded-full
                         2xl:text-lg border text-[#646868] ${selectedCategory === item ? 'bg-[#1f1f1f] text-white' : 'bg-white'}
                         cursor-pointer transition-colors duration-500 shadow-sm`} key={index}>
                             {item}
@@ -332,10 +332,10 @@ const MainBrowse: React.FC = () => {
                                 <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
                                 hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300' />
 
-                                <div className='flex flex-row items-center mt-[15px]'>
+                                <div className='flex flex-col sm:flex-row sm:items-center mt-[15px]'>
                                     <h4 className='text-2xl font-[600]'>{c.name}</h4>
 
-                                    <div className='flex flex-row items-center ml-auto'>
+                                    <div className='flex flex-row items-center sm:ml-auto'>
                                         <BsStarFill className='text-sm' />
                                         <span className='ml-[10px] mt-[2px]'>{c.rating}</span>
                                     </div>

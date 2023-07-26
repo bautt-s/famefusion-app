@@ -87,6 +87,10 @@ body {
     background-color: #313131;
 }
 
+.hero-img {
+    aspect-ratio: 16/9;
+}
+
 @media (min-width: 1537px) and (max-width: 1650px) {
     .hero-img {
         width: 550px;

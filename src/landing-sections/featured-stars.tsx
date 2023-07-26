@@ -95,13 +95,13 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
     }, [limit, starsShowed])
 
     return (
-        <section className='w-full flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] lg:pb-0 mt-[120px]'>
+        <section className='w-full flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] pb-[140px] sm:pb-0 mt-[120px]'>
             <div className='flex flex-row items-center'>
                 <h2 className='text-4xl outfit font-[600] tracking-tight'>
                     { title }
                 </h2>
 
-                <div className='flex flex-row items-center gap-[25px] ml-auto'>
+                <div className='flex flex-col sm:flex-row items-center gap-y-[10px] sm:gap-y-0 gap-x-[25px] ml-auto'>
                     <button className='akatab underline underline-offset-2 text-lg font-[500]'>
                         Show (112)
                     </button>
@@ -127,10 +127,10 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
                         <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
                         hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300' />
 
-                        <div className='flex flex-row mt-[15px]'>
-                            <h4 className='text-2xl font-[600]'>{c.name}</h4>
+                        <div className='flex flex-col sm:flex-row mt-[15px]'>
+                            <h4 className='text-2xl font-[600] max-w-[3ch] sm:max-w-none'>{c.name}</h4>
 
-                            <div className='flex flex-row items-center ml-auto'>
+                            <div className='flex flex-row items-center sm:ml-auto'>
                                 <BsStarFill className='text-sm' />
                                 <span className='ml-[10px] mt-[2px]'>{c.rating}</span>
                             </div>
