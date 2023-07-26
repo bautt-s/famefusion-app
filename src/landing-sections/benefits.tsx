@@ -41,7 +41,7 @@ const BenefitsSection: React.FC = () => {
     }
 
     return (
-        <section className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[80px] akatab flex flex-row">
+        <section className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] akatab flex flex-row mt-[120px] mb-[120px]">
             <div className='relative z-50 flex flex-col items-center justify-center md:items-start md:justify-normal'>
                 <span className="text-[#959b9b] font-[500] text-lg">BENEFITS</span>
 

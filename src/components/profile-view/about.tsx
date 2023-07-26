@@ -53,7 +53,7 @@ const AboutPanel: React.FC<AboutProps> = (props) => {
                 <div className='relative'>
                     <img src={video} className='rounded-[25px] h-[300px] w-[400px] object-cover' />
 
-                    <div className='p-[5px] rounded-full backdrop-blur-md absolute top-[48%] left-[50%] 
+                    <div className='p-[5px] rounded-full backdrop-blur-md absolute top-[50%] left-[50%] 
                     translate-x-[-50%] translate-y-[-50%] hover:bg-[#0000003f] transition-colors duration-300'>
                         <RxTriangleRight className='text-6xl text-white cursor-pointer' />
                     </div>

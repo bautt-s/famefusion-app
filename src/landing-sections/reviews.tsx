@@ -39,7 +39,7 @@ const dummyReviews = [
 
 const ReviewsSection: React.FC = () => {
     return (
-        <section className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[80px] akatab">
+        <section className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] mt-[120px] akatab">
             <h2 className="text-4xl outfit font-[600] tracking-tight">
                 Reviews
             </h2>

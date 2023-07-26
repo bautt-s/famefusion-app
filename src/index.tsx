@@ -1,10 +1,10 @@
 import './index.css';
-import Browse from './Browse';
-import Landing from './Landing';
+import Browse from './pages/Browse';
+import Landing from './pages/Landing';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Profile from './Profile';
+import Profile from './pages/Profile';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

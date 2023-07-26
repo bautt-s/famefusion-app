@@ -43,7 +43,7 @@ const ReviewsPanel: React.FC<ReviewsProps> = (props) => {
                         )}
                     </div>
 
-                    <div className="flex flex-row items-center mt-[25px]">
+                    <div className="flex flex-row items-center mt-[20px]">
                         <div className='flex flex-row text-[#FB5870] gap-x-[7px]'>
                             {starReview(r.stars).map((star, index) => 
                                 <div>

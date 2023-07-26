@@ -3,6 +3,8 @@ import { BsStarFill } from 'react-icons/bs'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+type FeaturedProps = { title: string }
+
 type StarType = {
     id: number,
     name: string,
@@ -71,7 +73,9 @@ const dummyCelebrities = [
     }
 ]
 
-const FeaturedSection: React.FC = () => {
+const FeaturedSection: React.FC<FeaturedProps> = (props) => {
+    const { title } = props
+
     const [featured, setFeatured] = useState<StarType[]>([])
     const [limit, setLimit] = useState(5)
 
@@ -91,10 +95,10 @@ const FeaturedSection: React.FC = () => {
     }, [limit, starsShowed])
 
     return (
-        <section className='w-full flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[80px] lg:pb-0'>
+        <section className='w-full flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] lg:pb-0 mt-[120px]'>
             <div className='flex flex-row items-center'>
                 <h2 className='text-4xl outfit font-[600] tracking-tight'>
-                    Featured Stars
+                    { title }
                 </h2>
 
                 <div className='flex flex-row items-center gap-[25px] ml-auto'>
@@ -132,7 +136,9 @@ const FeaturedSection: React.FC = () => {
                             </div>
                         </div>
 
-                        <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px]'>{c.description}</p>
+                        <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px]'>
+                            {c.description.length > 62 ? c.description.slice(0, 62)+'...' : c.description}
+                        </p>
 
                         <span className='font-[600] text-lg lg:absolute lg:bottom-[185px] 2xl:bottom-[27%]'>From €{c.startingPrice}</span>
                     </Link>
