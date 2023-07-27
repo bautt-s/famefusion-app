@@ -327,26 +327,29 @@ const MainBrowse: React.FC = () => {
 
                     <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full transition-all duration-300'>
                         {dummyCelebrities.map((c, index) =>
-                            <Link key={index} className='akatab relative w-full group' to={`/browse/${c.id}`}>
-                                <img src={c.img} className='w-full object-cover object-top rounded-2xl featured-img' alt={c.name} />
+                            <div key={index} className='akatab relative w-full group'>
                                 <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
                                 hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300' />
 
-                                <div className='flex flex-col sm:flex-row sm:items-center mt-[15px]'>
-                                    <h4 className='text-2xl font-[600]'>{c.name}</h4>
+                                <Link to={`/browse/${c.id}`}>
+                                    <img src={c.img} className='w-full object-cover object-top rounded-2xl featured-img' alt={c.name} />
 
-                                    <div className='flex flex-row items-center sm:ml-auto'>
-                                        <BsStarFill className='text-sm' />
-                                        <span className='ml-[10px] mt-[2px]'>{c.rating}</span>
+                                    <div className='flex flex-col sm:flex-row sm:items-center mt-[15px]'>
+                                        <h4 className='text-2xl font-[600]'>{c.name}</h4>
+
+                                        <div className='flex flex-row items-center sm:ml-auto'>
+                                            <BsStarFill className='text-sm' />
+                                            <span className='ml-[10px] mt-[2px]'>{c.rating}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px] text-left'>
-                                    {c.description.length > 62 ? c.description.slice(0, 62)+'...' : c.description}
-                                </p>
+                                    <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px] text-left'>
+                                        {c.description.length > 62 ? c.description.slice(0, 62) + '...' : c.description}
+                                    </p>
 
-                                <span className='font-[600] text-lg '>From €{c.startingPrice}</span>
-                            </Link>
+                                    <span className='font-[600] text-lg '>From €{c.startingPrice}</span>
+                                </Link>
+                            </div>
                         )}
                     </div>
                 </div>
