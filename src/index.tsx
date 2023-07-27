@@ -13,6 +13,9 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
+const kindeDomain = process.env.NODE_ENV === "development"  ? 'https://famefusion-pig.eu.kinde.com' : 'https://famefusion.kinde.com'
+const redirectUri = process.env.NODE_ENV === "development"  ? 'http://localhost:3000/' : 'https://famefusion-app.vercel.app/'
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -40,9 +43,9 @@ root.render(
     <React.StrictMode>
         <KindeProvider
             clientId={process.env.REACT_APP_KINDE_CLIENT_ID}
-            domain={process.env.REACT_APP_KINDE_DOMAIN || 'https://famefusion-pig.eu.kinde.com'}
+            domain={process.env.REACT_APP_KINDE_DOMAIN || kindeDomain}
             logoutUri={process.env.REACT_APP_KINDE_LOGOUT_URL}
-            redirectUri={process.env.REACT_APP_KINDE_REDIRECT_URL || 'http://localhost:3000/'}
+            redirectUri={process.env.REACT_APP_KINDE_REDIRECT_URL || redirectUri}
             isDangerouslyUseLocalStorage={process.env.NODE_ENV === "development"}
         >
             <RouterProvider router={router} />
