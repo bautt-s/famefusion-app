@@ -1,4 +1,5 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { FaArrowRightToBracket } from 'react-icons/fa6'
 import { CiSearch } from 'react-icons/ci'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
@@ -8,7 +9,7 @@ const logo = require('../static/logo.png')
 const portugalIcon = require('../static/icon-portugal.png')
 
 const NavSection: React.FC = () => {
-    const { user, isAuthenticated, isLoading, register, login } = useKindeAuth();
+    const { user, isAuthenticated, isLoading, register, login, logout } = useKindeAuth();
 
     const options = {
         org_code: '',
@@ -88,7 +89,7 @@ const NavSection: React.FC = () => {
 
                 <img src={portugalIcon} className='w-[32px] h-[32px] hidden lg:flex' alt='Country Icon' />
 
-                {!isAuthenticated ? 
+                {!isAuthenticated ?
                     <div className="flex flex-row lg:gap-[10px] xl:gap-[20px] 2xl:gap-[25px] items-center">
                         <button onClick={handleRegister} className='akatab font-[500] underline'>
                             Sign Up
@@ -99,8 +100,12 @@ const NavSection: React.FC = () => {
                             Sign In
                         </button>
                     </div>
-                : 
-                    <div></div>
+                    :
+                    <button onClick={logout} className='bg-[#1E1F1E] hover:bg-[#2b2b2b] active:bg-[#313131] text-white 
+                    lg:px-[20px] 2xl:px-[20px] rounded-xl akatab py-[8px] font-[500] transition-colors duration-300 flex flex-row items-center'>
+                        Sign Out
+                        <FaArrowRightToBracket className="ml-[10px] mt-[2px]" />
+                    </button>
                 }
             </div>
 
