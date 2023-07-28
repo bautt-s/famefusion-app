@@ -3,6 +3,10 @@ import NavSection from "../landing-sections/nav";
 import FooterSection from "../landing-sections/footer";
 import { useState } from "react";
 
+const iconFan = require('../static/icon-fan.png')
+const iconCelebrity = require('../static/icon-celebrity.png')
+const iconBusiness = require('../static/icon-business.png')
+
 const Roles = () => {
     const { user } = useKindeAuth();
 
@@ -21,24 +25,33 @@ const Roles = () => {
 
                     <fieldset>
                         <div className="grid grid-cols-3 gap-[75px] mt-[60px]">
-                            <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] px-[32px] pt-[15px] pb-[25px]">
+                            <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
+                            p-[32px] cursor-pointer" onClick={() => setSelectedOption('fan')}>
                                 <div className="flex flex-row">
+                                    <img src={iconFan} />
+
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='fan' 
                                     name='fan' value='fan' checked={selectedOption === 'fan'} onChange={() => setSelectedOption('fan')}  />
                                 </div>
                                 <p className="text-lg max-w-[17ch] mt-[15px]">I'm <strong>a fan</strong> seeking memorable experiences with celebrities</p>
                             </div>
 
-                            <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] px-[32px] pt-[15px] pb-[25px]">
+                            <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
+                            p-[32px] cursor-pointer" onClick={() => setSelectedOption('business')}>
                                 <div className="flex flex-row">
+                                    <img src={iconBusiness} />
+
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='business' 
                                     name='business' value='business' checked={selectedOption === 'business'} onChange={() => setSelectedOption('business')} />
                                 </div>
                                 <p className="text-lg max-w-[18ch] mt-[15px]">I'm <strong>a business</strong> interested in collaborating with celebrities</p>
                             </div>
 
-                            <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] px-[32px] pt-[15px] pb-[25px]">
+                            <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
+                            p-[32px] cursor-pointer" onClick={() => setSelectedOption('celebrity')}>
                                 <div className="flex flex-row">
+                                    <img src={iconCelebrity} />
+
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='celebrity' 
                                     name='celebrity' value='celebrity' checked={selectedOption === 'celebrity'} onChange={() => setSelectedOption('celebrity')} />
                                 </div>
