@@ -18,10 +18,10 @@ const hailey = {
     age: 26,
     gender: 'female',
     languages: ['english', 'spanish'],
-    imgGallery: ['https://i.pinimg.com/originals/1f/f6/63/1ff663c8f92a7187a8f886c1b940cd09.jpg', 'https://hips.hearstapps.com/hmg-prod/images/levi-s-unbasic-hoodie-in-white-1554485718.jpg'
-    ,'https://s.yimg.com/ny/api/res/1.2/t4LoBHQeKMMGFZdh5hqRGg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTE0NDA7Y2Y9d2VicA--/https://media.zenfs.com/en/list_wire_usa_today_articles_325/c89984a74177d4ec4143e2247d6c3f02'],
+    imgGallery: ["https://i.pinimg.com/originals/1f/f6/63/1ff663c8f92a7187a8f886c1b940cd09.jpg", "https://hips.hearstapps.com/hmg-prod/images/levi-s-unbasic-hoodie-in-white-1554485718.jpg"
+    ,"https://s.yimg.com/ny/api/res/1.2/t4LoBHQeKMMGFZdh5hqRGg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTE0NDA7Y2Y9d2VicA--/https://media.zenfs.com/en/list_wire_usa_today_articles_325/c89984a74177d4ec4143e2247d6c3f02"],
     availability: [],
-    associatedBrands: ['Guess', 'Ralph Lauren', 'Vogue', 'Tommy Hilfiger'],
+    associatedBrands: ["Guess", 'Ralph Lauren', 'Vogue', 'Tommy Hilfiger'],
     longDescription: 'Hailey Bieber is a renowned model and influencer, known for her captivating presence on both runways and social media. With a meteoric rise to fame, she has graced the covers of leading fashion magazines and collaborated with esteemed designers worldwide. Her style and personality have made her a global icon.',
     interests: ['fitness', 'travel', 'photography', 'philantrophy'],
     followers: { instagram: 123000, twitter: 85000, tiktok: 465000, facebook: 243000 },

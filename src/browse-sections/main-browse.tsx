@@ -23,7 +23,8 @@ export type FilterProps = {
             endDate: Date | undefined
         }
 
-        ageFilter: string[]
+        ageFilter: string[],
+        ageBoundaries: number[],
         languageFilter: string[],
         genderFilter: string[],
         interestFilter: string[],
@@ -216,6 +217,7 @@ const MainBrowse: React.FC = () => {
         },
 
         ageFilter: [],
+        ageBoundaries: [],
         languageFilter: [],
         genderFilter: [],
         interestFilter: [],
@@ -240,6 +242,7 @@ const MainBrowse: React.FC = () => {
             },
 
             ageFilter: [],
+            ageBoundaries: [],
             languageFilter: [],
             genderFilter: [],
             interestFilter: [],
