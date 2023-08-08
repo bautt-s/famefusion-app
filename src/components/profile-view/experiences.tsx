@@ -1,60 +1,52 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { LuClock } from 'react-icons/lu'
 
-type ExperiencesProps = {
-    experiences: {
-        offlineExp: {
-            title: string,
-            price: number,
-            duration: string,
-            description: string
-        }[]
-
-        onlineExp: {
-            title: string,
-            price: number,
-            duration: string,
-            description: string
-        }[]
-    }
+export interface workInterface {
+    title: string,
+    price: number,
+    description: string,
+    duration: string,
+    collaboration: boolean,
+    online: boolean,
 }
 
-const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
-    const { offlineExp, onlineExp } = props.experiences
+const ExperiencesPanel: React.FC<any> = (props) => {
+    const [offlineExp, setOfflineExp] = useState<workInterface[]>([])
+    const [onlineExp, setOnlineExp] = useState<workInterface[]>([])
 
     const [showOffline, setShowOffline] = useState({
         index: 1,
-        show: offlineExp.slice(0, 3)
+        show: offlineExp?.slice(0, 3)
     })
 
     const [showOnline, setShowOnline] = useState({
         index: 1,
-        show: onlineExp.slice(0, 3)
+        show: onlineExp?.slice(0, 3)
     })
 
     const handlePage = (mode: string, sense: string) => {
         if (sense === 'asc') {
             if (mode === 'online') {
-                const limit = Math.ceil(onlineExp.length / 3)
+                const limit = Math.ceil(onlineExp?.length / 3)
 
                 if (showOnline.index !== limit) {
                     const newIndex = showOnline.index + 1
 
                     setShowOnline({
                         index: newIndex,
-                        show: onlineExp.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: onlineExp?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             } else {
-                const limit = Math.ceil(offlineExp.length / 3)
+                const limit = Math.ceil(offlineExp?.length / 3)
 
                 if (showOffline.index !== limit) {
                     const newIndex = showOffline.index + 1
 
                     setShowOffline({
                         index: newIndex,
-                        show: offlineExp.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: offlineExp?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             }
@@ -65,7 +57,7 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
 
                     setShowOnline({
                         index: newIndex,
-                        show: onlineExp.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: onlineExp?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             } else {
@@ -74,24 +66,41 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
 
                     setShowOffline({
                         index: newIndex,
-                        show: offlineExp.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: offlineExp?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             }
         }
     }
-    
+
+    useEffect(() => {
+        setOfflineExp(props?.experiences?.filter((e: workInterface) => !e?.online))
+        setOnlineExp(props?.experiences?.filter((e: workInterface) => !e?.online))
+    }, [props?.experiences])
+
+    useEffect(() => {
+        setShowOffline({
+            index: 1,
+            show: offlineExp?.slice(0, 3)
+        })
+
+        setShowOnline({
+            index: 1,
+            show: onlineExp?.slice(0, 3)
+        })
+    }, [onlineExp])
+
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
             <div className="flex-col">
                 <h2 className="text-xl font-[600]">Offline Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{offlineExp.length} available</span>
+                    <span className='text-[#646868]'>{offlineExp?.length} available</span>
 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
-                            {showOffline.index + ' / ' + Math.ceil(offlineExp.length / 3)}
+                            {showOffline.index + ' / ' + Math.ceil(offlineExp?.length / 3)}
                         </span>
 
                         <div className='flex flex-row gap-[15px] ml-[15px]'>
@@ -109,7 +118,7 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOffline.show.map((offExp, index) =>
+                    {showOffline.show?.map((offExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{offExp.title}</h5>
@@ -121,7 +130,7 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
                             <div className='flex flex-row items-center mt-[15px] text-lg'>
                                 <LuClock className='text-2xl' />
                                 <span className='ml-[10px]'>
-                                    <strong className='mr-[5px]'>Duration:</strong> {offExp.duration}
+                                    <strong className='mr-[5px]'>Duration:</strong> {offExp?.duration}
                                 </span>
                             </div>
 
@@ -142,11 +151,11 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
                 <h2 className="text-xl font-[600]">Online Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{onlineExp.length} available</span>
+                    <span className='text-[#646868]'>{onlineExp?.length} available</span>
 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
-                            {showOnline.index + ' / ' + Math.ceil(onlineExp.length / 3)}
+                            {showOnline.index + ' / ' + Math.ceil(onlineExp?.length / 3)}
                         </span>
 
                         <div className='flex flex-row gap-[15px] ml-[15px]'>
@@ -164,7 +173,7 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOnline.show.map((onlExp, index) =>
+                    {showOnline.show?.map((onlExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{onlExp.title}</h5>
@@ -176,7 +185,7 @@ const ExperiencesPanel: React.FC<ExperiencesProps> = (props) => {
                             <div className='flex flex-row items-center mt-[15px] text-lg'>
                                 <LuClock className='text-2xl' />
                                 <span className='ml-[10px]'>
-                                    <strong className='mr-[5px]'>Duration:</strong> {onlExp.duration}
+                                    <strong className='mr-[5px]'>Duration:</strong> {onlExp?.duration}
                                 </span>
                             </div>
 

@@ -1,60 +1,44 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { LuClock } from 'react-icons/lu'
+import { workInterface } from './experiences'
 
-type OportunitiesProps = {
-    collaborations: {
-        offlineCollabs: {
-            title: string,
-            price: number,
-            duration: string,
-            description: string
-        }[]
-
-        onlineCollabs: {
-            title: string,
-            price: number,
-            duration: string,
-            description: string
-        }[]
-    }
-}
-
-const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
-    const { offlineCollabs, onlineCollabs } = props.collaborations
+const OpportunitiesPanel: React.FC<any> = (props) => {
+    const [offlineCollabs, setOfflineCollabs] = useState<workInterface[]>([])
+    const [onlineCollabs, setOnlineCollabs] = useState<workInterface[]>([])
 
     const [showOffline, setShowOffline] = useState({
         index: 1,
-        show: offlineCollabs.slice(0, 3)
+        show: offlineCollabs?.slice(0, 3)
     })
 
     const [showOnline, setShowOnline] = useState({
         index: 1,
-        show: onlineCollabs.slice(0, 3)
+        show: onlineCollabs?.slice(0, 3)
     })
 
     const handlePage = (mode: string, sense: string) => {
         if (sense === 'asc') {
             if (mode === 'online') {
-                const limit = Math.ceil(onlineCollabs.length / 3)
+                const limit = Math.ceil(onlineCollabs?.length / 3)
 
                 if (showOnline.index !== limit) {
                     const newIndex = showOnline.index + 1
 
                     setShowOnline({
                         index: newIndex,
-                        show: offlineCollabs.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: offlineCollabs?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             } else {
-                const limit = Math.ceil(offlineCollabs.length / 3)
+                const limit = Math.ceil(offlineCollabs?.length / 3)
 
                 if (showOffline.index !== limit) {
                     const newIndex = showOffline.index + 1
 
                     setShowOffline({
                         index: newIndex,
-                        show: offlineCollabs.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: offlineCollabs?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             }
@@ -65,7 +49,7 @@ const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
 
                     setShowOnline({
                         index: newIndex,
-                        show: onlineCollabs.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: onlineCollabs?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             } else {
@@ -74,12 +58,31 @@ const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
 
                     setShowOffline({
                         index: newIndex,
-                        show: offlineCollabs.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: offlineCollabs?.slice((newIndex - 1) * 3, newIndex * 3)
                     })
                 }
             }
         }
     }
+
+    useEffect(() => {
+        setOfflineCollabs(props?.collaborations?.filter((e: workInterface) => !e?.online))
+        setOnlineCollabs(props?.collaborations?.filter((e: workInterface) => !e?.online))
+    }, [props?.collaborations])
+
+    useEffect(() => {
+        setShowOffline({
+            index: 1,
+            show: offlineCollabs?.slice(0, 3)
+        })
+
+        setShowOnline({
+            index: 1,
+            show: onlineCollabs?.slice(0, 3)
+        })
+    }, [offlineCollabs])
+
+    console.log(onlineCollabs)
 
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
@@ -87,11 +90,11 @@ const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
                 <h2 className="text-xl font-[600]">Offline Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{offlineCollabs.length} available</span>
+                    <span className='text-[#646868]'>{offlineCollabs?.length} available</span>
 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
-                            {showOffline.index + ' / ' + Math.ceil(offlineCollabs.length / 3)}
+                            {showOffline.index + ' / ' + Math.ceil(offlineCollabs?.length / 3)}
                         </span>
 
                         <div className='flex flex-row gap-[15px] ml-[15px]'>
@@ -109,7 +112,7 @@ const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOffline.show.map((offExp, index) =>
+                    {showOffline.show?.map((offExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{offExp.title}</h5>
@@ -142,11 +145,11 @@ const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
                 <h2 className="text-xl font-[600]">Online Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{onlineCollabs.length} available</span>
+                    <span className='text-[#646868]'>{onlineCollabs?.length} available</span>
 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
-                            {showOnline.index + ' / ' + Math.ceil(onlineCollabs.length / 3)}
+                            {showOnline.index + ' / ' + Math.ceil(onlineCollabs?.length / 3)}
                         </span>
 
                         <div className='flex flex-row gap-[15px] ml-[15px]'>
@@ -164,7 +167,7 @@ const OpportunitiesPanel: React.FC<OportunitiesProps> = (props) => {
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOnline.show.map((onlExp, index) =>
+                    {showOnline.show?.map((onlExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{onlExp.title}</h5>

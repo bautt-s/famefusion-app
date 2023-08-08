@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 );
 
 const client = new ApolloClient({
-    uri: 'http://localhost:3001',
+    uri: process.env.SERVER_URI ?? 'http://localhost:3001',
     cache: new InMemoryCache(),
 });
 

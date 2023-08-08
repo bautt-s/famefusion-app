@@ -3,16 +3,6 @@ import { RxTriangleRight } from 'react-icons/rx'
 import { PiInstagramLogo, PiFacebookLogo, PiTwitterLogo } from 'react-icons/pi'
 import { BsTiktok } from 'react-icons/bs'
 
-type AboutProps = {
-    name: string,
-    imgGallery: string[],
-    associatedBrands: string[]
-    longDescription: string,
-    followers: { instagram: number, facebook: number, tiktok: number, twitter: number },
-    video: string,
-    interests: string[]
-}
-
 const screenWidth = window.innerWidth
 let imgsShowed = 0
 
@@ -36,8 +26,8 @@ function formatNumber(number: number) {
     return (number < 0 ? '-' : '') + absNumber.toFixed(decimalPlaces).replace(/\.?0+$/, '') + suffixes[suffixIndex]
 }
 
-const AboutPanel: React.FC<AboutProps> = (props) => {
-    const { name, imgGallery, associatedBrands, longDescription, followers, interests, video } = props
+const AboutPanel: React.FC<any> = (props) => {
+    const { name, media, associatedBrands, biography, interests, video } = props
 
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
@@ -68,14 +58,15 @@ const AboutPanel: React.FC<AboutProps> = (props) => {
                     </div>
                 </div>
 
-                {imgGallery.slice(0, imgsShowed).map((item, index) =>
-                    <img key={index} src={item} className='rounded-[25px] object-cover h-[300px] w-full' />
+                {media?.slice(0, imgsShowed).map((item: string, index: number) =>
+                    <div style={{backgroundImage: `url(${item})`, backgroundSize: 'cover', backgroundPosition: 'center'}} 
+                    className='max-w-full rounded-[25px]'></div>
                 )}
             </div>
 
             <div className='flex flex-col lg:flex-row items-center mt-[20px]'>
                 <div className='flex flex-row text-[#646868]'>
-                    {associatedBrands.map((brand, index) => (
+                    {associatedBrands?.map((brand: string, index: number) => (
                         <div className={`${index !== 0 && 'ml-[5px]'}`}>
                             {index !== 0 && ' · '}
                             {brand}
@@ -95,10 +86,10 @@ const AboutPanel: React.FC<AboutProps> = (props) => {
             </div>
 
             <div className='flex flex-col mt-[15px]'>
-                <p className='max-w-[100ch] text-justify'>{longDescription}</p>
+                <p className='max-w-[100ch] text-justify'>{biography}</p>
 
                 <span className='mt-[25px] text-xl font-[600]'>Social Followers</span>
-                <div className='grid grid-cols-2 xl:grid-cols-3'>
+                {/*<div className='grid grid-cols-2 xl:grid-cols-3'>
                     <div className='flex flex-row items-center mt-[15px]'>
                         <PiInstagramLogo className='text-2xl' />
                         <span className='ml-[10px] text-[#646868]'>Instagram <br className='flex lg:hidden' />Followers:
@@ -130,12 +121,12 @@ const AboutPanel: React.FC<AboutProps> = (props) => {
                             {formatNumber(followers.facebook)}</strong>
                         </span>
                     </div>
-                </div>
+                </div>*/}
 
                 <span className='mt-[35px] text-xl font-[600]'>Interests</span>
                 <ul className='flex flex-row flex-wrap gap-[25px] mt-[20px]'>
-                    {interests.map((i, index) =>
-                        <li className='bg-[#EFF3FF] rounded-full px-[15px] py-[4px]'>
+                    {interests?.map((i: string, index: number) =>
+                        <li key={index} className='bg-[#EFF3FF] rounded-full px-[15px] py-[4px]'>
                         {i[0].toUpperCase() + i.slice(1)}</li>
                     )}
                 </ul>

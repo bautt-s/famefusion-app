@@ -3,7 +3,9 @@ import Filters from '../components/filters/filters'
 import { GoHeartFill } from 'react-icons/go'
 import { BsStarFill } from 'react-icons/bs'
 import FilterTag from '../components/filters/filter-tag'
+import { useQuery, gql } from "@apollo/client";
 import { Link } from 'react-router-dom'
+import { StarType } from '../landing-sections/featured-stars'
 
 export type FilterProps = {
     setSelectedFilters: Function,
@@ -32,173 +34,29 @@ export type FilterProps = {
     }
 }
 
-const dummyCelebrities = [
-    {
-        id: 0,
-        name: 'Hailey Bieber',
-        description: 'American model',
-        rating: 4.97,
-        startingPrice: 100,
-        img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
-    },
-    {
-        id: 0,
-        name: 'Tom Hardy',
-        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
-        rating: 5.00,
-        startingPrice: 150,
-        img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
-    },
-    {
-        id: 0,
-        name: 'Ariana Grande',
-        description: 'American singer and songwriter',
-        rating: 4.98,
-        startingPrice: 100,
-        img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
-    },
-    {
-        id: 0,
-        name: 'Chris Hemsworth',
-        description: 'Australian actor',
-        rating: 4.99,
-        startingPrice: 90,
-        img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
-    },
-    {
-        id: 0,
-        name: 'Hailey Bieber',
-        description: 'American model',
-        rating: 4.97,
-        startingPrice: 100,
-        img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
-    },
-    {
-        id: 0,
-        name: 'Tom Hardy',
-        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
-        rating: 5.00,
-        startingPrice: 150,
-        img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
-    },
-    {
-        id: 0,
-        name: 'Ariana Grande',
-        description: 'American singer and songwriter',
-        rating: 4.98,
-        startingPrice: 100,
-        img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
-    },
-    {
-        id: 0,
-        name: 'Chris Hemsworth',
-        description: 'Australian actor',
-        rating: 4.99,
-        startingPrice: 90,
-        img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
-    },
-    {
-        id: 0,
-        name: 'Hailey Bieber',
-        description: 'American model',
-        rating: 4.97,
-        startingPrice: 100,
-        img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
-    },
-    {
-        id: 0,
-        name: 'Tom Hardy',
-        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
-        rating: 5.00,
-        startingPrice: 150,
-        img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
-    },
-    {
-        id: 0,
-        name: 'Ariana Grande',
-        description: 'American singer and songwriter',
-        rating: 4.98,
-        startingPrice: 100,
-        img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
-    },
-    {
-        id: 0,
-        name: 'Chris Hemsworth',
-        description: 'Australian actor',
-        rating: 4.99,
-        startingPrice: 90,
-        img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
-    },
-    {
-        id: 0,
-        name: 'Hailey Bieber',
-        description: 'American model',
-        rating: 4.97,
-        startingPrice: 100,
-        img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
-    },
-    {
-        id: 0,
-        name: 'Tom Hardy',
-        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
-        rating: 5.00,
-        startingPrice: 150,
-        img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
-    },
-    {
-        id: 0,
-        name: 'Ariana Grande',
-        description: 'American singer and songwriter',
-        rating: 4.98,
-        startingPrice: 100,
-        img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
-    },
-    {
-        id: 0,
-        name: 'Chris Hemsworth',
-        description: 'Australian actor',
-        rating: 4.99,
-        startingPrice: 90,
-        img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
-    },
-    {
-        id: 0,
-        name: 'Hailey Bieber',
-        description: 'American model',
-        rating: 4.97,
-        startingPrice: 100,
-        img: 'https://i.pinimg.com/originals/6d/ec/8b/6dec8b8780f11ee59849c01a8e8f2e79.jpg'
-    },
-    {
-        id: 0,
-        name: 'Tom Hardy',
-        description: "English actor, producer and screenwriter. He's admired for his dedication to roles and chameleon-like abilities on screen.",
-        rating: 5.00,
-        startingPrice: 150,
-        img: 'https://media.gq.com/photos/56d4902a9acdcf20275ef34c/1:1/w_120'
-    },
-    {
-        id: 0,
-        name: 'Ariana Grande',
-        description: 'American singer and songwriter',
-        rating: 4.98,
-        startingPrice: 100,
-        img: 'https://hips.hearstapps.com/hmg-prod/images/ariana-grande-brown-hair-1635503860.png'
-    },
-    {
-        id: 0,
-        name: 'Chris Hemsworth',
-        description: 'Australian actor',
-        rating: 4.99,
-        startingPrice: 90,
-        img: 'https://pbs.twimg.com/media/E-TIkcpWQAYy_Pu?format=jpg&name=4096x4096'
-    },
-]
+const loadingArray = ['loading', 'loading', 'loading',
+    'loading', 'loading', 'loading', 'loading', 'loading']
 
 const filterItems = ['Show All', 'Featured', 'Actors', 'Athletes',
     'Comedians', 'Creators', 'Musicians', 'Professionals', 'Reality TV']
 
 const MainBrowse: React.FC = () => {
+    const BROWSE = gql`
+    query getCelebrities {
+        getAllCelebrities {
+            id,
+            name,
+            description,
+            rating,
+            profilePic,
+            workList {
+                price
+            }
+        }
+    }`
+
+    const { loading, error, data } = useQuery(BROWSE);
+
     const [selectedCategory, setSelectedCategory] = useState(filterItems[0])
     const [selectedFilters, setSelectedFilters] = useState({
         locationFilter: {
@@ -328,33 +186,58 @@ const MainBrowse: React.FC = () => {
                         {noFilters && <button onClick={handleClear} className='text-[#D20505]'>Clear filters</button>}
                     </div>
 
-                    <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full transition-all duration-300'>
-                        {dummyCelebrities.map((c, index) =>
-                            <div key={index} className='akatab relative w-full group'>
-                                <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
-                                hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300' />
+                    {error &&
+                        <div className='w-full flex justify-center items-center pt-[40px] pb-[250px]'>
+                            <span className='akatab text-xl text-[#FB5870]'>Error: could not get stars.</span>
+                        </div>
+                    }
 
-                                <Link to={`/browse/${c.id}`}>
-                                    <img src={c.img} className='w-full object-cover object-top rounded-2xl featured-img' alt={c.name} />
+                    {loading &&
+                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full'>
+                            {loadingArray.map((item, index) =>
+                                <div key={index} className='w-full'>
+                                    <div className='w-full h-[200px] bg-gray-500 animate-pulse rounded-lg'></div>
+                                    <div className='w-[150px] h-[15px] bg-gray-500 animate-pulse mt-[15px] rounded-full'></div>
+                                    <div className='w-full h-[10px] bg-gray-500 animate-pulse mt-[15px] rounded-full'></div>
+                                    <div className='w-full h-[10px] bg-gray-500 animate-pulse mt-[5px] rounded-full'></div>
+                                    <div className='w-full h-[10px] bg-gray-500 animate-pulse mt-[5px] rounded-full'></div>
+                                </div>
+                            )}
+                        </div>
+                    }
 
-                                    <div className='flex flex-col sm:flex-row sm:items-center mt-[15px]'>
-                                        <h4 className='text-2xl font-[600]'>{c.name}</h4>
+                    {(!loading && !error) &&
+                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full transition-all duration-300'>
+                            {data?.getAllCelebrities?.map((c: StarType, index: number) =>
+                                <div key={index} className='akatab relative w-full group'>
+                                    <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
+                                hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300 z-50' />
 
-                                        <div className='flex flex-row items-center sm:ml-auto'>
-                                            <BsStarFill className='text-sm' />
-                                            <span className='ml-[10px] mt-[2px]'>{c.rating}</span>
+                                    <Link to={`/browse/${c.id}`}>
+                                        <img src={c.profilePic} className='w-full object-cover rounded-2xl object-top 
+                                    featured-img group-hover:scale-105 transition-all duration-300 select-none' alt={c.name} />
+
+                                        <div className='flex flex-col sm:flex-row sm:items-center mt-[15px]'>
+                                            <h4 className='text-2xl font-[600]'>{c?.name}</h4>
+
+                                            <div className='flex flex-row items-center sm:ml-auto'>
+                                                <BsStarFill className='text-sm' />
+                                                <span className='ml-[10px] mt-[2px]'>{c?.rating}</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px] text-left'>
-                                        {c.description.length > 62 ? c.description.slice(0, 62) + '...' : c.description}
-                                    </p>
+                                        <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px] text-left'>
+                                            {c?.description.length > 62 ? c?.description.slice(0, 62) + '...' : c?.description}
+                                        </p>
 
-                                    <span className='font-[600] text-lg '>From €{c.startingPrice}</span>
-                                </Link>
-                            </div>
-                        )}
-                    </div>
+                                        <span className='font-[600] text-lg '>
+                                            {c?.workList[0]?.price ? `From €${c?.workList[0]?.price}` : 'Learn more'}
+                                        </span>
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    }
                 </div>
             </div>
         </div>
