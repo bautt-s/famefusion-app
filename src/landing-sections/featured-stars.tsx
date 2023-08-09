@@ -56,7 +56,7 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
     useEffect(() => {
         setFeatured(data?.getAllCelebrities?.slice(limit - starsShowed, limit))
     }, [limit, starsShowed, data])
-
+    if (error) console.log(error)
     return (
         <section className='w-full flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] pb-[140px] sm:pb-0 mt-[120px]'>
             <div className='flex flex-row items-center'>
