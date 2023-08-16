@@ -1,7 +1,7 @@
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { useState, ChangeEvent } from 'react'
-import { FilterProps } from '../../browse-sections/main-browse';
+import { FilterProps } from '../browse-sections/main-browse';
 
 const minDistance = 0;
 
@@ -61,10 +61,10 @@ const PriceAcc: React.FC<FilterProps> = (props) => {
     }
 
     const applyFilter = () => {
-        if (rangeChecked !== selectedFilters.priceFilter.range || value[0] !== selectedFilters.priceFilter.min || value[1] !== selectedFilters.priceFilter.max) {
+        if (rangeChecked !== selectedFilters.price.range || value[0] !== selectedFilters.price.min || value[1] !== selectedFilters.price.max) {
             setSelectedFilters({
                 ...selectedFilters,
-                priceFilter: {
+                price: {
                     range: rangeChecked,
                     min: value[0],
                     max: value[1]

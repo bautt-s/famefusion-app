@@ -1,6 +1,6 @@
 import 'flowbite'
 import { useState } from 'react'
-import { FilterProps } from '../../browse-sections/main-browse'
+import { FilterProps } from '../browse-sections/main-browse'
 import Datepicker from "tailwind-datepicker-react"
 
 const today = new Date();
@@ -79,7 +79,7 @@ const AvailabilityAcc: React.FC<FilterProps> = (props) => {
     const applyDateFilter = () => {
         setSelectedFilters({ 
             ...selectedFilters, 
-            availabilityFilter: { startDate: dates[0], endDate: dates[1] } 
+            availability: { startDate: dates[0], endDate: dates[1] } 
         })
     }
 

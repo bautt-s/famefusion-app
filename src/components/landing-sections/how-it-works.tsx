@@ -1,6 +1,6 @@
-import GlassIcon from "../static/svgs/Glass"
-import CheckIcon from "../static/svgs/Check"
-import FlameIcon from "../static/svgs/Flame"
+import GlassIcon from "../../static/svgs/Glass"
+import CheckIcon from "../../static/svgs/Check"
+import FlameIcon from "../../static/svgs/Flame"
 
 const how = [
     {

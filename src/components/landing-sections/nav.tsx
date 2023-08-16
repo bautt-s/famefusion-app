@@ -5,8 +5,8 @@ import { BiMenuAltRight } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const logo = require('../static/logo.png')
-const portugalIcon = require('../static/icon-portugal.png')
+const logo = require('../../static/logo.png')
+const portugalIcon = require('../../static/icon-portugal.png')
 
 const NavSection: React.FC = () => {
     const { user, isAuthenticated, isLoading, register, login, logout } = useKindeAuth();

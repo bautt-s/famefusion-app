@@ -96,8 +96,9 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                 <h2 className="text-xl font-[600]">Offline Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{offlineExp?.length} available</span>
+                    <span className='text-[#646868]'>{offlineExp?.length || 'None'} available</span>
 
+                    {(offlineExp?.length !== 0) && 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
                             {showOffline.index + ' / ' + Math.ceil(offlineExp?.length / 3)}
@@ -114,11 +115,11 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                                 <GoChevronRight />
                             </button>
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOffline.show?.map((offExp: workInterface, index: number) =>
+                    {offlineExp?.length ? showOffline.show?.map((offExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{offExp.title}</h5>
@@ -143,16 +144,21 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                                 </button>
                             </div>
                         </div>
-                    )}
+                    ) : 
+                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
+                            This celebrity does not provide offline experiences.
+                        </div>
+                    }
                 </div>
             </div>
 
-            <div className="flex-col mt-auto">
+            <div className={`flex-col ${onlineExp?.length && 'mt-auto'}}`}>
                 <h2 className="text-xl font-[600]">Online Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{onlineExp?.length} available</span>
+                    <span className='text-[#646868]'>{onlineExp?.length || 'None'} available</span>
 
+                    {(onlineExp?.length !== 0) && 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
                             {showOnline.index + ' / ' + Math.ceil(onlineExp?.length / 3)}
@@ -169,11 +175,11 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                                 <GoChevronRight />
                             </button>
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOnline.show?.map((onlExp: workInterface, index: number) =>
+                    {onlineExp?.length ? showOnline.show?.map((onlExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{onlExp.title}</h5>
@@ -198,7 +204,11 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                                 </button>
                             </div>
                         </div>
-                    )}
+                    ) :
+                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
+                            This celebrity does not provide online experiences.
+                        </div>
+                    }
                 </div>
             </div>
         </div>

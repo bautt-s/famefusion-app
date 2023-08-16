@@ -1,106 +1,23 @@
 import { useEffect, useState } from "react"
-import ProfileSidebar from "../components/profile-view/side-bar"
-import AboutPanel from "../components/profile-view/about"
-import ExperiencesPanel from "../components/profile-view/experiences"
-import OpportunitiesPanel from "../components/profile-view/opportunities"
-import AvailabilityPanel from "../components/profile-view/availability"
-import ReviewsPanel from "../components/profile-view/reviews"
-import { useQuery, gql, ApolloError } from "@apollo/client";
-import { useParams } from "react-router-dom"
-
-type celebrityId = {
-    getCelebrityById: {
-        name: string
-        biography: string
-        description: string
-        rating: number
-        profilePic: string
-        languages: string[]
-        age: number
-        gender: string
-        location: string
-        media: string[]
-        associatedBrands: string[]
-        interests: string[]
-        video: string
-
-        workList: {
-            title: string
-            price: number
-            description: string
-            duration: string
-            online: boolean
-            collaboration: boolean
-        }[]
-
-        reviewList: {
-            title: string
-            description: string
-            images: string
-            stars: number
-            createdAt: Date
-            author: {
-                name: string
-            }
-        }[]
-    }
-}
+import ProfileSidebar from "../profile-view/side-bar"
+import AboutPanel from "../profile-view/about"
+import ExperiencesPanel from "../profile-view/experiences"
+import OpportunitiesPanel from "../profile-view/opportunities"
+import AvailabilityPanel from "../profile-view/availability"
+import ReviewsPanel from "../profile-view/reviews"
+import { celebrityId } from "../../pages/Profile"
 
 type WorkListType = celebrityId['getCelebrityById']['workList'];
 
-const MainView: React.FC = () => {
-    const { id } = useParams()
+const MainView: React.FC<{data: celebrityId | undefined}> = (props) => {
+    const { data } = props
     const sectionsList = ['About', 'Experiences', 'Business Opportunities', 'Availability', 'Reviews']
-
-    const PROFILE = gql`
-    query getCelebrityById($id: String) {
-        getCelebrityById(id: $id) {
-            name,
-            biography,
-            description,
-            rating,
-            profilePic,
-            languages,
-            age,
-            gender,
-            location,
-            media,
-            associatedBrands,
-            interests,
-            video
-
-            workList {
-                title
-                price
-                description
-                duration
-                online
-                collaboration
-            }
-
-            reviewList {
-                title
-                description
-                images
-                stars
-                createdAt
-                author {
-                    name
-                }
-            }
-        }
-    }`
-
-    const { loading, error, data } = useQuery<celebrityId>(PROFILE, { variables: { id } });
 
     const [section, setSection] = useState(sectionsList[0])
     const [collaborations, setCollaborations] = useState<WorkListType>([])
     const [experiences, setExperiences] = useState<WorkListType>([])
 
     useEffect(() => {
-        if (!loading) document.title = `FameFusion | ${data?.getCelebrityById?.name}`
-        else document.title = `FameFusion | Loading...`
-
         if (data) {
             setCollaborations(data?.getCelebrityById?.workList.filter(w => w.collaboration))
             setExperiences(data?.getCelebrityById?.workList.filter(w => !w.collaboration))
@@ -109,11 +26,10 @@ const MainView: React.FC = () => {
 
     return (
         <div className="mt-[120px] flex flex-col px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] mb-[120px]">
-
             <div className="flex akatab font-[500]" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-3">
                     <li className="inline-flex items-center">
-                        <a href="/" className="inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                        <a href="/" className="inline-flex items-center text-gray-700 hover:text-[#FB5870] dark:text-gray-400 dark:hover:text-white">
                             Home
                         </a>
                     </li>
@@ -122,7 +38,7 @@ const MainView: React.FC = () => {
                             <svg className="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="/browse" className="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Browse Celebrity</a>
+                            <a href="/browse" className="ml-1 text-gray-700 hover:text-[#FB5870] md:ml-2 dark:text-gray-400 dark:hover:text-white">Browse Celebrity</a>
                         </div>
                     </li>
                     <li aria-current="page">

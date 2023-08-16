@@ -1,5 +1,5 @@
 import 'flowbite'
-import { FilterProps } from '../../browse-sections/main-browse'
+import { FilterProps } from '../browse-sections/main-browse'
 import AvailabilityAcc from './availability'
 import PriceAcc from './price'
 import AgeGroupAcc from './age-group'

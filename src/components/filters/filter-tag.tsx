@@ -1,5 +1,5 @@
 import { RxCross1 } from 'react-icons/rx'
-import { FilterProps } from '../../browse-sections/main-browse'
+import { FilterProps } from '../browse-sections/main-browse'
 
 type TagProps = {
     item: string | (Date | undefined)[],
@@ -13,7 +13,7 @@ const FilterTag: React.FC<TagProps> = (props) => {
     const { item, selectedFilters, setSelectedFilters, origin, array } = props
 
     const handleClear = () => {
-        if (origin === 'priceFilter') setSelectedFilters({ ...selectedFilters, priceFilter: { ...selectedFilters.priceFilter, range: false } })
+        if (origin === 'price') setSelectedFilters({ ...selectedFilters, price: { ...selectedFilters.price, range: false } })
         else setSelectedFilters({ ...selectedFilters, [origin]: array?.filter(o => o !== item) })
     }
 
@@ -30,7 +30,7 @@ const FilterTag: React.FC<TagProps> = (props) => {
         if (i === '-30') return 'Under 30'
         if (i === 'media-promotion') return 'Media Promotion'
 
-        if (origin === 'availabilityFilter') {
+        if (origin === 'availability') {
             const fromDate = i[0] ? new Date(i[0]) : undefined;
             const toDate = i[1] ? new Date(i[1]) : undefined;
     

@@ -1,10 +1,34 @@
-import MainBrowse from "../browse-sections/main-browse";
-import SearchbarSection from "../browse-sections/searchbar";
-import FooterSection from "../landing-sections/footer";
-import NavSection from "../landing-sections/nav";
-import { useEffect } from 'react'
+import MainBrowse from "../components/browse-sections/main-browse";
+import SearchbarSection from "../components/browse-sections/searchbar";
+import FooterSection from "../components/landing-sections/footer";
+import NavSection from "../components/landing-sections/nav";
+import { useEffect, useState } from 'react'
 
 function Browse() {
+    const [selectedFilters, setSelectedFilters] = useState({
+        location: '',
+
+        price: {
+            range: false,
+            min: 0,
+            max: 100
+        },
+
+        availability: {
+            startDate: undefined,
+            endDate: undefined
+        },
+
+        ageFilter: [],
+        ageGroup: [],
+        languages: [],
+        gender: [],
+        interests: [],
+        opportunities: [],
+        category: '',
+        name: ''
+    })
+
     useEffect(() => {
         document.title = 'FameFusion | Browse'
     }, [])
@@ -12,8 +36,8 @@ function Browse() {
     return (
         <div className="w-screen overflow-x-hidden antialiased">
             <NavSection />
-            <SearchbarSection />
-            <MainBrowse />
+            <SearchbarSection selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
+            <MainBrowse selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
             <FooterSection />
         </div>
     );

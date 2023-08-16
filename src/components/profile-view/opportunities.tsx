@@ -87,11 +87,12 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
             <div className="flex-col">
-                <h2 className="text-xl font-[600]">Offline Experiences</h2>
+                <h2 className="text-xl font-[600]">Offline Collaborations</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{offlineCollabs?.length} available</span>
+                    <span className='text-[#646868]'>{offlineCollabs?.length || 'None'} available</span>
 
+                    {(offlineCollabs?.length !== 0) && 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
                             {showOffline.index + ' / ' + Math.ceil(offlineCollabs?.length / 3)}
@@ -108,11 +109,11 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                                 <GoChevronRight />
                             </button>
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOffline.show?.map((offExp: workInterface, index: number) =>
+                    {offlineCollabs?.length ? showOffline.show?.map((offExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{offExp.title}</h5>
@@ -137,16 +138,21 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                                 </button>
                             </div>
                         </div>
-                    )}
+                    ) : 
+                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
+                            This celebrity does not provide offline collaborations.
+                        </div>
+                    }
                 </div>
             </div>
 
-            <div className="flex-col mt-auto">
-                <h2 className="text-xl font-[600]">Online Experiences</h2>
+            <div className={`flex-col ${onlineCollabs?.length && 'mt-auto'}}`}>
+                <h2 className="text-xl font-[600]">Online Collaborations</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
-                    <span className='text-[#646868]'>{onlineCollabs?.length} available</span>
+                    <span className='text-[#646868]'>{onlineCollabs?.length || 'None'} available</span>
 
+                    {(onlineCollabs?.length !== 0) && 
                     <div className="flex flex-row items-center ml-auto">
                         <span>
                             {showOnline.index + ' / ' + Math.ceil(onlineCollabs?.length / 3)}
@@ -163,11 +169,12 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                                 <GoChevronRight />
                             </button>
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
-                    {showOnline.show?.map((onlExp: workInterface, index: number) =>
+                    {onlineCollabs?.length ?
+                    showOnline.show?.map((onlExp: workInterface, index: number) =>
                         <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                             <div className='flex flex-row items-center'>
                                 <h5 className='font-[600] text-lg'>{onlExp.title}</h5>
@@ -192,7 +199,11 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                                 </button>
                             </div>
                         </div>
-                    )}
+                    ) : 
+                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
+                            This celebrity does not provide online collaborations.
+                        </div>
+                    }
                 </div>
             </div>
         </div>

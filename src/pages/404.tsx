@@ -1,6 +1,6 @@
 import { FaArrowRightLong } from "react-icons/fa6"
-import FooterSection from "../landing-sections/footer"
-import NavSection from "../landing-sections/nav"
+import FooterSection from "../components/landing-sections/footer"
+import NavSection from "../components/landing-sections/nav"
 import { Link } from "react-router-dom"
 import { useEffect } from 'react'
 

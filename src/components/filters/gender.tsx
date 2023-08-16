@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { FilterProps } from "../../browse-sections/main-browse"
+import { FilterProps } from "../browse-sections/main-browse"
 
 const GenderAcc: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
@@ -11,39 +11,39 @@ const GenderAcc: React.FC<FilterProps> = (props) => {
     }
 
     useEffect(() => {
-        if (genders !== selectedFilters.genderFilter) setSelectedFilters({ ...selectedFilters, genderFilter: genders })
+        if (genders !== selectedFilters.gender) setSelectedFilters({ ...selectedFilters, gender: genders })
     }, [genders])
 
     useEffect(() => {
-        setGenders(selectedFilters.genderFilter)
-    }, [selectedFilters.genderFilter])
+        setGenders(selectedFilters.gender)
+    }, [selectedFilters.gender])
 
     return (
         <div className="flex flex-col akatab">
             <div className="flex flex-row items-center">
                 <label className="flex gap-[7px]">
-                    <input type="checkbox" checked={selectedFilters.genderFilter.includes('male')} 
+                    <input type="checkbox" checked={selectedFilters.gender.includes('male')} 
                     className="accent-[#EB5269]" onChange={() => handleCheck('male')} />Male</label>
                 <span className="flex ml-auto">292</span>
             </div>
 
             <div className="flex flex-row items-center">
                 <label className="flex gap-[7px]">
-                    <input type="checkbox" checked={selectedFilters.genderFilter.includes('female')} 
+                    <input type="checkbox" checked={selectedFilters.gender.includes('female')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('female')} />Female</label>
                 <span className="flex ml-auto">236</span>
             </div>
 
             <div className="flex flex-row items-center">
                 <label className="flex gap-[7px]">
-                    <input type="checkbox" checked={selectedFilters.genderFilter.includes('transgender')} 
+                    <input type="checkbox" checked={selectedFilters.gender.includes('transgender')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('transgender')} />Transgender</label>
                 <span className="flex ml-auto">64</span>
             </div>
 
             <div className="flex flex-row items-center">
                 <label className="flex gap-[7px]">
-                    <input type="checkbox" checked={selectedFilters.genderFilter.includes('non-binary')} 
+                    <input type="checkbox" checked={selectedFilters.gender.includes('non-binary')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('non-binary')} />Non-binary</label>
                 <span className="flex ml-auto">29</span>
             </div>

@@ -27,7 +27,8 @@ const ReviewsPanel: React.FC<any> = (props) => {
 
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab gap-y-[25px]">
-            {reviews?.slice(-2).map((r: reviewInterface, index: number) =>
+            {reviews.length ?
+            reviews?.slice(-2).map((r: reviewInterface, index: number) =>
                 <div key={index} className={`flex flex-col rounded-[25px] p-[32px] ${index % 2 === 0 ? 'bg-[#F7F8FC]' : 'bg-[#EEF3FE]'}`}>
                     <h5 className="text-xl font-[600]">{r.title}</h5>
                     <span className="text-[#646868]">{r.date}</span>
@@ -57,11 +58,17 @@ const ReviewsPanel: React.FC<any> = (props) => {
                         <span className="font-[600] ml-[15px]">{r.author}</span>
                     </div>
                 </div>
-            )}
+            ) : 
+                <div className='w-full h-full text-center text-xl text-[#FB5870] flex justify-center items-center '>
+                    <span className='mb-[60px]'>This celebrity has no reviews (yet)</span>
+                </div>
+            }
 
-            <button className="text-[#1f1f1f] underline underline-offset-4 mt-auto w-fit">
-                Show all {reviews?.length} reviews
-            </button>
+            {reviews.length !== 0 &&
+                <button className="text-[#1f1f1f] underline underline-offset-4 mt-auto w-fit">
+                    Show all {reviews?.length} reviews
+                </button>
+            }
         </div>
     )
 }

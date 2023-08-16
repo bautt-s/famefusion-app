@@ -1,6 +1,6 @@
 import { HiOutlineChevronDown } from 'react-icons/hi'
 import { useState, useEffect } from "react"
-import { FilterProps } from '../../browse-sections/main-browse'
+import { FilterProps } from '../browse-sections/main-browse'
 
 const OpportunitiesAcc: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
@@ -12,35 +12,35 @@ const OpportunitiesAcc: React.FC<FilterProps> = (props) => {
     }
 
     useEffect(() => {
-        if (opportunities !== selectedFilters.businessFilter) setSelectedFilters({ ...selectedFilters, businessFilter: opportunities })
+        if (opportunities !== selectedFilters.opportunities) setSelectedFilters({ ...selectedFilters, opportunities: opportunities })
     }, [opportunities])
 
     useEffect(() => {
-        if (opportunities.length) setOpportunities(selectedFilters.businessFilter)
-    }, [selectedFilters.businessFilter])
+        if (opportunities.length) setOpportunities(selectedFilters.opportunities)
+    }, [selectedFilters.opportunities])
 
     return (
         <div className="flex flex-col akatab">
             <div className="flex flex-row items-center">
-                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.businessFilter.includes('media-promotion')} 
+                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.opportunities.includes('media-promotion')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('media-promotion')} />Media Promotion</label>
                 <span className="flex ml-auto">17</span>
             </div>
 
             <div className="flex flex-row items-center">
-                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.businessFilter.includes('events')} 
+                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.opportunities.includes('events')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('events')} />Event Attendance</label>
                 <span className="flex ml-auto">121</span>
             </div>
 
             <div className="flex flex-row items-center">
-                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.businessFilter.includes('partnerships')} 
+                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.opportunities.includes('partnerships')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('partnerships')} />Affiliate Partnerships</label>
                 <span className="flex ml-auto">90</span>
             </div>
 
             <div className="flex flex-row items-center">
-                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.businessFilter.includes('reviews')} 
+                <label className="flex gap-[7px]"><input type="checkbox" checked={selectedFilters.opportunities.includes('reviews')} 
                      className="accent-[#EB5269]" onChange={() => handleCheck('reviews')} />Reviews</label>
                 <span className="flex ml-auto">47</span>
             </div>

@@ -1,8 +1,8 @@
 import { FaArrowRightLong } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 
-const heroImage = require('../static/hero-image.png')
-const heroSmallImage = require('../static/hero-small-image.png')
+const heroImage = require('../../static/hero-image.png')
+const heroSmallImage = require('../../static/hero-small-image.png')
 
 const HeroSection: React.FC = () => {
     return (

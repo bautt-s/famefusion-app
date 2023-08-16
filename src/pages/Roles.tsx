@@ -1,6 +1,6 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import NavSection from "../landing-sections/nav";
-import FooterSection from "../landing-sections/footer";
+import NavSection from "../components/landing-sections/nav";
+import FooterSection from "../components/landing-sections/footer";
 import { useState } from "react";
 
 const iconFan = require('../static/icon-fan.png')

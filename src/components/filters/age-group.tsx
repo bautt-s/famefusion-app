@@ -1,4 +1,4 @@
-import { FilterProps } from "../../browse-sections/main-browse"
+import { FilterProps } from "../browse-sections/main-browse"
 import { useState, useEffect } from "react"
 
 function calculateRange(arr: string[]): [number, number] {
@@ -35,7 +35,7 @@ const AgeGroupAcc: React.FC<FilterProps> = (props) => {
 
     useEffect(() => {
         if (ages !== selectedFilters.ageFilter) 
-        setSelectedFilters({ ...selectedFilters, ageBoundaries: calculateRange(ages), ageFilter: ages })
+        setSelectedFilters({ ...selectedFilters, ageGroup: calculateRange(ages), ageFilter: ages })
     }, [ages])
 
     useEffect(() => {

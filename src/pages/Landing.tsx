@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import BenefitsSection from "../landing-sections/benefits";
-import FeaturedSection from "../landing-sections/featured-stars";
-import FooterSection from "../landing-sections/footer";
-import HeroSection from "../landing-sections/hero";
-import HowSection from "../landing-sections/how-it-works";
-import NavSection from "../landing-sections/nav";
-import ReviewsSection from "../landing-sections/reviews";
+import BenefitsSection from "../components/landing-sections/benefits";
+import FeaturedSection from "../components/landing-sections/featured-stars";
+import FooterSection from "../components/landing-sections/footer";
+import HeroSection from "../components/landing-sections/hero";
+import HowSection from "../components/landing-sections/how-it-works";
+import NavSection from "../components/landing-sections/nav";
+import ReviewsSection from "../components/landing-sections/reviews";
 
 function Landing() {
     useEffect(() => {

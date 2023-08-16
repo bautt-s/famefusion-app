@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 
-const benefitsImg1 = require('../static/benefits-image-1.png')
-const benefitsImg2 = require('../static/benefits-image-2.png')
-const benefitsImg3 = require('../static/benefits-image-3.png')
+const benefitsImg1 = require('../../static/benefits-image-1.png')
+const benefitsImg2 = require('../../static/benefits-image-2.png')
+const benefitsImg3 = require('../../static/benefits-image-3.png')
 
 const benefitsSlides = [
     {
