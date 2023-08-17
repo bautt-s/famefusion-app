@@ -34,7 +34,7 @@ const Roles = () => {
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='fan' 
                                     name='fan' value='fan' checked={selectedOption === 'fan'} onChange={() => setSelectedOption('fan')}  />
                                 </div>
-                                <p className="text-lg max-w-[17ch] mt-[15px]">I'm <strong>a fan</strong> seeking memorable experiences with celebrities</p>
+                                <p className="text-lg max-w-[17ch] mt-[15px]">I&apos;m <strong>a fan</strong> seeking memorable experiences with celebrities</p>
                             </div>
 
                             <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
@@ -45,7 +45,7 @@ const Roles = () => {
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='business' 
                                     name='business' value='business' checked={selectedOption === 'business'} onChange={() => setSelectedOption('business')} />
                                 </div>
-                                <p className="text-lg max-w-[18ch] mt-[15px]">I'm <strong>a business</strong> interested in collaborating with celebrities</p>
+                                <p className="text-lg max-w-[18ch] mt-[15px]">I&apos;m <strong>a business</strong> interested in collaborating with celebrities</p>
                             </div>
 
                             <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
@@ -56,11 +56,11 @@ const Roles = () => {
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='celebrity' 
                                     name='celebrity' value='celebrity' checked={selectedOption === 'celebrity'} onChange={() => setSelectedOption('celebrity')} />
                                 </div>
-                                <p className="text-lg max-w-[18ch] mt-[15px]">I'm <strong>a celebrity</strong> exploring opportunities to connect with fans and businesses.</p>
+                                <p className="text-lg max-w-[18ch] mt-[15px]">I&apos;m <strong>a celebrity</strong> exploring opportunities to connect with fans and businesses.</p>
                             </div>
                         </div>
 
-                        <button className="bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] 
+                        <button className="bg-[#503c3f] hover:bg-[#eb5269] active:bg-[#e64c63] 
                     text-white py-[12px] px-[120px] rounded-2xl mx-auto flex mt-[60px]">
                             Register as a Fan
                         </button>

@@ -6,6 +6,7 @@ import OpportunitiesPanel from "./opportunities";
 import ExperiencesPanel from "./experiences";
 import AboutPanel from "./about";
 import ProfileSidebar from "./side-bar";
+import Link from "next/link";
 
 type WorkListType = celebrityId['getCelebrityById']['workList'];
 
@@ -29,16 +30,16 @@ const MainView: React.FC<{data: celebrityId | undefined}> = (props) => {
             <div className="flex akatab font-[500]" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-3">
                     <li className="inline-flex items-center">
-                        <a href="/" className="inline-flex items-center text-gray-700 hover:text-[#FB5870] dark:text-gray-400 dark:hover:text-white">
+                        <Link href="/" className="inline-flex items-center text-gray-700 hover:text-[#FB5870] dark:text-gray-400 dark:hover:text-white">
                             Home
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <div className="flex items-center">
                             <svg className="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="/browse" className="ml-1 text-gray-700 hover:text-[#FB5870] md:ml-2 dark:text-gray-400 dark:hover:text-white">Browse Celebrity</a>
+                            <Link href="/browse" className="ml-1 text-gray-700 hover:text-[#FB5870] md:ml-2 dark:text-gray-400 dark:hover:text-white">Browse Celebrity</Link>
                         </div>
                     </li>
                     <li aria-current="page">

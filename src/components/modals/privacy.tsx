@@ -15,7 +15,7 @@ const PrivacyModal: React.FC<{ setOpen: Function }> = (props) => {
 
                 <div className='max-h-[600px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px]'>
                     <p className='akatab text-justify'>
-                        Welcome to FameFusion ("we", "us", or "Website"), a platform that connects celebrities with fans and businesses. This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information when you visit our website or use our services. By accessing or using our services, you consent to the practices described in this Privacy Policy.
+                        Welcome to FameFusion (&quot;we&quot;, &quot;us&quot;, or &quot;Website&quot;), a platform that connects celebrities with fans and businesses. This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information when you visit our website or use our services. By accessing or using our services, you consent to the practices described in this Privacy Policy.
                         <br /><br />
                         <strong className='text-xl font-[600]'>Information We Collect</strong>
                         <br /><br />

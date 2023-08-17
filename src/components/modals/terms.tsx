@@ -15,7 +15,7 @@ const TermsModal: React.FC<{ setOpen: Function }> = (props) => {
 
                 <div className='max-h-[600px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px]'>
                     <p className='akatab text-justify'>
-                        Welcome to FameFusion ("we", "us", or "Website"). These Terms and Conditions ("Terms") govern your use of our platform and services. By accessing or using our services, you agree to comply with these Terms. If you do not agree with these Terms, please do not use our services.
+                        Welcome to FameFusion (&quot;we&quot;, &quot;us&quot;, or &quot;Website&quot;). These Terms and Conditions (&quot;Terms&quot;) govern your use of our platform and services. By accessing or using our services, you agree to comply with these Terms. If you do not agree with these Terms, please do not use our services.
 
                         <br /><br />
                         <strong className='text-xl font-[700]'>User Eligibility</strong>
