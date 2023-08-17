@@ -1,11 +1,8 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import NavSection from "../components/landing-sections/nav";
-import FooterSection from "../components/landing-sections/footer";
+import FooterSection from "@/components/landing/footer";
+import NavSection from "@/components/landing/nav";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+import Head from "next/head";
 import { useState } from "react";
-
-const iconFan = require('../static/icon-fan.png')
-const iconCelebrity = require('../static/icon-celebrity.png')
-const iconBusiness = require('../static/icon-business.png')
 
 const Roles = () => {
     const { user } = useKindeAuth();
@@ -14,6 +11,10 @@ const Roles = () => {
 
     return (
         <div>
+            <Head>
+                <title>FameFusion | Roles</title>
+            </Head>
+
             <NavSection />
 
             <div className="pt-[180px] pb-[180px] akatab">
@@ -28,7 +29,7 @@ const Roles = () => {
                             <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
                             p-[32px] cursor-pointer" onClick={() => setSelectedOption('fan')}>
                                 <div className="flex flex-row">
-                                    <img src={iconFan} />
+                                    <img src='/icon-fan.png' />
 
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='fan' 
                                     name='fan' value='fan' checked={selectedOption === 'fan'} onChange={() => setSelectedOption('fan')}  />
@@ -39,7 +40,7 @@ const Roles = () => {
                             <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
                             p-[32px] cursor-pointer" onClick={() => setSelectedOption('business')}>
                                 <div className="flex flex-row">
-                                    <img src={iconBusiness} />
+                                    <img src='/icon-business.png' />
 
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='business' 
                                     name='business' value='business' checked={selectedOption === 'business'} onChange={() => setSelectedOption('business')} />
@@ -50,7 +51,7 @@ const Roles = () => {
                             <div className="flex flex-col border-[#bbbbbb] border-[1px] rounded-[35px] 
                             p-[32px] cursor-pointer" onClick={() => setSelectedOption('celebrity')}>
                                 <div className="flex flex-row">
-                                    <img src={iconCelebrity} />
+                                    <img src='/icon-celebrity.png' />
 
                                     <input className="ml-auto w-[20px] h-[20px] accent-[#FB5870]" type='radio' id='celebrity' 
                                     name='celebrity' value='celebrity' checked={selectedOption === 'celebrity'} onChange={() => setSelectedOption('celebrity')} />

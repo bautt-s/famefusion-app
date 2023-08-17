@@ -1,18 +1,16 @@
 import { FaArrowRightLong } from "react-icons/fa6"
-import FooterSection from "../components/landing-sections/footer"
-import NavSection from "../components/landing-sections/nav"
-import { Link } from "react-router-dom"
-import { useEffect } from 'react'
-
-const img404 = require('../static/404img.png')
+import Link from "next/link"
+import NavSection from "@/components/landing/nav"
+import FooterSection from "@/components/landing/footer"
+import Head from "next/head"
 
 const Error404 = () => {
-    useEffect(() => {
-        document.title = 'FameFusion | 404'
-    }, [])
-
     return (
         <div>
+            <Head>
+                <title>FameFusion | Not found</title>
+            </Head>
+
             <NavSection />
 
             <div className="w-full flex flex-row px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] pt-[120px] 
@@ -22,7 +20,7 @@ const Error404 = () => {
                     <span className="text-5xl text-[#FB5870] xl:mt-[-60px] text-center md:text-left">Ooops!</span>
                     <span className="text-5xl text-[#323434] mt-[15px] text-center md:text-left">This page does not exist :/</span>
 
-                    <Link to='/' className='bg-[#FB5870] text-white font-[500] py-[12px] rounded-xl px-[35px] items-center
+                    <Link href='/' className='bg-[#FB5870] text-white font-[500] py-[12px] rounded-xl px-[35px] items-center
                     hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 w-fit mt-[60px] flex flex-row mx-auto md:mx-0'>
                         Go to homepage
                         <FaArrowRightLong className='text-lg ml-[20px]'/>
@@ -30,7 +28,7 @@ const Error404 = () => {
                 </div>
 
                 <div className="relative mt-[60px]">
-                    <img src={img404} className="hidden md:flex w-auto md:h-[320px] lg:h-[470px] object-cover object-right-bottom rounded-[45px]" />
+                    <img src='/404img.png' className="hidden md:flex w-auto md:h-[320px] lg:h-[470px] object-cover object-right-bottom rounded-[45px]" />
                 </div>
             </div>
 

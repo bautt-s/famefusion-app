@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Akatab:wght@400;500;700;800&family=Outfit:wght@300;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'CocoSharp';
+    src: url('/fonts/cocosharp-regular.ttf') format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'CocoSharp';
+    src: url('/fonts/cocosharp-bold.ttf') format("truetype");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'TT Hoves Pro';
+    src: url('/fonts/tthovespro-regular.ttf') format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'TT Hoves Pro';
+    src: url('/fonts/tthovespro-medium.ttf') format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'TT Hoves Pro';
+    src: url('/fonts/tthovespro-demibold.ttf') format("truetype");
+    font-weight: 600;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    background: #FB5870;
+}
+
+::selection {
+    background: #FB5870;
+}
+
+body {
+    overflow-x: hidden
+}
+
+.akatab {
+    font-family: 'TT Hoves Pro', sans-serif;
+}
+
+.outfit {
+    font-family: 'CocoSharp', sans-serif;
+}
+
+.featured-img {
+    aspect-ratio: 1/1;
+}
+
+.heart-shadow {
+    filter: drop-shadow(1px -1px 0 rgb(255, 255, 255)) drop-shadow(-1px -1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 0 rgb(255, 255, 255)) drop-shadow(-1px 1px 0 rgb(255, 255, 255));
+}
+
+.button-slide-1 {
+    background-color: #fb5971;
+}
+
+.button-slide-1:hover {
+    background-color: #e64c63;
+}
+
+.button-slide-2 {
+    background-color: #6558FB;
+}
+
+.button-slide-2:hover {
+    background-color: #584ce0;
+}
+
+.button-slide-3 {
+    background-color: #1f1f1f;
+}
+
+.button-slide-3:hover {
+    background-color: #313131;
+}
+
+.hero-img {
+    aspect-ratio: 16/9;
+}
+
+@media (min-width: 1537px) and (max-width: 1650px) {
+    .hero-img {
+        width: 550px;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1465px) {
+    .hero-img {
+        width: 550px;
+    }
+}
+
+@media (min-width: 970px) and (max-width: 1024px) {
+    .hero-small-img {
+        width: 500px;
+    }
+}
+
+@media (min-width: 920px) and (max-width: 970px) {
+    .hero-small-img {
+        width: 450px;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 920px) {
+    .hero-small-img {
+        width: 370px;
+    }
+}
+
+@media (max-width: 1180px) {
+    .swiper-slide-active+* {
+        opacity: 0.4;
+        transition: all 2s;
+    }
+}
+
+@media (min-width: 1180px) and (max-width: 1720px) {
+    .swiper-slide-active+*+* {
+        opacity: 0.4;
+        transition: all 2s;
+    }
+}
+
+@media (min-width: 1720px) {
+    .swiper-slide-active+*+*+* {
+        opacity: 0.4;
+        transition: all 2s;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------------------ BROWSE PAGE -------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+.MuiSlider-rail {
+    color: rgb(189, 189, 189);
+}
+
+.input-group {
+    position: relative;
+    display: inline-block;
+}
+
+.input-group:before {
+    content: '\20AC';
+    /* Euro sign */
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 14px
+}
+
+.input-group input[type="number"] {
+    text-align: right;
+    padding-left: 20px;
+    /* Leave space for the euro sign */
+    -moz-appearance: textfield;
+    /* Firefox */
+    appearance: textfield;
+    /* Rest of the browsers */
+}
+
+.input-group input[type="number"]::-webkit-inner-spin-button,
+.input-group input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    /* WebKit browsers */
+    appearance: none;
+    /* Rest of the browsers */
+    margin: 0;
+    /* Remove the default margin */
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* --------------------------------------- SPINNER --------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+.lds-grid {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+}
+
+.lds-grid div {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    animation: lds-grid 1.2s linear infinite;
+}
+
+.lds-grid div:nth-child(1) {
+    background-color: #FB5870;
+    top: 16px;
+    left: 16px;
+    animation-delay: 0s;
+}
+
+.lds-grid div:nth-child(2) {
+    background-color: #FB5870;
+    top: 16px;
+    left: 64px;
+    animation-delay: -0.4s;
+}
+
+.lds-grid div:nth-child(3) {
+    background-color: #FB5870;
+    top: 16px;
+    left: 112px;
+    animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(4) {
+    background-color: #FB5870;
+    top: 64px;
+    left: 16px;
+    animation-delay: -0.4s;
+}
+
+.lds-grid div:nth-child(5) {
+    background-color: #FB5870;
+    top: 64px;
+    left: 64px;
+    animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(6) {
+    background-color: #FB5870;
+    top: 64px;
+    left: 112px;
+    animation-delay: -1.2s;
+}
+
+.lds-grid div:nth-child(7) {
+    background-color: #FB5870;
+    top: 112px;
+    left: 16px;
+    animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(8) {
+    background-color: #FB5870;
+    top: 112px;
+    left: 64px;
+    animation-delay: -1.2s;
+}
+
+.lds-grid div:nth-child(9) {
+    background-color: #FB5870;
+    top: 112px;
+    left: 112px;
+    animation-delay: -1.6s;
+}
+
+@keyframes lds-grid {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* -------------------------------------- SCROLLBAR -------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+/* width */
+.thin-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Handle */
+.thin-scroll::-webkit-scrollbar-thumb {
+    background: #b9b9b9;
+    border-radius: 999px
+}
+
+/* Handle on hover */
+.thin-scroll::-webkit-scrollbar-thumb:hover {
+    background: #1d97e2;
+}
