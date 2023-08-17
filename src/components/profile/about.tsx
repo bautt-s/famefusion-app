@@ -62,14 +62,14 @@ const AboutPanel: React.FC<any> = (props) => {
 
                 {media?.slice(0, imgsShowed).map((item: string, index: number) =>
                     <div style={{backgroundImage: `url(${item})`, backgroundSize: 'cover', backgroundPosition: 'center'}} 
-                    className='max-w-full rounded-[25px]'></div>
+                    className='max-w-full rounded-[25px]' key={index}></div>
                 )}
             </div>
 
             <div className='flex flex-col lg:flex-row items-center mt-[20px]'>
                 <div className='flex flex-row text-[#646868]'>
                     {associatedBrands?.map((brand: string, index: number) => (
-                        <div className={`${index !== 0 && 'ml-[5px]'}`}>
+                        <div key={index} className={`${index !== 0 && 'ml-[5px]'}`}>
                             {index !== 0 && ' · '}
                             {brand}
                         </div>
