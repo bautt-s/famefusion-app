@@ -6,9 +6,10 @@ import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 import type { AppProps } from 'next/app'
 
 const client = new ApolloClient({
-	uri: process.env.SERVER_URI || 'http://localhost:3001',
+	uri: process.env.NEXT_PUBLIC_SERVER_URI || 'http://localhost:3001',
 	cache: new InMemoryCache(),
 });
+
 
 const kindeDomain = process.env.NODE_ENV === "development" ? 'https://famefusion-pig.eu.kinde.com' : 'https://famefusion.kinde.com'
 const redirectUri = process.env.NODE_ENV === "development" ? 'http://localhost:3000/' : 'https://famefusion-app.vercel.app/'
