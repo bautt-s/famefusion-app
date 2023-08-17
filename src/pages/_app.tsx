@@ -6,7 +6,7 @@ import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 import type { AppProps } from 'next/app'
 
 const client = new ApolloClient({
-	uri: /*process.env.SERVER_URI ||*/ 'http://localhost:3001',
+	uri: process.env.SERVER_URI || 'http://localhost:3001',
 	cache: new InMemoryCache(),
 });
 
