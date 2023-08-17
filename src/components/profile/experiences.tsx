@@ -152,7 +152,7 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                 </div>
             </div>
 
-            <div className={`flex-col ${onlineExp?.length && 'mt-auto'}}`}>
+            <div className={`flex-col ${onlineExp?.length !== 0 && 'mt-auto'}`}>
                 <h2 className="text-xl font-[600]">Online Experiences</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">

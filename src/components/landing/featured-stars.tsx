@@ -17,7 +17,7 @@ export type StarType = {
     }[]
 }
 
-const loadingArray = ['loading', 'loading', 'loading', 'loading', 'loading']
+const loadingArray = new Array(5).fill('loading')
 
 const FeaturedSection: React.FC<FeaturedProps> = (props) => {
 
