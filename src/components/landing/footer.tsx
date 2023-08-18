@@ -65,7 +65,7 @@ const FooterSection: React.FC = () => {
 
                             <button className='bg-[#1f1e1f] hover:bg-[#353435] text-white py-[12px] w-[50%] lg:px-[30px] 
                         rounded-r-2xl font-[500] transition-colors duration-300'>
-                                Sign Up
+                                Subscribe
                             </button>
                         </form>
                     </div>

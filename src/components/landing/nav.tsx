@@ -57,7 +57,7 @@ const NavSection: React.FC = () => {
             </div>
 
             <div className='hidden flex-row ml-auto lg:gap-[10px] xl:gap-[20px] 2xl:gap-[25px] items-center lg:flex'>
-                <div className='bg-white border-[#bec2c2] border-[1px] flex flex-row items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] rounded-xl py-[5px]'>
+                <div className='bg-white border-[#bec2c2] border-[1px] flex flex-row items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] rounded-xl py-[8px]'>
                     <CiSearch className='text-2xl text-[#505252]' />
 
                     <form>
