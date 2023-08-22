@@ -116,8 +116,8 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
                                 <img src={c.profilePic} className='w-full object-cover rounded-2xl 
                                 featured-img group-hover:scale-105 transition-all duration-300 select-none' alt={c.name} />
 
-                                <div className='flex flex-col sm:flex-row mt-[15px]'>
-                                    <h4 className='text-2xl font-[600] max-w-[3ch] sm:max-w-none'>{c.name}</h4>
+                                <div className='flex flex-col sm:flex-row sm:items-end 2xl:items-center mt-[15px]'>
+                                    <h4 className='text-2xl font-[600] max-w-[3ch] sm:max-w-none lg:max-w-[7ch] 2xl:max-w-none'>{c.name}</h4>
 
                                     <div className='flex flex-row items-center sm:ml-auto'>
                                         <BsStarFill className='text-sm' />
@@ -126,10 +126,10 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
                                 </div>
 
                                 <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px]'>
-                                    {c.description.length > 62 ? c.description.slice(0, 62) + '...' : c.description}
+                                    {c.description.length > 44 ? c.description.slice(0, 44) + '...' : c.description}
                                 </p>
 
-                                <span className='font-[600] text-lg lg:absolute lg:bottom-[185px] 2xl:bottom-[27%]'>
+                                <span className='font-[600] text-lg lg:absolute lg:bottom-[210px] 2xl:bottom-[27%]'>
                                     {c?.workList[0]?.price ? `From €${c?.workList[0]?.price}` : 'Learn more'}
                                 </span>
                             </Link>

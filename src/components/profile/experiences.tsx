@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import Icon404 from '@/svgs/Icon404'
 import { LuClock } from 'react-icons/lu'
 
 export interface workInterface {
@@ -52,7 +53,7 @@ const ExperiencesPanel: React.FC<any> = (props) => {
             }
         } else {
             if (mode === 'online') {
-                if (showOnline.index-1 !== 0) {
+                if (showOnline.index - 1 !== 0) {
                     const newIndex = showOnline.index - 1
 
                     setShowOnline({
@@ -61,7 +62,7 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                     })
                 }
             } else {
-                if (showOffline.index-1 !== 0) {
+                if (showOffline.index - 1 !== 0) {
                     const newIndex = showOffline.index - 1
 
                     setShowOffline({
@@ -98,24 +99,24 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center mt-[5px]">
                     <span className='text-[#646868]'>{offlineExp?.length || 'None'} available</span>
 
-                    {(offlineExp?.length !== 0) && 
-                    <div className="flex flex-row items-center ml-auto">
-                        <span>
-                            {showOffline.index + ' / ' + Math.ceil(offlineExp?.length / 3)}
-                        </span>
+                    {(offlineExp?.length !== 0) &&
+                        <div className="flex flex-row items-center ml-auto">
+                            <span>
+                                {showOffline.index + ' / ' + Math.ceil(offlineExp?.length / 3)}
+                            </span>
 
-                        <div className='flex flex-row gap-[15px] ml-[15px]'>
-                            <button onClick={() => handlePage('offline', 'desc')}
-                            className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
-                                <GoChevronLeft />
-                            </button>
+                            <div className='flex flex-row gap-[15px] ml-[15px]'>
+                                <button onClick={() => handlePage('offline', 'desc')}
+                                    className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
+                                    <GoChevronLeft />
+                                </button>
 
-                            <button onClick={() => handlePage('offline', 'asc')}
-                            className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
-                                <GoChevronRight />
-                            </button>
-                        </div>
-                    </div>}
+                                <button onClick={() => handlePage('offline', 'asc')}
+                                    className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
+                                    <GoChevronRight />
+                                </button>
+                            </div>
+                        </div>}
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
@@ -144,9 +145,10 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                                 </button>
                             </div>
                         </div>
-                    ) : 
-                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
-                            This celebrity does not provide offline experiences.
+                    ) :
+                        <div className='w-full pt-[60px] pb-[120px] flex flex-col items-center gap-[15px]'>
+                            <Icon404 className='flex mx-auto' />
+                            <span>Celebrity doesn&apos;t have any offline experiences yet</span>
                         </div>
                     }
                 </div>
@@ -158,24 +160,24 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center mt-[5px]">
                     <span className='text-[#646868]'>{onlineExp?.length || 'None'} available</span>
 
-                    {(onlineExp?.length !== 0) && 
-                    <div className="flex flex-row items-center ml-auto">
-                        <span>
-                            {showOnline.index + ' / ' + Math.ceil(onlineExp?.length / 3)}
-                        </span>
+                    {(onlineExp?.length !== 0) &&
+                        <div className="flex flex-row items-center ml-auto">
+                            <span>
+                                {showOnline.index + ' / ' + Math.ceil(onlineExp?.length / 3)}
+                            </span>
 
-                        <div className='flex flex-row gap-[15px] ml-[15px]'>
-                            <button onClick={() => handlePage('online', 'desc')}
-                            className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
-                                <GoChevronLeft />
-                            </button>
+                            <div className='flex flex-row gap-[15px] ml-[15px]'>
+                                <button onClick={() => handlePage('online', 'desc')}
+                                    className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
+                                    <GoChevronLeft />
+                                </button>
 
-                            <button onClick={() => handlePage('online', 'asc')}
-                            className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
-                                <GoChevronRight />
-                            </button>
-                        </div>
-                    </div>}
+                                <button onClick={() => handlePage('online', 'asc')}
+                                    className='text-xl border rounded-full p-[7px] hover:bg-[#ececec] active:bg-[#dddddd] transition-colors duration-300'>
+                                    <GoChevronRight />
+                                </button>
+                            </div>
+                        </div>}
                 </div>
 
                 <div className='flex flex-row gap-x-[25px] mt-[25px]'>
@@ -205,8 +207,9 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                             </div>
                         </div>
                     ) :
-                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
-                            This celebrity does not provide online experiences.
+                        <div className='w-full pt-[60px] flex flex-col items-center gap-[15px]'>
+                            <Icon404 className='flex mx-auto' />
+                            <span>Celebrity doesn&apos;t have any online experiences yet</span>
                         </div>
                     }
                 </div>

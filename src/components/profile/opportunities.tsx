@@ -3,6 +3,7 @@ import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { LuClock } from 'react-icons/lu'
 import { workInterface } from './experiences'
 import CustomCollabModal from '../modals/custom-collab'
+import Icon404 from '@/svgs/Icon404'
 
 const OpportunitiesPanel: React.FC<any> = (props) => {
     const [customCollab, setCustomCollab] = useState(false)
@@ -141,11 +142,13 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                             </div>
                         </div>
                     ) :
-                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
-                            This celebrity does not provide offline collaborations.
+                        <div className='w-full pt-[60px] pb-[120px] flex flex-col items-center gap-[15px]'>
+                            <Icon404 className='flex mx-auto' />
+                            <span>Celebrity doesn&apos;t have any offline experiences yet</span>
                         </div>
                     }
 
+                    {(offlineCollabs?.length !== 0) && 
                     <div className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px] flex flex-col'>
                         <h5 className='font-[600] text-lg'>Custom Collaboration</h5>
 
@@ -154,11 +157,11 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                         </p>
 
                         <button onClick={() => setCustomCollab(true)}
-                        className='bg-white text-[#1f1f1f] font-[500] py-[12px] rounded-xl border-black border-[1px] mt-auto
+                            className='bg-white text-[#1f1f1f] font-[500] py-[12px] rounded-xl border-black border-[1px] mt-auto
                         transition-colors duration-300 hover:bg-[#1f1f1f] active:bg-black hover:text-white active:text-white'>
                             Offer Collaboration
                         </button>
-                    </div>
+                    </div>}
                 </div>
             </div>
 
@@ -216,8 +219,9 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                                 </div>
                             </div>
                         ) :
-                        <div className='text-xl text-center w-full pt-[60px] pb-[120px] text-[#FB5870]'>
-                            This celebrity does not provide online collaborations.
+                        <div className='w-full pt-[60px] flex flex-col items-center gap-[15px]'>
+                            <Icon404 className='flex mx-auto' />
+                            <span>Celebrity doesn&apos;t have any offline experiences yet</span>
                         </div>
                     }
                 </div>

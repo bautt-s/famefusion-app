@@ -5,11 +5,11 @@ import { BsTiktok } from 'react-icons/bs'
 
 let screenWidth = 0
 if (typeof window !== 'undefined') screenWidth = window.innerWidth
-
+console.log(screenWidth)
 let imgsShowed = 0
 
 if (screenWidth > 1536) imgsShowed = 3
-else if (screenWidth > 1280) imgsShowed = 2
+else if (screenWidth > 1279) imgsShowed = 2
 else if (screenWidth > 1024) imgsShowed = 1
 else imgsShowed = 0
 
