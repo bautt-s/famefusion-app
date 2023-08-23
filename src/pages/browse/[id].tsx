@@ -66,6 +66,7 @@ function Profile() {
             video
 
             workList {
+                id
                 title
                 price
                 description
@@ -75,6 +76,7 @@ function Profile() {
             }
 
             reviewList {
+                id
                 title
                 description
                 images

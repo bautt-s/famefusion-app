@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import Icon404 from '@/svgs/Icon404'
 import { LuClock } from 'react-icons/lu'
+import Link from 'next/link'
 
 export interface workInterface {
+    id: string,
     title: string,
     price: number,
     description: string,
@@ -90,7 +92,7 @@ const ExperiencesPanel: React.FC<any> = (props) => {
             show: onlineExp?.slice(0, 3)
         })
     }, [onlineExp])
-
+    
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
             <div className="flex-col">
@@ -141,7 +143,7 @@ const ExperiencesPanel: React.FC<any> = (props) => {
 
                                 <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
-                                    Choose
+                                    <Link href={`/booking/${offExp?.id}`}>Choose</Link>
                                 </button>
                             </div>
                         </div>
@@ -202,7 +204,7 @@ const ExperiencesPanel: React.FC<any> = (props) => {
 
                                 <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
-                                    Choose
+                                    <Link href={`/booking/${onlExp?.id}`}>Choose</Link>
                                 </button>
                             </div>
                         </div>

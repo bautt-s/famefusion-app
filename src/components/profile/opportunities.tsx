@@ -4,6 +4,7 @@ import { LuClock } from 'react-icons/lu'
 import { workInterface } from './experiences'
 import CustomCollabModal from '../modals/custom-collab'
 import Icon404 from '@/svgs/Icon404'
+import Link from 'next/link'
 
 const OpportunitiesPanel: React.FC<any> = (props) => {
     const [customCollab, setCustomCollab] = useState(false)
@@ -137,7 +138,7 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
 
                                 <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
-                                    Choose
+                                    <Link href={`/booking/${offExp?.id}`}>Choose</Link>
                                 </button>
                             </div>
                         </div>
@@ -214,7 +215,7 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
 
                                     <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
-                                        Choose
+                                        <Link href={`/booking/${onlExp?.id}`}>Choose</Link>
                                     </button>
                                 </div>
                             </div>

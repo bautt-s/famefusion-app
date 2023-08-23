@@ -2,10 +2,11 @@ import { BsStarFill } from 'react-icons/bs'
 import { MdVerified } from 'react-icons/md'
 import { PiInstagramLogo, PiFacebookLogo, PiTwitterLogo } from 'react-icons/pi'
 import { BsTiktok } from 'react-icons/bs'
+import { BiInfoCircle } from 'react-icons/bi'
 
 const ProfileSidebar: React.FC<any> = (props) => {
     const { name, description, rating, age, profilePic, gender, languages, location, workList } = props
-    
+
     return (
         <div className="w-[550px] xl:w-[500px] 2xl:w-[335px] flex flex-col shadow-xl rounded-b-[25px] self-start">
             <img src={profilePic} className="w-full h-[400px] object-top object-cover rounded-t-[25px]" />
@@ -61,9 +62,21 @@ const ProfileSidebar: React.FC<any> = (props) => {
                         {workList?.length ? `Book Experience from €${workList[0]?.price}` : 'Book Experience'}
                     </button>
 
-                    <button className='bg-white text-[#1f1f1f] font-[500] py-[12px] rounded-xl border-black border-[1px]
-                    transition-colors duration-300 hover:bg-[#1f1f1f] active:bg-black hover:text-white active:text-white'>
-                        Message (€1)
+                    <button className='bg-white text-[#1f1f1f] font-[500] py-[12px] rounded-xl border-black border-[1px] flex flex-row justify-center
+                    transition-colors duration-300 hover:bg-[#1f1f1f] active:bg-black hover:text-white active:text-white items-center'>
+                        <span>Message for 5 credits</span>
+
+                        <div className='ml-[5px] relative group'>
+                            <BiInfoCircle />
+
+                            <div className='hidden group-hover:inline w-0 h-0 border-triangle absolute bottom-0 left-[50%] translate-x-[-50%] top-[25px]'></div>
+                            <div className='hidden group-hover:inline text-black absolute bg-white shadow-2xl px-[15px] py-[20px] rounded-xl left-[7px] top-[40px] translate-x-[-50%]'>
+                                
+                                <p className='w-[18ch] text-left'>
+                                    You will be charged only when a celebrity responds to your communication.
+                                </p>
+                            </div>
+                        </div>
                     </button>
                 </div>
             </div>

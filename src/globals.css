@@ -270,6 +270,7 @@ body {
 }
 
 @keyframes lds-grid {
+
     0%,
     100% {
         opacity: 1;
@@ -305,4 +306,15 @@ body {
     border-radius: 50%;
     outline: none;
     border: 2px solid #b3b3b3;
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* --------------------------------------- PROFILE --------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+.border-triangle {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 15px solid white;
+    filter: drop-shadow(1px 0px 7px rgba(0, 0, 0, 0.401))
 }
