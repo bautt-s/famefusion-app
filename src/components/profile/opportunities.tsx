@@ -5,8 +5,12 @@ import { workInterface } from './experiences'
 import CustomCollabModal from '../modals/custom-collab'
 import Icon404 from '@/svgs/Icon404'
 import Link from 'next/link'
+import ModalDetail from '../booking/detail-modal'
 
 const OpportunitiesPanel: React.FC<any> = (props) => {
+    const [open, setOpen] = useState(false)
+    const [detailId, setDetailId] = useState('')
+
     const [customCollab, setCustomCollab] = useState(false)
     const [offlineCollabs, setOfflineCollabs] = useState<workInterface[]>([])
     const [onlineCollabs, setOnlineCollabs] = useState<workInterface[]>([])
@@ -67,6 +71,11 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                 }
             }
         }
+    }
+
+    const handleDetail = (id: string) => {
+        setDetailId(id)
+        setOpen(true)
     }
 
     useEffect(() => {
@@ -134,7 +143,10 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                             </div>
 
                             <div className='flex flex-row items-center mt-[25px]'>
-                                <span className='cursor-pointer underline underline-offset-4 text-lg'>Details</span>
+                                <span onClick={() => handleDetail(offExp?.id)}
+                                    className='cursor-pointer underline underline-offset-4 text-lg'>
+                                    Details
+                                </span>
 
                                 <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
@@ -149,20 +161,20 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                         </div>
                     }
 
-                    {(offlineCollabs?.length !== 0) && 
-                    <div className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px] flex flex-col'>
-                        <h5 className='font-[600] text-lg'>Custom Collaboration</h5>
+                    {(offlineCollabs?.length !== 0) &&
+                        <div className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px] flex flex-col'>
+                            <h5 className='font-[600] text-lg'>Custom Collaboration</h5>
 
-                        <p className='mt-[15px] max-w-[22ch] text-lg'>
-                            You can offer a collaboration tailored to your preferences and aligns with your objectives.
-                        </p>
+                            <p className='mt-[15px] max-w-[22ch] text-lg'>
+                                You can offer a collaboration tailored to your preferences and aligns with your objectives.
+                            </p>
 
-                        <button onClick={() => setCustomCollab(true)}
-                            className='bg-white text-[#1f1f1f] font-[500] py-[12px] rounded-xl border-black border-[1px] mt-auto
+                            <button onClick={() => setCustomCollab(true)}
+                                className='bg-white text-[#1f1f1f] font-[500] py-[12px] rounded-xl border-black border-[1px] mt-auto
                         transition-colors duration-300 hover:bg-[#1f1f1f] active:bg-black hover:text-white active:text-white'>
-                            Offer Collaboration
-                        </button>
-                    </div>}
+                                Offer Collaboration
+                            </button>
+                        </div>}
                 </div>
             </div>
 
@@ -211,7 +223,10 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                                 </div>
 
                                 <div className='flex flex-row items-center mt-[25px]'>
-                                    <span className='cursor-pointer underline underline-offset-4 text-lg'>Details</span>
+                                    <span onClick={() => handleDetail(onlExp?.id)}
+                                        className='cursor-pointer underline underline-offset-4 text-lg'>
+                                        Details
+                                    </span>
 
                                     <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
@@ -229,6 +244,7 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
             </div>
 
             {customCollab && <CustomCollabModal setOpen={setCustomCollab} />}
+            {open && <ModalDetail id={detailId} setOpen={setOpen} />}
         </div>
     )
 }

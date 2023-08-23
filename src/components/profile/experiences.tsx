@@ -3,6 +3,7 @@ import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import Icon404 from '@/svgs/Icon404'
 import { LuClock } from 'react-icons/lu'
 import Link from 'next/link'
+import ModalDetail from '../booking/detail-modal'
 
 export interface workInterface {
     id: string,
@@ -15,6 +16,9 @@ export interface workInterface {
 }
 
 const ExperiencesPanel: React.FC<any> = (props) => {
+    const [open, setOpen] = useState(false)
+    const [detailId, setDetailId] = useState('')
+
     const [offlineExp, setOfflineExp] = useState<workInterface[]>([])
     const [onlineExp, setOnlineExp] = useState<workInterface[]>([])
 
@@ -74,6 +78,11 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                 }
             }
         }
+    }
+
+    const handleDetail = (id: string) => {
+        setDetailId(id)
+        setOpen(true)
     }
 
     useEffect(() => {
@@ -139,7 +148,10 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                             </div>
 
                             <div className='flex flex-row items-center mt-[25px]'>
-                                <span className='cursor-pointer underline underline-offset-4 text-lg'>Details</span>
+                                <span onClick={() => handleDetail(offExp?.id)} 
+                                className='cursor-pointer underline underline-offset-4 text-lg'>
+                                    Details
+                                </span>
 
                                 <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
@@ -200,7 +212,10 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                             </div>
 
                             <div className='flex flex-row items-center mt-[25px]'>
-                                <span className='cursor-pointer underline underline-offset-4 text-lg'>Details</span>
+                                <span onClick={() => handleDetail(onlExp?.id)} 
+                                className='cursor-pointer underline underline-offset-4 text-lg'>
+                                    Details
+                                </span>
 
                                 <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
                                 hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
@@ -216,6 +231,8 @@ const ExperiencesPanel: React.FC<any> = (props) => {
                     }
                 </div>
             </div>
+
+            {open && <ModalDetail id={detailId} setOpen={setOpen} />}
         </div>
     )
 }

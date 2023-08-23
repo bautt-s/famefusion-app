@@ -11,9 +11,9 @@ import { useState } from 'react'
 import Link from "next/link"
 
 // do not forget to add this to db model
-const categories = ['shopping', 'fashion', 'consultation', 'style']
+export const categories = ['shopping', 'fashion', 'consultation', 'style']
 
-const capitalizeLanguages = (languages: string[] | undefined) => {
+export const capitalizeLanguages = (languages: string[] | undefined) => {
     if (languages) return languages.map(language => {
         return language.charAt(0).toUpperCase() + language.slice(1).toLowerCase();
     }).join(', ')
