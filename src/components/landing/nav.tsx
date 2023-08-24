@@ -77,7 +77,7 @@ const NavSection: React.FC = () => {
 
                         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                         <a href='/api/auth/login' className='bg-[#1E1F1E] hover:bg-[#2b2b2b] active:bg-[#313131] text-white 
-                    lg:px-[20px] 2xl:px-[35px] rounded-xl akatab py-[8px] font-[500] transition-colors duration-300'>
+                        lg:px-[20px] 2xl:px-[35px] rounded-xl akatab py-[8px] font-[500] transition-colors duration-300'>
                             Sign In
                         </a>
                     </div>

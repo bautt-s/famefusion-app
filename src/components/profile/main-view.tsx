@@ -83,7 +83,7 @@ const MainView: React.FC<{data: celebrityId | undefined}> = (props) => {
                         <AvailabilityPanel />}
 
                     {section === 'Reviews' &&
-                        <ReviewsPanel reviews={data?.getCelebrityById?.reviewList} />}
+                        <ReviewsPanel reviews={data?.getCelebrityById?.reviewList} rating={data?.getCelebrityById?.rating} />}
                 </div>
             </div>
 

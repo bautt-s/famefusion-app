@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const Roles = () => {
     const { user } = useKindeAuth();
-
+    console.log(user)
     const [selectedOption, setSelectedOption] = useState<null | string>(null)
 
     return (
@@ -60,8 +60,8 @@ const Roles = () => {
                             </div>
                         </div>
 
-                        <button className="bg-[#503c3f] hover:bg-[#eb5269] active:bg-[#e64c63] 
-                    text-white py-[12px] px-[120px] rounded-2xl mx-auto flex mt-[60px]">
+                        <button className="bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] 
+                      text-white py-[12px] px-[120px] rounded-2xl mx-auto flex mt-[60px]">
                             Register as a Fan
                         </button>
                     </fieldset>

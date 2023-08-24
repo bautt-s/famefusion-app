@@ -41,7 +41,7 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
 
     const [featured, setFeatured] = useState<StarType[]>([])
     const [limit, setLimit] = useState(5)
-
+    console.log(error)
     let screenWidth = 0
     if (typeof window !== 'undefined') screenWidth = window.innerWidth
 

@@ -90,7 +90,7 @@ const ExperienceDetail: React.FC = () => {
     return (
         <div>
             <Head>
-                <title>FameFusion | {data?.getWorkById?.celebrity?.name}</title>
+                <title>FameFusion | {data?.getWorkById?.title}</title>
             </Head>
 
             <NavSection />

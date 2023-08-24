@@ -13,9 +13,6 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
-const kindeDomain = process.env.NODE_ENV === "development" ? 'https://famefusion-pig.eu.kinde.com' : 'https://famefusion.kinde.com'
-const redirectUri = process.env.NODE_ENV === "development" ? 'http://localhost:3000/' : 'https://famefusion-app.vercel.app/'
-
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ApolloProvider client={client}>

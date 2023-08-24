@@ -1,5 +1,7 @@
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 import Reviews404 from '@/svgs/Reviews404'
+import { useState } from 'react'
+import ReviewsModal from '../modals/reviews-modal'
 
 interface reviewInterface {
     title: string,
@@ -10,21 +12,22 @@ interface reviewInterface {
     stars: number
 }
 
-const ReviewsPanel: React.FC<any> = (props) => {
-    const { reviews } = props
+export const starReview = (stars: number) => {
+    const starArray = []
+    const intPart = Math.trunc(stars)
 
-    const starReview = (stars: number) => {
-        const starArray = []
-        const intPart = Math.trunc(stars)
-
-        for (let i = 0; i < intPart; i++) starArray.push('star')
-        if (stars % 1 !== 0) starArray.push('half')
-        if (starArray.length !== 5) {
-            for (let j = starArray.length; j < 5; j++) starArray.push('empty')
-        }
-
-        return starArray
+    for (let i = 0; i < intPart; i++) starArray.push('star')
+    if (stars % 1 !== 0) starArray.push('half')
+    if (starArray.length !== 5) {
+        for (let j = starArray.length; j < 5; j++) starArray.push('empty')
     }
+
+    return starArray
+}
+
+const ReviewsPanel: React.FC<any> = (props) => {
+    const { reviews, rating } = props
+    const [open, setOpen] = useState(false)
 
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab gap-y-[25px]">
@@ -67,10 +70,13 @@ const ReviewsPanel: React.FC<any> = (props) => {
             }
 
             {reviews.length !== 0 &&
-                <button className="text-[#1f1f1f] underline underline-offset-4 mt-auto w-fit">
+                <button onClick={() => setOpen(true)} 
+                className="text-[#1f1f1f] underline underline-offset-4 mt-auto w-fit">
                     Show all {reviews?.length} reviews
                 </button>
             }
+
+            {open && <ReviewsModal setOpen={setOpen} rating={rating} reviews={reviews} />}
         </div>
     )
 }
