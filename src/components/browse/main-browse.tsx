@@ -6,7 +6,9 @@ import FilterTag from './filters/filter-tag'
 import { useQuery, gql } from "@apollo/client";
 import Link from 'next/link'
 import { StarType } from '../landing/featured-stars'
-import { filterItems, loadingArray } from '@/utils/hardcode'
+import { filterItems } from '@/utils/hardcode'
+
+const loadingArray = new Array(8).fill('loading')
 
 export type FilterProps = {
     setSelectedFilters: Function,
