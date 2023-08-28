@@ -2,6 +2,7 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 import Reviews404 from '@/svgs/Reviews404'
 import { useState } from 'react'
 import ReviewsModal from '../modals/reviews-modal'
+import { starReview } from '@/utils/functions'
 
 interface reviewInterface {
     title: string,
@@ -10,19 +11,6 @@ interface reviewInterface {
     description: string,
     images: string[],
     stars: number
-}
-
-export const starReview = (stars: number) => {
-    const starArray = []
-    const intPart = Math.trunc(stars)
-
-    for (let i = 0; i < intPart; i++) starArray.push('star')
-    if (stars % 1 !== 0) starArray.push('half')
-    if (starArray.length !== 5) {
-        for (let j = starArray.length; j < 5; j++) starArray.push('empty')
-    }
-
-    return starArray
 }
 
 const ReviewsPanel: React.FC<any> = (props) => {

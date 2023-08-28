@@ -27,7 +27,7 @@ const FooterSection: React.FC = () => {
     return (
         <>
             <section className="bg-[#f7f8fc] py-[30px] akatab relative">
-                <div className="flex flex-col lg:flex-row px-[80px] lg:px-[60px] xl:px-[140px] 2xl:px-[200px] relative z-50">
+                <div className="flex flex-col lg:flex-row px-[80px] lg:px-[60px] xl:px-[140px] 2xl:px-[200px] relative">
                     <div className="flex flex-col mx-auto lg:mx-0">
                         <img src='/logo.png' className='w-[170px] h-[25px]' alt='FameFusion Logo' />
 

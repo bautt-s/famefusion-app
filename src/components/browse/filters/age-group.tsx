@@ -1,28 +1,6 @@
+import { calculateRange } from '@/utils/functions';
 import type { FilterProps } from '../main-browse';
 import { useState, useEffect } from "react"
-
-function calculateRange(arr: string[]): [number, number] {
-    let bottom = 1;
-    let upper = 120;
-
-    arr.forEach(item => {
-        if (item === '-30') {
-            bottom = 1;
-            upper = Math.min(30, upper);
-        } else if (item === '30 - 40') {
-            bottom = Math.max(30, bottom);
-            upper = Math.min(40, upper);
-        } else if (item === '40 - 50') {
-            bottom = Math.max(40, bottom);
-            upper = Math.min(50, upper);
-        } else if (item === '+50') {
-            bottom = Math.max(50, bottom);
-            upper = 120;
-        }
-    });
-
-    return [bottom, upper];
-}
 
 const AgeGroupAcc: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props

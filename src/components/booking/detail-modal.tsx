@@ -7,11 +7,12 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { RxPerson } from "react-icons/rx";
-import { capitalizeLanguages, categories } from "./header";
 import { GoHeart, GoShare } from "react-icons/go";
 import { IoMdClose } from "react-icons/io";
 import { BsCheckLg } from "react-icons/bs";
 import Link from "next/link";
+import { categories } from "@/utils/hardcode";
+import { capitalizeArray } from "@/utils/functions";
 
 const ModalDetail: React.FC<{ id: string, setOpen: Function }> = (props) => {
     const { id, setOpen } = props
@@ -97,7 +98,7 @@ const ModalDetail: React.FC<{ id: string, setOpen: Function }> = (props) => {
                                 </li>
                                 <li className='flex flex-row items-center gap-x-[10px]'>
                                     <TbWorld className='text-3xl text-[#1F1F1F]' />
-                                    <span className='text-[#646868]'>{capitalizeLanguages(data?.getWorkById?.celebrity?.languages)}</span>
+                                    <span className='text-[#646868]'>{capitalizeArray(data?.getWorkById?.celebrity?.languages).join(', ')}</span>
                                 </li>
                                 <li className='flex flex-row items-center gap-x-[10px]'>
                                     <MdOutlineVerifiedUser className='text-3xl text-[#1F1F1F]' />

@@ -5,21 +5,11 @@ import { HiOutlineMapPin } from 'react-icons/hi2'
 import { BsStarFill } from 'react-icons/bs'
 import { RxPerson } from 'react-icons/rx'
 import { TbWorld } from 'react-icons/tb'
-
 import Datepicker from "react-tailwindcss-datepicker"
 import { useState } from 'react'
 import Link from "next/link"
-
-// do not forget to add this to db model
-export const categories = ['shopping', 'fashion', 'consultation', 'style']
-
-export const capitalizeLanguages = (languages: string[] | undefined) => {
-    if (languages) return languages.map(language => {
-        return language.charAt(0).toUpperCase() + language.slice(1).toLowerCase();
-    }).join(', ')
-
-    else return null
-}
+import { categories } from '@/utils/hardcode'
+import { capitalizeArray } from '@/utils/functions'
 
 const BookingHeader: React.FC<{data: any}> = (props) => {
     const { data } = props
@@ -93,7 +83,7 @@ const BookingHeader: React.FC<{data: any}> = (props) => {
                         </li>
                         <li className='flex flex-row items-center gap-x-[10px]'>
                             <TbWorld className='text-3xl text-[#1F1F1F]' />
-                            <span className='text-[#646868]'>{capitalizeLanguages(data?.getWorkById?.celebrity?.languages)}</span>
+                            <span className='text-[#646868]'>{capitalizeArray(data?.getWorkById?.celebrity?.languages).join(', ')}</span>
                         </li>
                         <li className='flex flex-row items-center gap-x-[10px]'>
                             <MdOutlineVerifiedUser className='text-3xl text-[#1F1F1F]' />

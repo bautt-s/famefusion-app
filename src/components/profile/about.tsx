@@ -12,21 +12,6 @@ else if (screenWidth > 1279) imgsShowed = 2
 else if (screenWidth > 1024) imgsShowed = 1
 else imgsShowed = 0
 
-function formatNumber(number: number) {
-    let absNumber = Math.abs(number)
-    const suffixes = ["", "k", "M", "B", "T"]
-    let suffixIndex = 0
-
-    while (absNumber >= 1000 && suffixIndex < suffixes.length - 1) {
-        absNumber /= 1000
-        suffixIndex++
-    }
-
-    const decimalPlaces = (suffixIndex === 0 || absNumber >= 100) ? 0 : (absNumber >= 10) ? 1 : 2
-
-    return (number < 0 ? '-' : '') + absNumber.toFixed(decimalPlaces).replace(/\.?0+$/, '') + suffixes[suffixIndex]
-}
-
 const AboutPanel: React.FC<any> = (props) => {
     const { name, media, associatedBrands, biography, interests, video } = props
 

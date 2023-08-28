@@ -1,6 +1,6 @@
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs"
 import { TfiClose } from "react-icons/tfi"
-import { starReview } from "../profile/reviews"
+import { starReview } from "@/utils/functions"
 
 const ReviewsModal: React.FC<{ reviews: any, rating: number, setOpen: Function }> = (props) => {
     const { reviews, rating, setOpen } = props

@@ -17,11 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ApolloProvider client={client}>
 			<KindeProvider>
-				<Head>
-					<link rel="apple-touch-icon" sizes="180x180" href={appleIcon.src} />
-					<link rel="icon" href={icon.src} />
-				</Head>
-				<Component {...pageProps} />
+					<Head>
+						<link rel="apple-touch-icon" sizes="180x180" href={appleIcon.src} />
+						<link rel="icon" href={icon.src} />
+					</Head>
+					<Component {...pageProps} />
 			</KindeProvider>
 		</ApolloProvider>
 	)

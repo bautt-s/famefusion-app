@@ -95,8 +95,6 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
         })
     }, [offlineCollabs])
 
-    console.log(onlineCollabs)
-
     return (
         <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
             <div className="flex-col">

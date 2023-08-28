@@ -6,6 +6,7 @@ import FilterTag from './filters/filter-tag'
 import { useQuery, gql } from "@apollo/client";
 import Link from 'next/link'
 import { StarType } from '../landing/featured-stars'
+import { filterItems, loadingArray } from '@/utils/hardcode'
 
 export type FilterProps = {
     setSelectedFilters: Function,
@@ -33,12 +34,6 @@ export type FilterProps = {
         name: string
     }
 }
-
-const loadingArray = ['loading', 'loading', 'loading',
-    'loading', 'loading', 'loading', 'loading', 'loading']
-
-const filterItems = ['Show All', 'Featured', 'Actors', 'Athletes',
-    'Comedians', 'Creators', 'Musicians', 'Professionals', 'Reality TV']
 
 const MainBrowse: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
