@@ -11,6 +11,9 @@ import CelGender from "./celebrity/gender";
 import CelLanguages from "./celebrity/languages";
 import FanInterests from "./fan/interests";
 import CelSocial from "./celebrity/social";
+import CelImages from "./celebrity/images";
+import FanAddress from "./fan/address";
+import FanIdentity from "./fan/identity";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -37,6 +40,7 @@ const CelSignup: React.FC = () => {
         categories: [],
         languages: [],
         interests: [],
+        images: [],
         birthYear: null,
         gender: '',
         identity: null,
@@ -61,6 +65,7 @@ const CelSignup: React.FC = () => {
         categories: [],
         languages: [],
         interests: [],
+        images: [],
         birthYear: {
             startDate: null,
             endDate: null
@@ -119,6 +124,9 @@ const CelSignup: React.FC = () => {
 
         else if (userData.stage === 11)
         setUserData({ ...userData, stage: 12, social: temp.social, warning: '' })
+
+        else if (userData.stage === 12)
+        setUserData({ ...userData, stage: 13, images: temp.images, warning: '' })
         
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
@@ -172,6 +180,9 @@ const CelSignup: React.FC = () => {
             {userData.stage === 9 && <CelLanguages data={temp} setData={setTemp} skip={handleSkip} />}
             {userData.stage === 10 && <FanInterests data={temp} setData={setTemp} skip={handleSkip} />}
             {userData.stage === 11 && <CelSocial data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 12 && <CelImages data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 13 && <FanAddress data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 14 && <FanIdentity data={temp} setData={setTemp} skip={handleSkip} />}
 
             <div className="flex flex-col mt-[80px]">
                 {(userData.warning.length !== 0) &&

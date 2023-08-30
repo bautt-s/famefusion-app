@@ -14,6 +14,13 @@ const Roles = () => {
     const [selectedOption, setSelectedOption] = useState<null | string>(null)
     const [selectedRole, setSelectedRole] = useState<null | string>(null)
 
+    const [roleState, setRoleState] = useState({
+        role: '',
+        option: '',
+        mainScreen: true,
+        signupCompleted: false,
+    })
+
     const USER = gql`
     query getUserByEmail($email: String) {
         getUserByEmail(email: $email) {
@@ -47,7 +54,7 @@ const Roles = () => {
     }
 
     return (
-        <div>
+        <div className="min-h-screen flex flex-col">
             <Head>
                 <title>FameFusion | Roles</title>
             </Head>
@@ -71,7 +78,9 @@ const Roles = () => {
                     <BusSignup />}
             </div>
 
-            <FooterSection />
+            <div className="mt-auto">
+                <FooterSection />
+            </div>
         </div>
     )
 }

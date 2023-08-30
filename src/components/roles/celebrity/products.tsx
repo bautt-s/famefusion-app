@@ -45,7 +45,7 @@ const CelProducts: React.FC<any> = (props) => {
 
                 {(data.products.length < 4) &&
                     <input className='ring-1 ring-gray-400 w-[300px] py-[7px] rounded-lg
-                    px-[15px] text-gray-800 outline-none focus:ring-[#FB5870]'
+                    px-[15px] text-gray-800 outline-none focus:ring-[#FB5870] bg-white'
                     placeholder='Guess' value={inputValue} onChange={(e) => setInputValue(e.target.value)} />}
             </div>
 

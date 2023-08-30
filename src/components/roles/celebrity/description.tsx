@@ -2,7 +2,7 @@ const CelDescription: React.FC<any> = (props) => {
     const { data, setData, skip } = props
 
     return (
-        <div>
+        <div className="flex flex-col">
             <div className="flex flex-row items-center">
                 <h1 className="outfit font-[700] text-4xl mb-[5px]">
                     Describe yourself
@@ -17,7 +17,7 @@ const CelDescription: React.FC<any> = (props) => {
             </span>
 
             <textarea className="ring-gray-500 ring-1 px-4 py-4 text-gray-700 rounded-xl w-[400px] text-sm
-            h-[100px] resize-none focus:ring-[#FB5870] focus:outline-none focus:border-rose-600 mt-[40px]"
+            h-[100px] resize-none focus:ring-[#FB5870] focus:outline-none focus:border-rose-600 mt-[40px] bg-white"
                 onChange={(e) => setData({ ...data, description: e.target.value })} value={data.description}
                 placeholder="What are you most known for in your celebrity career?
             What sets you apart as a celebrity, and what makes you stand out in your profession?">

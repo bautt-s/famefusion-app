@@ -25,7 +25,7 @@ const CelSocial: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center gap-x-[10px] ring-1 ring-gray-400 
                 rounded-lg w-[300px] py-[10px] px-[20px]">
                     <GoLink className='text-xl' />
-                    <input placeholder="Add Website" className="px-[5px] w-full outline-none font-[500]"
+                    <input placeholder="Add Website" className="px-[5px] w-full outline-none font-[500] bg-white"
                     value={data.social.website} 
                     onChange={(e) => setData({ ...data, social: { ...data.social, website: e.target.value } })} />
                 </div>
@@ -33,7 +33,7 @@ const CelSocial: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center gap-x-[10px] ring-1 ring-gray-400 
                 rounded-lg w-[300px] py-[10px] px-[20px]">
                     <FaInstagram className='text-xl' />
-                    <input placeholder="Add Instagram" className="px-[5px] w-full outline-none font-[500]"
+                    <input placeholder="Add Instagram" className="px-[5px] w-full outline-none font-[500] bg-white"
                     value={data.social.instagram} 
                     onChange={(e) => setData({ ...data, social: { ...data.social, instagram: e.target.value } })} />
                 </div>
@@ -41,7 +41,7 @@ const CelSocial: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center gap-x-[10px] ring-1 ring-gray-400 
                 rounded-lg w-[300px] py-[10px] px-[20px]">
                     <FaTiktok className='text-xl' />
-                    <input placeholder="Add TikTok" className="px-[5px] w-full outline-none font-[500]"
+                    <input placeholder="Add TikTok" className="px-[5px] w-full outline-none font-[500] bg-white"
                     value={data.social.tiktok} 
                     onChange={(e) => setData({ ...data, social: { ...data.social, tiktok: e.target.value } })} />
                 </div>
@@ -49,7 +49,7 @@ const CelSocial: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center gap-x-[10px] ring-1 ring-gray-400 
                 rounded-lg w-[300px] py-[10px] px-[18px]">
                     <FiYoutube className='text-2xl' />
-                    <input placeholder="Add YouTube" className="px-[5px] w-full outline-none font-[500]"
+                    <input placeholder="Add YouTube" className="px-[5px] w-full outline-none font-[500] bg-white"
                     value={data.social.youtube} 
                     onChange={(e) => setData({ ...data, social: { ...data.social, youtube: e.target.value } })} />
                 </div>
@@ -57,7 +57,7 @@ const CelSocial: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center gap-x-[10px] ring-1 ring-gray-400 
                 rounded-lg w-[300px] py-[10px] px-[20px]">
                     <FiTwitter className='text-xl' />
-                    <input placeholder="Add Twitter" className="px-[5px] w-full outline-none font-[500]"
+                    <input placeholder="Add Twitter" className="px-[5px] w-full outline-none font-[500] bg-white"
                     value={data.social.twitter} 
                     onChange={(e) => setData({ ...data, social: { ...data.social, twitter: e.target.value } })} />
                 </div>
@@ -65,7 +65,7 @@ const CelSocial: React.FC<any> = (props) => {
                 <div className="flex flex-row items-center gap-x-[10px] ring-1 ring-gray-400 
                 rounded-lg w-[300px] py-[10px] px-[18px]">
                     <CiFacebook className='text-2xl' />
-                    <input placeholder="Add Facebook" className="px-[5px] w-full outline-none font-[500]"
+                    <input placeholder="Add Facebook" className="px-[5px] w-full outline-none font-[500] bg-white"
                     value={data.social.facebook} 
                     onChange={(e) => setData({ ...data, social: { ...data.social, facebook: e.target.value } })} />
                 </div>
