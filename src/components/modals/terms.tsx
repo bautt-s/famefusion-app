@@ -13,7 +13,7 @@ const TermsModal: React.FC<{ setOpen: Function }> = (props) => {
                     <TfiClose className='ml-auto text-2xl cursor-pointer' onClick={() => setOpen(false)} />
                 </div>
 
-                <div className='max-h-[600px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px]'>
+                <div className='max-h-[400px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px]'>
                     <p className='akatab text-justify'>
                         Welcome to FameFusion (&quot;we&quot;, &quot;us&quot;, or &quot;Website&quot;). These Terms and Conditions (&quot;Terms&quot;) govern your use of our platform and services. By accessing or using our services, you agree to comply with these Terms. If you do not agree with these Terms, please do not use our services.
 

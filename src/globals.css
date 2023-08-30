@@ -304,7 +304,7 @@ body {
 .radio-collab {
     -webkit-appearance: none;
     border-radius: 50%;
-    outline: none;
+    
     border: 2px solid #b3b3b3;
 }
 

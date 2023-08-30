@@ -1,35 +1,31 @@
 import { capitalizeWords } from "@/utils/functions";
-import { allInterests } from "@/utils/hardcode";
+import { allCategories } from "@/utils/hardcode";
 
-const FanInterests: React.FC<any> = (props) => {
+const CelCategories: React.FC<any> = (props) => {
     const { data, setData, skip } = props
 
     const handleSelect = (item: string) => {
-        if (data?.interests?.includes(item))
-            setData({ ...data, interests: data?.interests?.filter((i: string) => i !== item) })
+        if (data?.categories?.includes(item))
+            setData({ ...data, categories: data?.categories?.filter((i: string) => i !== item) })
 
-        else setData({ ...data, interests: [...data?.interests, item] })
+        else setData({ ...data, categories: [...data?.categories, item] })
     }
     
     return (
         <div>
             <div className="flex flex-row items-center">
                 <h1 className="outfit font-[700] text-4xl mb-[5px]">
-                    Which are the most popular products or projects you have been involved in?
+                    Select categories that best represent your area of expertise
                 </h1>
 
                 <button className="ml-auto underline" onClick={skip}>Skip</button>
             </div>
 
-            <span className="text-[#646868]">
-                Tell us what motivates you. Three interests minimum, six maximum.
-            </span>
-
             <ul className="flex flex-row flex-wrap gap-[20px] 2xl:gap-[25px]
             w-full sm:w-auto lg:w-[700px] xl:w-auto mt-[40px]">
-                {allInterests.map((item, index) =>
+                {allCategories.map((item, index) =>
                     <li className={`px-[13px] py-[5px] rounded-full 2xl:text-lg border text-[#646868] 
-                        ${data?.interests?.includes(item) ? 'bg-[#1f1f1f] text-white' : 'bg-white'}
+                        ${data?.categories?.includes(item) ? 'bg-[#1f1f1f] text-white' : 'bg-white'}
                         cursor-pointer transition-colors duration-500 shadow-sm`} key={index}
                         onClick={() => handleSelect(item)}>
                         {capitalizeWords(item)}
@@ -40,4 +36,4 @@ const FanInterests: React.FC<any> = (props) => {
     )
 }
 
-export default FanInterests
+export default CelCategories

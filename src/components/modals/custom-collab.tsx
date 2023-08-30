@@ -17,7 +17,7 @@ const CustomCollabModal: React.FC<{ setOpen: Function }> = (props) => {
                     <TfiClose className='ml-auto text-2xl cursor-pointer' onClick={() => setOpen(false)} />
                 </div>
 
-                <div className='max-h-[600px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px] akatab'>
+                <div className='max-h-[400px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px] akatab'>
                     <p className='max-w-[65ch]'>
                         We value your thoughts and opinions regarding your recent experience meeting celebrities.
                         Your feedback will help us enhance our services and provide an even more memorable experiences in the future.
@@ -28,12 +28,12 @@ const CustomCollabModal: React.FC<{ setOpen: Function }> = (props) => {
                             <span className='font-[600]'>What type of collaboration do you want?</span>
 
                             <div className='flex flex-row items-center pl-[25px] w-full border-[1px] border-[#a1a1a1] py-[7px] rounded-xl'>
-                                <input type='radio' className='w-[25px] h-[25px] radio-collab' />
+                                <input type='radio' className='w-[25px] h-[25px] accent-[#FB5870]' />
                                 <span className='ml-[15px]'>Offline</span>
                             </div>
 
                             <div className='flex flex-row items-center pl-[25px] w-full border-[1px] border-[#a1a1a1] py-[7px] rounded-xl'>
-                                <input type='radio' className='w-[25px] h-[25px] radio-collab' />
+                                <input type='radio' className='w-[25px] h-[25px] accent-[#FB5870]' />
                                 <span className='ml-[15px]'>Online</span>
                             </div>
                         </div>

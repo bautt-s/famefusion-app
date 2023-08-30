@@ -35,3 +35,12 @@ export const allInterests = ['lifestyle', 'fashion', 'beauty', 'travel', 'health
     'entertainment', 'art & culture', 'photography', 'music & dance', 'gardening',
     'finance', 'volunteering', 'pets & animals', 'camping', 'gaming', 'education',
     'technology', 'reading', 'fishing', 'meditation', 'sports', 'comedy']
+
+// categories in celebrity signup
+export const allCategories = ['lifestyle', 'fashion', 'beauty', 'travel', 'health & fitness', 'food & drinks',
+    'entertainment', 'art & culture', 'photography', 'music & dance', 'entrepeneur & business',
+    'finance', 'non-profit & social causes', 'pets & animals', 'green & sustainable', 'gaming', 'education',
+    'automotive & transportation', 'technology', 'other', 'sports', 'comedy']
+
+// genders used in celebrity signup
+export const genders = ['female', 'male', 'transgender', 'non-binary', 'other']

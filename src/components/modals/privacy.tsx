@@ -13,7 +13,7 @@ const PrivacyModal: React.FC<{ setOpen: Function }> = (props) => {
                     <TfiClose className='ml-auto text-2xl cursor-pointer' onClick={() => setOpen(false)} />
                 </div>
 
-                <div className='max-h-[600px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px]'>
+                <div className='max-h-[400px] overflow-y-scroll thin-scroll mt-[35px] pr-[25px]'>
                     <p className='akatab text-justify'>
                         Welcome to FameFusion (&quot;we&quot;, &quot;us&quot;, or &quot;Website&quot;), a platform that connects celebrities with fans and businesses. This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information when you visit our website or use our services. By accessing or using our services, you consent to the practices described in this Privacy Policy.
                         <br /><br />

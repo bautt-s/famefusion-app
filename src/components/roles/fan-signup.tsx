@@ -74,7 +74,7 @@ const FanSignup: React.FC = () => {
         else if (userData.stage === 2 && !temp.birthYear.startDate)
             setUserData({ ...userData, warning: 'You must provide a date.' })
 
-        else if (userData.stage === 3 && !(temp.interests.length >= 3 && temp.interests.length <= 6))
+        else if (userData.stage === 3 && (temp.interests.length < 3 || temp.interests.length > 6))
             setUserData({ ...userData, warning: 'You must provide three to six interests.' })
 
         else if (userData.stage === 4 && !temp.address)

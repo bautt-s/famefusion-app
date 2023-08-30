@@ -1,5 +1,7 @@
 import FooterSection from "@/components/landing/footer";
 import NavSection from "@/components/landing/nav";
+import BusSignup from "@/components/roles/bus-signup";
+import CelSignup from "@/components/roles/cel-signup";
 import FanSignup from "@/components/roles/fan-signup";
 import ChooseRole from "@/components/roles/role-choose";
 import { gql, useQuery, useMutation } from "@apollo/client";
@@ -58,11 +60,15 @@ const Roles = () => {
                     <ChooseRole selectedOption={selectedOption} setSelectedOption={setSelectedOption}
                         name={user?.given_name} setSelectedRole={setSelectedRole} />
                 }
-                
-                {
-                    selectedRole === 'fan' &&
-                    <FanSignup />
-                }
+
+                {selectedRole === 'fan' &&
+                    <FanSignup />}
+
+                {selectedRole === 'celebrity' &&
+                    <CelSignup />}
+
+                {selectedRole === 'business' &&
+                    <BusSignup />}
             </div>
 
             <FooterSection />
