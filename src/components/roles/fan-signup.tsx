@@ -18,7 +18,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     },
 }));
 
-const FanSignup: React.FC = () => {
+const FanSignup: React.FC<any> = (props) => {
+    const { roleState, setRoleState } = props
+    
     const [progress, setProgress] = useState(0)
 
     const [userData, setUserData] = useState({
@@ -43,11 +45,12 @@ const FanSignup: React.FC = () => {
     })
 
     const handleSkip = () => {
-        if (userData.stage > 1) setUserData({ ...userData, stage: userData.stage + 1, warning: '' })
+        if (userData.stage >= 1) setUserData({ ...userData, stage: userData.stage + 1, warning: '' })
     }
 
     const handleBack = () => {
         if (userData.stage > 1) setUserData({ ...userData, stage: userData.stage - 1, warning: '' })
+        else if (userData.stage === 1) setRoleState({ ...roleState, mainScreen: true })
     }
 
     const handleNext = () => {
@@ -87,15 +90,18 @@ const FanSignup: React.FC = () => {
     useEffect(() => {
         if (window) window.scrollTo(0, 0)
 
-        const percentage = userData.stage * 100 / 5
-        setProgress(percentage)
+        const totalStages = 5
+        const percentage = userData.stage * 100 / totalStages
+
+        if (userData.stage > totalStages) setRoleState({ ...roleState, signupCompleted: true })
+        else setProgress(percentage)
     }, [userData.stage])
 
     return (
         <div className="flex flex-col pt-[140px] pb-[60px] akatab px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px]">
-            {userData.stage === 1 && <FanLocation data={temp} setData={setTemp} />}
+            {userData.stage === 1 && <FanLocation data={temp} setData={setTemp} skip={handleSkip} />}
             {userData.stage === 2 && <FanBirthdate data={temp} setData={setTemp} />}
-            {userData.stage === 3 && <FanInterests data={temp} setData={setTemp} />}
+            {userData.stage === 3 && <FanInterests data={temp} setData={setTemp} skip={handleSkip} />}
             {userData.stage === 4 && <FanAddress data={temp} setData={setTemp} skip={handleSkip} />}
             {userData.stage === 5 && <FanIdentity data={temp} setData={setTemp} skip={handleSkip} />}
 

@@ -4,7 +4,7 @@ import ProofButton from "../proof"
 import SelfieButton from "../selfie"
 
 const FanIdentity: React.FC<any> = (props) => {
-    const { data, setData, skip } = props
+    const { data, setData, skip, business } = props
     const [countries, setCountries] = useState<any>([]);
 
     const [selectedCountry, setSelectedCountry] =
@@ -30,14 +30,16 @@ const FanIdentity: React.FC<any> = (props) => {
         <div>
             <div className="flex flex-row items-center">
                 <h1 className="outfit font-[700] text-4xl mb-[5px]">
-                    Upload a proof of your identity
+                    {business ? 
+                    'Upload a proof of your identity' : 
+                    'Upload a proof of your representative identity'}
                 </h1>
 
                 <button className="ml-auto underline" onClick={skip}>Skip</button>
             </div>
 
             <span className="text-[#646868]">
-                To verify your identity, we require your identity
+                To verify your {business ? 'business' : 'identity'}, we require your identity
                 document and a selfie to ensure authenticity.
             </span>
 

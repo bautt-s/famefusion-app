@@ -4,6 +4,7 @@ import BusSignup from "@/components/roles/bus-signup";
 import CelSignup from "@/components/roles/cel-signup";
 import FanSignup from "@/components/roles/fan-signup";
 import ChooseRole from "@/components/roles/role-choose";
+import SignupCompleted from "@/components/roles/signup-complete";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { useKindeAuth, User } from "@kinde-oss/kinde-auth-nextjs";
 import Head from "next/head";
@@ -11,8 +12,6 @@ import { useState } from "react";
 
 const Roles = () => {
     const { user }: { user: User } = useKindeAuth();
-    const [selectedOption, setSelectedOption] = useState<null | string>(null)
-    const [selectedRole, setSelectedRole] = useState<null | string>(null)
 
     const [roleState, setRoleState] = useState({
         role: '',
@@ -62,20 +61,20 @@ const Roles = () => {
             <NavSection />
 
             <div>
-                {
-                    !selectedRole &&
-                    <ChooseRole selectedOption={selectedOption} setSelectedOption={setSelectedOption}
-                        name={user?.given_name} setSelectedRole={setSelectedRole} />
-                }
+                {roleState.mainScreen && 
+                <ChooseRole roleState={roleState} setRoleState={setRoleState} name={user?.given_name} />}
 
-                {selectedRole === 'fan' &&
-                    <FanSignup />}
+                {(roleState.role === 'fan' && !roleState.signupCompleted && !roleState.mainScreen) &&
+                <FanSignup roleState={roleState} setRoleState={setRoleState} />}
 
-                {selectedRole === 'celebrity' &&
-                    <CelSignup />}
+                {(roleState.role === 'celebrity' && !roleState.signupCompleted && !roleState.mainScreen) &&
+                <CelSignup roleState={roleState} setRoleState={setRoleState} />}
 
-                {selectedRole === 'business' &&
-                    <BusSignup />}
+                {(roleState.role === 'business' && !roleState.signupCompleted && !roleState.mainScreen) &&
+                <BusSignup roleState={roleState} setRoleState={setRoleState} />}
+
+                {roleState.signupCompleted &&
+                <SignupCompleted />}
             </div>
 
             <div className="mt-auto">

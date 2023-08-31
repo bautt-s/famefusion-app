@@ -27,7 +27,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     },
 }));
 
-const CelSignup: React.FC = () => {
+const CelSignup: React.FC<any> = (props) => {
+    const { roleState, setRoleState } = props
+
     const [progress, setProgress] = useState(0)
 
     const [userData, setUserData] = useState({
@@ -84,11 +86,12 @@ const CelSignup: React.FC = () => {
     })
 
     const handleSkip = () => {
-        if (userData.stage > 1) setUserData({ ...userData, stage: userData.stage + 1, warning: '' })
+        if (userData.stage >= 1) setUserData({ ...userData, stage: userData.stage + 1, warning: '' })
     }
 
     const handleBack = () => {
         if (userData.stage > 1) setUserData({ ...userData, stage: userData.stage - 1, warning: '' })
+        else if (userData.stage === 1) setRoleState({ ...roleState, mainScreen: true })
     }
 
     const handleNext = () => {
@@ -127,6 +130,12 @@ const CelSignup: React.FC = () => {
 
         else if (userData.stage === 12)
         setUserData({ ...userData, stage: 13, images: temp.images, warning: '' })
+
+        else if (userData.stage === 13)
+        setUserData({ ...userData, stage: 13, address: temp.address, warning: '' })
+
+        else if (userData.stage === 14)
+        setUserData({ ...userData, stage: 15, identity: temp.address, warning: '' })
         
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
@@ -158,13 +167,22 @@ const CelSignup: React.FC = () => {
 
         else if (userData.stage === 10 && (temp.interests.length < 3 || temp.interests.length > 6))
         setUserData({ ...userData, warning: 'You must provide 3 to 6 interests.' })
+
+        else if (userData.stage === 13 && !temp.address)
+        setUserData({ ...userData, warning: 'You must provide address verification.' })
+
+        else if (userData.stage === 14 && !temp.identity)
+        setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
 
     useEffect(() => {
         if (window) window.scrollTo(0, 0)
 
-        const percentage = userData.stage * 100 / 14
-        setProgress(percentage)
+        const totalStages = 14
+        const percentage = userData.stage * 100 / totalStages
+
+        if (userData.stage > totalStages) setRoleState({ ...roleState, signupCompleted: true })
+        else setProgress(percentage)
     }, [userData.stage])
 
     return (

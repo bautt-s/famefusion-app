@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react"
 import { LinearProgress, linearProgressClasses, styled } from "@mui/material"
+import FanLocation from "./fan/location";
+import BusName from "./business/alias";
+import BusDescription from "./business/description";
+import BusCategories from "./business/categories";
+import CelSocial from "./celebrity/social";
+import FanIdentity from "./fan/identity";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -13,84 +19,112 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     },
 }));
 
-const BusSignup: React.FC = () => {
+const BusSignup: React.FC<any> = (props) => {
+    const { roleState, setRoleState } = props
+
     const [progress, setProgress] = useState(0)
 
     const [userData, setUserData] = useState({
         stage: 1,
         location: '',
-        birthYear: null,
-        interests: [],
+        alias: '',
+        description: '',
+        categories: [],
+        social: {
+            website: null,
+            instagram: null,
+            tiktok: null,
+            youtube: null,
+            twitter: null,
+            facebook: null
+        },
         identity: null,
-        address: null,
         warning: ''
     })
 
     const [temp, setTemp] = useState({
         location: '',
-        birthYear: {
-            startDate: null,
-            endDate: null
+        alias: '',
+        description: '',
+        categories: [],
+        social: {
+            website: null,
+            instagram: null,
+            tiktok: null,
+            youtube: null,
+            twitter: null,
+            facebook: null
         },
-        interests: [],
         identity: null,
-        address: null,
     })
 
     const handleSkip = () => {
-        if (userData.stage > 1) setUserData({ ...userData, stage: userData.stage + 1, warning: '' })
+        if (userData.stage >= 1) setUserData({ ...userData, stage: userData.stage + 1, warning: '' })
     }
 
     const handleBack = () => {
         if (userData.stage > 1) setUserData({ ...userData, stage: userData.stage - 1, warning: '' })
+        else if (userData.stage === 1) setRoleState({ ...roleState, mainScreen: true })
     }
 
     const handleNext = () => {
         if (userData.stage === 1 && temp.location.length > 0)
-            setUserData({ ...userData, stage: 2, location: temp.location, warning: '' })
+        setUserData({ ...userData, stage: 2, location: temp.location, warning: '' })
 
-        else if (userData.stage === 2 && temp.birthYear.startDate)
-            setUserData({ ...userData, stage: 3, birthYear: temp.birthYear.startDate, warning: '' })
+        else if (userData.stage === 2 && temp.alias.length > 0)
+        setUserData({ ...userData, stage: 3, alias: temp.alias, warning: '' })
 
-        else if (userData.stage === 3 && temp.interests.length >= 3 && temp.interests.length <= 6)
-            setUserData({ ...userData, stage: 4, interests: [...temp.interests], warning: '' })
+        else if (userData.stage === 3 && temp.description.length > 0)
+        setUserData({ ...userData, stage: 4, description: temp.description, warning: '' })
 
-        else if (userData.stage === 4 && temp.address)
-            setUserData({ ...userData, stage: 5, warning: '' })
+        else if (userData.stage === 4 && temp.categories.length >= 3 && temp.categories.length <= 6)
+        setUserData({ ...userData, stage: 5, categories: temp.categories, warning: '' })
 
-        else if (userData.stage === 5 && temp.identity)
-            setUserData({ ...userData, stage: 6, warning: '' })
+        else if (userData.stage === 5)
+        setUserData({ ...userData, stage: 6, social: temp.social, warning: '' })
 
+        else if (userData.stage === 6 && temp.identity)
+        setUserData({ ...userData, stage: 7, warning: '' })
 
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
-            setUserData({ ...userData, warning: 'You must insert a location.' })
+        setUserData({ ...userData, warning: 'You must insert a location.' })
 
-        else if (userData.stage === 2 && !temp.birthYear.startDate)
-            setUserData({ ...userData, warning: 'You must provide a date.' })
+        else if (userData.stage === 2 && temp.alias.length < 1)
+        setUserData({ ...userData, warning: 'You must insert an alias.' })
 
-        else if (userData.stage === 3 && !(temp.interests.length >= 3 && temp.interests.length <= 6))
-            setUserData({ ...userData, warning: 'You must provide three to six interests.' })
+        else if (userData.stage === 3 && temp.description.length < 1)
+        setUserData({ ...userData, warning: 'You must insert a description.' })
 
-        else if (userData.stage === 4 && !temp.address)
-            setUserData({ ...userData, warning: 'You must provide address verification.' })
+        else if (userData.stage === 4 && (temp.categories.length < 3 || temp.categories.length > 6))
+        setUserData({ ...userData, warning: 'You must provide 3 to 6 categories.' })
 
-        else if (userData.stage === 5 && !temp.identity)
-            setUserData({ ...userData, warning: 'You must provide identity verification.' })
+        else if (userData.stage === 7 && !temp.identity)
+        setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
 
     useEffect(() => {
         if (window) window.scrollTo(0, 0)
 
-        const percentage = userData.stage * 100 / 5
-        setProgress(percentage)
+        const totalStages = 6
+        const percentage = userData.stage * 100 / totalStages
+
+        if (userData.stage > totalStages) setRoleState({ ...roleState, signupCompleted: true })
+        else setProgress(percentage)
     }, [userData.stage])
 
     return (
         <div className="flex flex-col pt-[140px] pb-[60px] akatab px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px]">
+            {userData.stage === 1 && <FanLocation data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 2 && <BusName data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 3 && <BusDescription data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 4 && <BusCategories data={temp} setData={setTemp} skip={handleSkip} />}
+            {userData.stage === 5 && <CelSocial data={temp} setData={setTemp} skip={handleSkip} business={true} />}
+            {userData.stage === 6 && <FanIdentity data={temp} setData={setTemp} skip={handleSkip} business={true} />}
+
             <div className="flex flex-col mt-[80px]">
-                {(userData.warning.length !== 0) && 
-                <span className="mb-[15px] text-[#e64c64]">{userData.warning}</span>}
+                {(userData.warning.length !== 0) &&
+                    <span className="mb-[15px] text-[#e64c64]">{userData.warning}</span>}
 
                 <BorderLinearProgress variant="determinate" value={progress} />
 

@@ -5,7 +5,7 @@ import { FiYoutube } from "react-icons/fi"
 import { FiTwitter } from 'react-icons/fi'
 
 const CelSocial: React.FC<any> = (props) => {
-    const { data, setData, skip } = props
+    const { data, setData, skip, business } = props
 
     return (
         <div>
@@ -18,7 +18,7 @@ const CelSocial: React.FC<any> = (props) => {
             </div>
 
             <span className="text-[#646868]">
-                Display links to the business's official website and verified social media profiles.
+                Display links to {business ? "the business's" : 'your'} official website and verified social media profiles.
             </span>
 
             <div className="grid grid-rows-3 grid-flow-col mt-[40px] gap-y-[15px] gap-x-[80px] w-fit">
