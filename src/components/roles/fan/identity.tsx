@@ -55,8 +55,8 @@ const FanIdentity: React.FC<any> = (props) => {
             </div>
 
             <div className="flex flex-row gap-x-[60px]">
-                <ProofButton />
-                <SelfieButton />
+                <ProofButton data={data} setData={setData} identity={true} />
+                <SelfieButton data={data} setData={setData} />
             </div>
         </div>
     )

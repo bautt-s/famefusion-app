@@ -45,8 +45,9 @@ const CelSignup: React.FC<any> = (props) => {
         images: [],
         birthYear: null,
         gender: '',
-        identity: null,
-        address: null,
+        identity: [],
+        address: [],
+        selfie: [],
         social: {
             website: null,
             instagram: null,
@@ -81,8 +82,9 @@ const CelSignup: React.FC<any> = (props) => {
             facebook: null
         },
         gender: '',
-        identity: null,
-        address: null,
+        identity: [],
+        address: [],
+        selfie: []
     })
 
     const handleSkip = () => {
@@ -131,11 +133,11 @@ const CelSignup: React.FC<any> = (props) => {
         else if (userData.stage === 12)
         setUserData({ ...userData, stage: 13, images: temp.images, warning: '' })
 
-        else if (userData.stage === 13)
-        setUserData({ ...userData, stage: 13, address: temp.address, warning: '' })
+        else if (userData.stage === 13 && temp.address.length > 0)
+        setUserData({ ...userData, stage: 14, address: temp.address, warning: '' })
 
-        else if (userData.stage === 14)
-        setUserData({ ...userData, stage: 15, identity: temp.address, warning: '' })
+        else if (userData.stage === 14 && temp.identity.length > 0 && temp.selfie.length > 0)
+        setUserData({ ...userData, stage: 15, identity: temp.identity, selfie: temp.selfie, warning: '' })
         
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
@@ -168,10 +170,10 @@ const CelSignup: React.FC<any> = (props) => {
         else if (userData.stage === 10 && (temp.interests.length < 3 || temp.interests.length > 6))
         setUserData({ ...userData, warning: 'You must provide 3 to 6 interests.' })
 
-        else if (userData.stage === 13 && !temp.address)
+        else if (userData.stage === 13 && temp.address.length === 0)
         setUserData({ ...userData, warning: 'You must provide address verification.' })
 
-        else if (userData.stage === 14 && !temp.identity)
+        else if (userData.stage === 14 && temp.identity.length === 0 && temp.selfie.length === 0)
         setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
 

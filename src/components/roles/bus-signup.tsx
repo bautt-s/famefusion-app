@@ -38,7 +38,8 @@ const BusSignup: React.FC<any> = (props) => {
             twitter: null,
             facebook: null
         },
-        identity: null,
+        identity: [],
+        selfie: [],
         warning: ''
     })
 
@@ -55,7 +56,8 @@ const BusSignup: React.FC<any> = (props) => {
             twitter: null,
             facebook: null
         },
-        identity: null,
+        identity: [],
+        selfie: []
     })
 
     const handleSkip = () => {
@@ -83,8 +85,8 @@ const BusSignup: React.FC<any> = (props) => {
         else if (userData.stage === 5)
         setUserData({ ...userData, stage: 6, social: temp.social, warning: '' })
 
-        else if (userData.stage === 6 && temp.identity)
-        setUserData({ ...userData, stage: 7, warning: '' })
+        else if (userData.stage === 6 && temp.identity.length > 0 && temp.selfie.length > 0)
+        setUserData({ ...userData, stage: 7, identity: temp.identity, selfie: temp.selfie, warning: '' })
 
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
@@ -99,7 +101,7 @@ const BusSignup: React.FC<any> = (props) => {
         else if (userData.stage === 4 && (temp.categories.length < 3 || temp.categories.length > 6))
         setUserData({ ...userData, warning: 'You must provide 3 to 6 categories.' })
 
-        else if (userData.stage === 7 && !temp.identity)
+        else if (userData.stage === 7 && temp.identity.length !== 1 && temp.selfie.length !== 1)
         setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
 

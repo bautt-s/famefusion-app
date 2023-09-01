@@ -28,8 +28,8 @@ const FanSignup: React.FC<any> = (props) => {
         location: '',
         birthYear: null,
         interests: [],
-        identity: null,
-        address: null,
+        identity: [],
+        address: [],
         warning: ''
     })
 
@@ -40,8 +40,8 @@ const FanSignup: React.FC<any> = (props) => {
             endDate: null
         },
         interests: [],
-        identity: null,
-        address: null,
+        identity: [],
+        address: [],
     })
 
     const handleSkip = () => {
@@ -63,11 +63,11 @@ const FanSignup: React.FC<any> = (props) => {
         else if (userData.stage === 3 && temp.interests.length >= 3 && temp.interests.length <= 6)
             setUserData({ ...userData, stage: 4, interests: [...temp.interests], warning: '' })
 
-        else if (userData.stage === 4 && temp.address)
-            setUserData({ ...userData, stage: 5, warning: '' })
+        else if (userData.stage === 4 && temp.address.length > 0)
+            setUserData({ ...userData, stage: 5, address: temp.address, warning: '' })
 
-        else if (userData.stage === 5 && temp.identity)
-            setUserData({ ...userData, stage: 6, warning: '' })
+        else if (userData.stage === 5 && temp.identity.length > 0)
+            setUserData({ ...userData, stage: 6, identity: temp.identity, warning: '' })
 
 
         // warning set list
@@ -80,10 +80,10 @@ const FanSignup: React.FC<any> = (props) => {
         else if (userData.stage === 3 && (temp.interests.length < 3 || temp.interests.length > 6))
             setUserData({ ...userData, warning: 'You must provide three to six interests.' })
 
-        else if (userData.stage === 4 && !temp.address)
+        else if (userData.stage === 4 && temp.address.length !== 1)
             setUserData({ ...userData, warning: 'You must provide address verification.' })
 
-        else if (userData.stage === 5 && !temp.identity)
+        else if (userData.stage === 5 && temp.identity.length !== 1)
             setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
 

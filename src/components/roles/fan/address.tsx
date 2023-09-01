@@ -53,7 +53,7 @@ const FanAddress: React.FC<any> = (props) => {
                 />
             </div>
 
-            <ProofButton />
+            <ProofButton data={data} setData={setData} />
         </div>
     )
 }
