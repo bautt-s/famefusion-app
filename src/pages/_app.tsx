@@ -1,6 +1,8 @@
 "use client";
 
 import '../globals.css'
+import { store } from '@/store/store'
+import { Provider } from 'react-redux'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 import type { AppProps } from 'next/app'
@@ -17,11 +19,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ApolloProvider client={client}>
 			<KindeProvider>
+				<Provider store={store}>
 					<Head>
 						<link rel="apple-touch-icon" sizes="180x180" href={appleIcon.src} />
 						<link rel="icon" href={icon.src} />
 					</Head>
 					<Component {...pageProps} />
+				</Provider>
 			</KindeProvider>
 		</ApolloProvider>
 	)

@@ -5,6 +5,9 @@ import FanInterests from "./fan/interests"
 import FanAddress from "./fan/address"
 import FanIdentity from "./fan/identity"
 import { LinearProgress, linearProgressClasses, styled } from "@mui/material"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+import { modifyFanData } from "@/store/slices/fanSlice";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -19,8 +22,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const FanSignup: React.FC<any> = (props) => {
+    const dispatch = useDispatch()
     const { roleState, setRoleState } = props
-    
+    const fanData = useSelector((state: RootState) => state.fan.fanData)
+
     const [progress, setProgress] = useState(0)
 
     const [userData, setUserData] = useState({
@@ -30,6 +35,7 @@ const FanSignup: React.FC<any> = (props) => {
         interests: [],
         identity: [],
         address: [],
+        selfie: [],
         warning: ''
     })
 
@@ -42,6 +48,7 @@ const FanSignup: React.FC<any> = (props) => {
         interests: [],
         identity: [],
         address: [],
+        selfie: [],
     })
 
     const handleSkip = () => {
@@ -93,7 +100,21 @@ const FanSignup: React.FC<any> = (props) => {
         const totalStages = 5
         const percentage = userData.stage * 100 / totalStages
 
-        if (userData.stage > totalStages) setRoleState({ ...roleState, signupCompleted: true })
+        if (userData.stage > totalStages) {
+            setRoleState({ ...roleState, signupCompleted: true })
+
+            const submitedData = {
+                location: userData.location,
+                birthYear: userData.birthYear || new Date(),
+                interests: userData.interests,
+                selfieImg: userData.selfie.length > 0 ? userData.selfie[0] : null,
+                locationImg: userData.address.length > 0 ? userData.address[0] : null,
+                identityImg: userData.identity.length > 0 ? userData.identity[0] : null,
+            }
+
+            dispatch(modifyFanData({ ...fanData, ...submitedData }))
+        }
+
         else setProgress(percentage)
     }, [userData.stage])
 
@@ -106,8 +127,8 @@ const FanSignup: React.FC<any> = (props) => {
             {userData.stage === 5 && <FanIdentity data={temp} setData={setTemp} skip={handleSkip} />}
 
             <div className="flex flex-col mt-[80px]">
-                {(userData.warning.length !== 0) && 
-                <span className="mb-[15px] text-[#e64c64]">{userData.warning}</span>}
+                {(userData.warning.length !== 0) &&
+                    <span className="mb-[15px] text-[#e64c64]">{userData.warning}</span>}
 
                 <BorderLinearProgress variant="determinate" value={progress} />
 

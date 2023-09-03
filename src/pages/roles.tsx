@@ -5,13 +5,20 @@ import CelSignup from "@/components/roles/cel-signup";
 import FanSignup from "@/components/roles/fan-signup";
 import ChooseRole from "@/components/roles/role-choose";
 import SignupCompleted from "@/components/roles/signup-complete";
+import { RootState } from "@/store/store";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { useKindeAuth, User } from "@kinde-oss/kinde-auth-nextjs";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { modifyFanData } from "@/store/slices/fanSlice";
 
 const Roles = () => {
+    const dispatch = useDispatch()
     const { user }: { user: User } = useKindeAuth();
+    const fanData = useSelector((state: RootState) => state.fan.fanData)
+    
+    const [userId, setUserId] = useState<string>('')
 
     const [roleState, setRoleState] = useState({
         role: '',
@@ -34,7 +41,7 @@ const Roles = () => {
         }
     }`
 
-    const { loading: loadingUser, error: errorUser, data: dataUser } =
+    const { loading: loadingUser, data: dataUser } =
         useQuery<any>(USER, { variables: { email: user?.email } });
 
     const [createUser, { data: createdUserData, loading: createdUserLoading, error: createdUserError }] =
@@ -47,11 +54,22 @@ const Roles = () => {
             }
         });
 
+    useEffect(() => {
+        if (dataUser?.getUserByEmail === null) setUserId(createdUserData?.createUser?.id)
+        else setUserId(dataUser?.getUserByEmail?.id)
+    }, [createdUserData])
 
-    if (!loadingUser && dataUser?.getUserByEmail === null) {
-        createUser()
-    }
+    useEffect(() => {
+        if (!loadingUser && dataUser?.getUserByEmail === null) createUser()
 
+        if (fanData?.userId?.length === 0 && user) dispatch(modifyFanData({
+            ...fanData, 
+            userId,
+            name: user.name || '',
+            email: user.email || '',
+        }))
+    }, [loadingUser])
+    console.log(userId)
     return (
         <div className="min-h-screen flex flex-col">
             <Head>
@@ -61,20 +79,20 @@ const Roles = () => {
             <NavSection />
 
             <div>
-                {roleState.mainScreen && 
-                <ChooseRole roleState={roleState} setRoleState={setRoleState} name={user?.given_name} />}
+                {roleState.mainScreen &&
+                    <ChooseRole roleState={roleState} setRoleState={setRoleState} name={user?.given_name} />}
 
                 {(roleState.role === 'fan' && !roleState.signupCompleted && !roleState.mainScreen) &&
-                <FanSignup roleState={roleState} setRoleState={setRoleState} />}
+                    <FanSignup roleState={roleState} setRoleState={setRoleState} />}
 
                 {(roleState.role === 'celebrity' && !roleState.signupCompleted && !roleState.mainScreen) &&
-                <CelSignup roleState={roleState} setRoleState={setRoleState} />}
+                    <CelSignup roleState={roleState} setRoleState={setRoleState} />}
 
                 {(roleState.role === 'business' && !roleState.signupCompleted && !roleState.mainScreen) &&
-                <BusSignup roleState={roleState} setRoleState={setRoleState} />}
+                    <BusSignup roleState={roleState} setRoleState={setRoleState} />}
 
                 {roleState.signupCompleted &&
-                <SignupCompleted />}
+                    <SignupCompleted roleState={roleState} />}
             </div>
 
             <div className="mt-auto">

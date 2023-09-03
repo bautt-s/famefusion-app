@@ -83,6 +83,7 @@ const CelImages: React.FC<any> = (props) => {
 
                 {renderArray.map((item, index) =>
                     <ImageUploading
+                        key={index}
                         multiple
                         value={data.images}
                         onChange={onChange}
@@ -96,7 +97,7 @@ const CelImages: React.FC<any> = (props) => {
                             isDragging,
                             dragProps
                         }) => (
-                            <button key={index} className={`aspect-[9/16] h-[280px] upload__image-wrapper 
+                            <button className={`aspect-[9/16] h-[280px] upload__image-wrapper 
                             bg-[#F7F8FC] flex flex-col items-center justify-center group cursor-pointer
                             ${isDragging ? 'border border-[#FB5870] rounded-[25px]' : 'upload-verification'}`}
                                 onClick={!imageList[index + 1] ? onImageUpload : () => null}
