@@ -13,6 +13,7 @@ export interface fanInterface {
         identityImg: string | null,
         profilePic: string | null,
         userId: string,
+        submited: boolean
     }
 }
 
@@ -28,6 +29,7 @@ const initialState: fanInterface = {
         identityImg: null,
         profilePic: null,
         userId: '',
+        submited: false
     }
 }
 

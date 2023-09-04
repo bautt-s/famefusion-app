@@ -57,19 +57,21 @@ const Roles = () => {
     useEffect(() => {
         if (dataUser?.getUserByEmail === null) setUserId(createdUserData?.createUser?.id)
         else setUserId(dataUser?.getUserByEmail?.id)
-    }, [createdUserData])
+    }, [createdUserData, dataUser])
 
     useEffect(() => {
-        if (!loadingUser && dataUser?.getUserByEmail === null) createUser()
-
         if (fanData?.userId?.length === 0 && user) dispatch(modifyFanData({
             ...fanData, 
             userId,
             name: user.name || '',
             email: user.email || '',
         }))
+    }, [userId])
+
+    useEffect(() => {
+        if (!loadingUser && dataUser?.getUserByEmail === null) createUser()
     }, [loadingUser])
-    console.log(userId)
+    
     return (
         <div className="min-h-screen flex flex-col">
             <Head>

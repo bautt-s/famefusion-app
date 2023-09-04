@@ -31,7 +31,10 @@ const FanSignup: React.FC<any> = (props) => {
     const [userData, setUserData] = useState({
         stage: 1,
         location: '',
-        birthYear: null,
+        birthYear: {
+            startDate: null,
+            endDate: null
+        },
         interests: [],
         identity: [],
         address: [],
@@ -93,7 +96,7 @@ const FanSignup: React.FC<any> = (props) => {
         else if (userData.stage === 5 && temp.identity.length !== 1)
             setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
-
+    
     useEffect(() => {
         if (window) window.scrollTo(0, 0)
 
@@ -105,7 +108,7 @@ const FanSignup: React.FC<any> = (props) => {
 
             const submitedData = {
                 location: userData.location,
-                birthYear: userData.birthYear || new Date(),
+                birthYear: typeof userData.birthYear.startDate === 'string' ? new Date(userData.birthYear.startDate) : new Date(),
                 interests: userData.interests,
                 selfieImg: userData.selfie.length > 0 ? userData.selfie[0] : null,
                 locationImg: userData.address.length > 0 ? userData.address[0] : null,

@@ -1,12 +1,14 @@
+import { modifyFanData } from "@/store/slices/fanSlice"
 import { RootState } from "@/store/store"
 import { gql, useMutation } from "@apollo/client"
 import Link from "next/link"
 import { useEffect } from "react"
 import { FaArrowRightLong } from "react-icons/fa6"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 const SignupCompleted: React.FC<any> = (props) => {
     const { roleState } = props
+    const dispatch = useDispatch()
     const submitFanData = useSelector((state: RootState) => state.fan.fanData)
 
     const CREATE_FAN = gql`
@@ -33,7 +35,9 @@ const SignupCompleted: React.FC<any> = (props) => {
 
         if (role === 'fan') {
             const { name, email, location, interests, profilePic, 
-            userId, selfieImg, locationImg, identityImg } = submitFanData
+            userId, selfieImg, locationImg, identityImg, birthYear } = submitFanData
+
+            dispatch(modifyFanData({ ...submitFanData, submited: true }))
 
             createRole({
                 variables: {
@@ -41,6 +45,7 @@ const SignupCompleted: React.FC<any> = (props) => {
                         name,
                         email,
                         location,
+                        birthYear,
                         interests,
                         profilePic,
                         userId,
@@ -54,7 +59,7 @@ const SignupCompleted: React.FC<any> = (props) => {
     }
 
     useEffect(() => {
-        handleCreate()
+        if (!submitFanData.submited) handleCreate()
         console.log(createdData)
     })
 
