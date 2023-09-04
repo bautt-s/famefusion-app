@@ -14,6 +14,9 @@ import CelSocial from "./celebrity/social";
 import CelImages from "./celebrity/images";
 import FanAddress from "./fan/address";
 import FanIdentity from "./fan/identity";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { modifyCelebrityData } from "@/store/slices/celebritySlice";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -28,7 +31,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const CelSignup: React.FC<any> = (props) => {
+    const dispatch = useDispatch()
     const { roleState, setRoleState } = props
+    const celebrityData = useSelector((state: RootState) => state.celebrity.celebrityData)
 
     const [progress, setProgress] = useState(0)
 
@@ -43,18 +48,21 @@ const CelSignup: React.FC<any> = (props) => {
         languages: [],
         interests: [],
         images: [],
-        birthYear: null,
+        birthYear: {
+            startDate: null,
+            endDate: null
+        },
         gender: '',
         identity: [],
         address: [],
         selfie: [],
         social: {
-            website: null,
-            instagram: null,
-            tiktok: null,
-            youtube: null,
-            twitter: null,
-            facebook: null
+            website: '',
+            instagram: '',
+            tiktok: '',
+            youtube: '',
+            twitter: '',
+            facebook: ''
         },
         warning: ''
     })
@@ -74,12 +82,12 @@ const CelSignup: React.FC<any> = (props) => {
             endDate: null
         },
         social: {
-            website: null,
-            instagram: null,
-            tiktok: null,
-            youtube: null,
-            twitter: null,
-            facebook: null
+            website: '',
+            instagram: '',
+            tiktok: '',
+            youtube: '',
+            twitter: '',
+            facebook: ''
         },
         gender: '',
         identity: [],
@@ -118,7 +126,7 @@ const CelSignup: React.FC<any> = (props) => {
         else if (userData.stage === 7 && temp.birthYear.startDate)
         setUserData({ ...userData, stage: 8, birthYear: temp.birthYear.startDate, warning: '' })
 
-        else if (userData.stage === 8 && temp.gender !== '')
+        else if (userData.stage === 8)
         setUserData({ ...userData, stage: 9, gender: temp.gender, warning: '' })
 
         else if (userData.stage === 9 && temp.languages.length > 0)
@@ -176,14 +184,34 @@ const CelSignup: React.FC<any> = (props) => {
         else if (userData.stage === 14 && temp.identity.length === 0 && temp.selfie.length === 0)
         setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
-
+    console.log(userData.gender)
     useEffect(() => {
         if (window) window.scrollTo(0, 0)
 
         const totalStages = 14
         const percentage = userData.stage * 100 / totalStages
 
-        if (userData.stage > totalStages) setRoleState({ ...roleState, signupCompleted: true })
+        if (userData.stage > totalStages) {
+            setRoleState({ ...roleState, signupCompleted: true })
+
+            const submitedData = {
+                nickname: userData.alias,
+                location: userData.location,
+                biography: userData.summary,
+                description: userData.description,
+                birthYear: typeof userData.birthYear.startDate === 'string' ? new Date(userData.birthYear.startDate) : new Date(),
+                categories: userData.categories,
+                interests: userData.interests,
+                media: userData.images.map((i: { dataURL: string, file: any }) => i.dataURL),
+                languages: userData.languages,
+                associatedBrands: userData.products,
+                selfieImg: userData.selfie.length > 0 ? userData.selfie.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
+                identityImg: userData.identity.length > 0 ? userData.identity.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
+            }
+
+            dispatch(modifyCelebrityData({ ...celebrityData, ...submitedData }))
+        }
+
         else setProgress(percentage)
     }, [userData.stage])
 

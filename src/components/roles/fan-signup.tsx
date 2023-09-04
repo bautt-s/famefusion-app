@@ -110,9 +110,9 @@ const FanSignup: React.FC<any> = (props) => {
                 location: userData.location,
                 birthYear: typeof userData.birthYear.startDate === 'string' ? new Date(userData.birthYear.startDate) : new Date(),
                 interests: userData.interests,
-                selfieImg: userData.selfie.length > 0 ? userData.selfie[0] : null,
-                locationImg: userData.address.length > 0 ? userData.address[0] : null,
-                identityImg: userData.identity.length > 0 ? userData.identity[0] : null,
+                selfieImg: userData.selfie.length > 0 ? userData.selfie.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
+                locationImg: userData.address.length > 0 ? userData.address.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
+                identityImg: userData.identity.length > 0 ? userData.identity.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
             }
 
             dispatch(modifyFanData({ ...fanData, ...submitedData }))

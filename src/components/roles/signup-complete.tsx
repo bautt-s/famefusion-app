@@ -1,4 +1,5 @@
 import { modifyBusinessData } from "@/store/slices/businessSlice"
+import { modifyCelebrityData } from "@/store/slices/celebritySlice"
 import { modifyFanData } from "@/store/slices/fanSlice"
 import { RootState } from "@/store/store"
 import { gql, useMutation } from "@apollo/client"
@@ -13,12 +14,12 @@ const SignupCompleted: React.FC<any> = (props) => {
 
     const submitFanData = useSelector((state: RootState) => state.fan.fanData)
     const submitBusinessData = useSelector((state: RootState) => state.business.businessData)
+    const submitCelebrityData = useSelector((state: RootState) => state.celebrity.celebrityData)
 
     const CREATE_FAN = gql`
     mutation createFan($fan: FanInput) {
         createFan(fan: $fan) {
             id
-            name
         }
     }`
 
@@ -26,15 +27,21 @@ const SignupCompleted: React.FC<any> = (props) => {
     mutation createBusiness($business: BusinessInput) {
         createBusiness(business: $business) {
             id
-            name
         }
     }`
+
+    const CREATE_CELEBRITY = gql`
+    mutation createCelebrity($celebrity: CelebrityInput) {
+        createCelebrity(celebrity: $celebrity) {
+            id
+        }
+}`
 
     const getMutation = () => {
         const { role } = roleState
 
         if (role === 'fan') return CREATE_FAN
-        else if (role === 'celebrity') return CREATE_FAN
+        else if (role === 'celebrity') return CREATE_CELEBRITY
         else return CREATE_BUSINESS
     }
 
@@ -68,11 +75,11 @@ const SignupCompleted: React.FC<any> = (props) => {
         }
 
         else if (role === 'business') {
-            const { name, email, location, profilePic, description, 
+            const { name, email, location, profilePic, description,
             userId, selfieImg, identityImg, categories } = submitBusinessData
 
             dispatch(modifyBusinessData({ ...submitBusinessData, submited: true }))
-                
+
             createRole({
                 variables: {
                     business: {
@@ -90,20 +97,56 @@ const SignupCompleted: React.FC<any> = (props) => {
                 }
             })
         }
+
+        else if (role === 'celebrity') {
+            const { name, email, location, interests, profilePic, nickname, biography,
+            userId, selfieImg, locationImg, identityImg, birthYear, associatedBrands,
+            gender, description, media, categories, languages, } = submitCelebrityData
+
+            dispatch(modifyCelebrityData({ ...submitCelebrityData, submited: true }))
+
+            createRole({
+                variables: {
+                    celebrity: {
+                        name,
+                        email,
+                        location,
+                        biography,
+                        description,
+                        nickname,
+                        associatedBrands,
+                        gender,
+                        media,
+                        categories,
+                        languages,
+                        birthYear,
+                        interests,
+                        profilePic,
+                        userId,
+                        selfieImg,
+                        locationImg,
+                        identityImg
+                    }
+                }
+            })
+        }
     }
 
     useEffect(() => {
         switch (roleState.role) {
-            case 'fan': 
+            case 'fan':
                 if (!submitFanData.submited) handleCreate()
                 break;
-            case 'business': 
+            case 'business':
                 if (!submitBusinessData.submited) handleCreate()
+                break;
+            case 'celebrity':
+                if (!submitCelebrityData.submited) handleCreate()
                 break;
             default:
                 console.log('No role assigned.')
         }
-        
+
         console.log(createdData)
     })
 

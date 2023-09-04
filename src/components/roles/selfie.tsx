@@ -5,7 +5,7 @@ const SelfieButton: React.FC<any> = (props) => {
     const { data, setData } = props
 
     const onChange = (imageList: ImageListType) => {
-        setData({ ...data, selfie: imageList as never[] });
+        setData({ ...data, selfie: imageList });
     }
 
     return (

@@ -124,8 +124,8 @@ const BusSignup: React.FC<any> = (props) => {
                 location: userData.location,
                 description: userData.description,
                 categories: userData.categories,
-                selfieImg: userData.selfie.length > 0 ? userData.selfie[0] : null,
-                identityImg: userData.identity.length > 0 ? userData.identity[0] : null,
+                selfieImg: userData.selfie.length > 0 ? userData.selfie.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
+                identityImg: userData.identity.length > 0 ? userData.identity.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
             }
 
             dispatch(modifyBusinessData({ ...businessData, ...submitedData }))

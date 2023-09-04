@@ -19,7 +19,7 @@ const CelGender: React.FC<any> = (props) => {
                 inclusive language when connecting you with fans and businesses.
             </span>
 
-            <div className="flex flex-col gap-y-[15px] mt-[40px]">
+            <fieldset className="flex flex-col gap-y-[15px] mt-[40px]">
                 {genders.map((g, index) =>
                     <div key={index} className="flex flex-row items-center gap-x-[20px] 
                     ring-1 ring-gray-400 w-[300px] py-[7px] pl-[15px] rounded-lg">
@@ -35,7 +35,7 @@ const CelGender: React.FC<any> = (props) => {
                         checked={data.gender === null} onChange={() => setData({ ...data, gender: null })} />
                     <span>I prefer not to answer</span>
                 </div>
-            </div>
+            </fieldset>
         </div>
     )
 }

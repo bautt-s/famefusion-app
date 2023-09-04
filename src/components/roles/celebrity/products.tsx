@@ -7,7 +7,7 @@ const CelProducts: React.FC<any> = (props) => {
     const [inputValue, setInputValue] = useState('')
 
     const handleProject = () => {
-        if (data.products.length < 4) {
+        if (data.products.length < 4 && inputValue.length > 0) {
             setData({ ...data, products: [...data.products, inputValue] })
             setInputValue('')
         }

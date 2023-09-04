@@ -4,12 +4,11 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 
 const CelImages: React.FC<any> = (props) => {
     const { data, setData, skip } = props
-    //const [images, setImages] = useState([]);
 
     const renderArray = new Array(4).fill('fill')
 
     const onChange = (imageList: ImageListType) => {
-        setData({ ...data, images: imageList as never[] });
+        setData({ ...data, images: imageList });
     }
 
     return (

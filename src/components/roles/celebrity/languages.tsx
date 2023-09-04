@@ -7,7 +7,7 @@ const CelLanguages: React.FC<any> = (props) => {
     const [inputValue, setInputValue] = useState('')
 
     const handleLanguage = () => {
-        if (data.languages.length < 4) {
+        if (data.languages.length < 4 && inputValue.length > 0) {
             setData({ ...data, languages: [...data.languages, inputValue] })
             setInputValue('')
         }

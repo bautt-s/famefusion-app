@@ -15,7 +15,7 @@ const FanInterests: React.FC<any> = (props) => {
         <div>
             <div className="flex flex-row items-center">
                 <h1 className="outfit font-[700] text-4xl mb-[5px]">
-                    Which are the most popular products or projects you have been involved in?
+                    Select some of your personal interests or hobbies
                 </h1>
 
                 <button className="ml-auto underline" onClick={skip}>Skip</button>

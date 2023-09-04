@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { modifyFanData } from "@/store/slices/fanSlice";
 import { modifyBusinessData } from "@/store/slices/businessSlice";
+import { modifyCelebrityData } from "@/store/slices/celebritySlice";
 
 const Roles = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const Roles = () => {
 
     const fanData = useSelector((state: RootState) => state.fan.fanData)
     const businessData = useSelector((state: RootState) => state.business.businessData)
+    const celebrityData = useSelector((state: RootState) => state.celebrity.celebrityData)
     
     const [userId, setUserId] = useState<string>('')
 
@@ -72,6 +74,13 @@ const Roles = () => {
 
         if (businessData?.userId?.length === 0 && user) dispatch(modifyBusinessData({
             ...businessData, 
+            userId,
+            name: user.name || '',
+            email: user.email || '',
+        }))
+
+        if (celebrityData?.userId?.length === 0 && user) dispatch(modifyCelebrityData({
+            ...celebrityData, 
             userId,
             name: user.name || '',
             email: user.email || '',
