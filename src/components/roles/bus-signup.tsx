@@ -6,6 +6,9 @@ import BusDescription from "./business/description";
 import BusCategories from "./business/categories";
 import CelSocial from "./celebrity/social";
 import FanIdentity from "./fan/identity";
+import { modifyBusinessData } from "@/store/slices/businessSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -20,7 +23,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const BusSignup: React.FC<any> = (props) => {
+    const dispatch = useDispatch()
     const { roleState, setRoleState } = props
+    const businessData = useSelector((state: RootState) => state.business.businessData)
 
     const [progress, setProgress] = useState(0)
 
@@ -31,12 +36,12 @@ const BusSignup: React.FC<any> = (props) => {
         description: '',
         categories: [],
         social: {
-            website: null,
-            instagram: null,
-            tiktok: null,
-            youtube: null,
-            twitter: null,
-            facebook: null
+            website: '',
+            instagram: '',
+            tiktok: '',
+            youtube: '',
+            twitter: '',
+            facebook: ''
         },
         identity: [],
         selfie: [],
@@ -49,12 +54,12 @@ const BusSignup: React.FC<any> = (props) => {
         description: '',
         categories: [],
         social: {
-            website: null,
-            instagram: null,
-            tiktok: null,
-            youtube: null,
-            twitter: null,
-            facebook: null
+            website: '',
+            instagram: '',
+            tiktok: '',
+            youtube: '',
+            twitter: '',
+            facebook: ''
         },
         identity: [],
         selfie: []
@@ -71,38 +76,38 @@ const BusSignup: React.FC<any> = (props) => {
 
     const handleNext = () => {
         if (userData.stage === 1 && temp.location.length > 0)
-        setUserData({ ...userData, stage: 2, location: temp.location, warning: '' })
+            setUserData({ ...userData, stage: 2, location: temp.location, warning: '' })
 
         else if (userData.stage === 2 && temp.alias.length > 0)
-        setUserData({ ...userData, stage: 3, alias: temp.alias, warning: '' })
+            setUserData({ ...userData, stage: 3, alias: temp.alias, warning: '' })
 
         else if (userData.stage === 3 && temp.description.length > 0)
-        setUserData({ ...userData, stage: 4, description: temp.description, warning: '' })
+            setUserData({ ...userData, stage: 4, description: temp.description, warning: '' })
 
         else if (userData.stage === 4 && temp.categories.length >= 3 && temp.categories.length <= 6)
-        setUserData({ ...userData, stage: 5, categories: temp.categories, warning: '' })
+            setUserData({ ...userData, stage: 5, categories: temp.categories, warning: '' })
 
         else if (userData.stage === 5)
-        setUserData({ ...userData, stage: 6, social: temp.social, warning: '' })
+            setUserData({ ...userData, stage: 6, social: temp.social, warning: '' })
 
         else if (userData.stage === 6 && temp.identity.length > 0 && temp.selfie.length > 0)
-        setUserData({ ...userData, stage: 7, identity: temp.identity, selfie: temp.selfie, warning: '' })
+            setUserData({ ...userData, stage: 7, identity: temp.identity, selfie: temp.selfie, warning: '' })
 
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
-        setUserData({ ...userData, warning: 'You must insert a location.' })
+            setUserData({ ...userData, warning: 'You must insert a location.' })
 
         else if (userData.stage === 2 && temp.alias.length < 1)
-        setUserData({ ...userData, warning: 'You must insert an alias.' })
+            setUserData({ ...userData, warning: 'You must insert an alias.' })
 
         else if (userData.stage === 3 && temp.description.length < 1)
-        setUserData({ ...userData, warning: 'You must insert a description.' })
+            setUserData({ ...userData, warning: 'You must insert a description.' })
 
         else if (userData.stage === 4 && (temp.categories.length < 3 || temp.categories.length > 6))
-        setUserData({ ...userData, warning: 'You must provide 3 to 6 categories.' })
+            setUserData({ ...userData, warning: 'You must provide 3 to 6 categories.' })
 
         else if (userData.stage === 7 && temp.identity.length !== 1 && temp.selfie.length !== 1)
-        setUserData({ ...userData, warning: 'You must provide identity verification.' })
+            setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
 
     useEffect(() => {
@@ -111,7 +116,21 @@ const BusSignup: React.FC<any> = (props) => {
         const totalStages = 6
         const percentage = userData.stage * 100 / totalStages
 
-        if (userData.stage > totalStages) setRoleState({ ...roleState, signupCompleted: true })
+        if (userData.stage > totalStages) {
+            setRoleState({ ...roleState, signupCompleted: true })
+
+            const submitedData = {
+                name: userData.alias,
+                location: userData.location,
+                description: userData.description,
+                categories: userData.categories,
+                selfieImg: userData.selfie.length > 0 ? userData.selfie[0] : null,
+                identityImg: userData.identity.length > 0 ? userData.identity[0] : null,
+            }
+
+            dispatch(modifyBusinessData({ ...businessData, ...submitedData }))
+        }
+
         else setProgress(percentage)
     }, [userData.stage])
 

@@ -12,11 +12,14 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { modifyFanData } from "@/store/slices/fanSlice";
+import { modifyBusinessData } from "@/store/slices/businessSlice";
 
 const Roles = () => {
     const dispatch = useDispatch()
     const { user }: { user: User } = useKindeAuth();
+
     const fanData = useSelector((state: RootState) => state.fan.fanData)
+    const businessData = useSelector((state: RootState) => state.business.businessData)
     
     const [userId, setUserId] = useState<string>('')
 
@@ -44,7 +47,7 @@ const Roles = () => {
     const { loading: loadingUser, data: dataUser } =
         useQuery<any>(USER, { variables: { email: user?.email } });
 
-    const [createUser, { data: createdUserData, loading: createdUserLoading, error: createdUserError }] =
+    const [createUser, { data: createdUserData }] =
         useMutation(CREATE_USER, {
             variables: {
                 user: {
@@ -62,6 +65,13 @@ const Roles = () => {
     useEffect(() => {
         if (fanData?.userId?.length === 0 && user) dispatch(modifyFanData({
             ...fanData, 
+            userId,
+            name: user.name || '',
+            email: user.email || '',
+        }))
+
+        if (businessData?.userId?.length === 0 && user) dispatch(modifyBusinessData({
+            ...businessData, 
             userId,
             name: user.name || '',
             email: user.email || '',

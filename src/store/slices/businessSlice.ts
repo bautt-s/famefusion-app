@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface fanInterface {
-    fanData: {
+export interface businessInterface {
+    businessData: {
         name: string,
         email: string,
+        businessEmail: string,
         location: string | null,
-        birthYear: Date,
-        interests: string[],
+        description: string,
+        categories: string[],
         selfieImg: string | null,
-        locationImg: string | null,
         identityImg: string | null,
         profilePic: string | null,
         userId: string,
@@ -17,15 +17,15 @@ export interface fanInterface {
     }
 }
 
-const initialState: fanInterface = {
-    fanData: {
+const initialState: businessInterface = {
+    businessData: {
         name: '',
         email: '',
+        businessEmail: '',
         location: null,
-        birthYear: new Date(),
-        interests: [],
+        description: '',
+        categories: [],
         selfieImg: null,
-        locationImg: null,
         identityImg: null,
         profilePic: null,
         userId: '',
@@ -34,15 +34,15 @@ const initialState: fanInterface = {
 }
 
 export const fanSlice = createSlice({
-    name: 'fan',
+    name: 'business',
     initialState,
     reducers: {
-        modifyFanData: (state, action: PayloadAction<fanInterface['fanData']>) => {
-            state.fanData = action.payload
+        modifyBusinessData: (state, action: PayloadAction<businessInterface['businessData']>) => {
+            state.businessData = action.payload
         }
     },
 })
 
-export const { modifyFanData } = fanSlice.actions
+export const { modifyBusinessData } = fanSlice.actions
 
 export default fanSlice.reducer

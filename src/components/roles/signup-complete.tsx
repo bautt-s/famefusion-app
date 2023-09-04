@@ -1,3 +1,4 @@
+import { modifyBusinessData } from "@/store/slices/businessSlice"
 import { modifyFanData } from "@/store/slices/fanSlice"
 import { RootState } from "@/store/store"
 import { gql, useMutation } from "@apollo/client"
@@ -9,11 +10,21 @@ import { useDispatch, useSelector } from "react-redux"
 const SignupCompleted: React.FC<any> = (props) => {
     const { roleState } = props
     const dispatch = useDispatch()
+
     const submitFanData = useSelector((state: RootState) => state.fan.fanData)
+    const submitBusinessData = useSelector((state: RootState) => state.business.businessData)
 
     const CREATE_FAN = gql`
     mutation createFan($fan: FanInput) {
         createFan(fan: $fan) {
+            id
+            name
+        }
+    }`
+
+    const CREATE_BUSINESS = gql`
+    mutation createBusiness($business: BusinessInput) {
+        createBusiness(business: $business) {
             id
             name
         }
@@ -24,17 +35,16 @@ const SignupCompleted: React.FC<any> = (props) => {
 
         if (role === 'fan') return CREATE_FAN
         else if (role === 'celebrity') return CREATE_FAN
-        else return CREATE_FAN
+        else return CREATE_BUSINESS
     }
 
-    const [createRole, { data: createdData, loading: createdLoading, error: createdError }] =
-        useMutation(getMutation());
+    const [createRole, { data: createdData }] = useMutation(getMutation());
 
     const handleCreate = () => {
         const { role } = roleState
 
         if (role === 'fan') {
-            const { name, email, location, interests, profilePic, 
+            const { name, email, location, interests, profilePic,
             userId, selfieImg, locationImg, identityImg, birthYear } = submitFanData
 
             dispatch(modifyFanData({ ...submitFanData, submited: true }))
@@ -56,10 +66,44 @@ const SignupCompleted: React.FC<any> = (props) => {
                 }
             })
         }
+
+        else if (role === 'business') {
+            const { name, email, location, profilePic, description, 
+            userId, selfieImg, identityImg, categories } = submitBusinessData
+
+            dispatch(modifyBusinessData({ ...submitBusinessData, submited: true }))
+                
+            createRole({
+                variables: {
+                    business: {
+                        name,
+                        email,
+                        businessEmail: email,
+                        location,
+                        description,
+                        categories,
+                        profilePic,
+                        userId,
+                        selfieImg,
+                        identityImg
+                    }
+                }
+            })
+        }
     }
 
     useEffect(() => {
-        if (!submitFanData.submited) handleCreate()
+        switch (roleState.role) {
+            case 'fan': 
+                if (!submitFanData.submited) handleCreate()
+                break;
+            case 'business': 
+                if (!submitBusinessData.submited) handleCreate()
+                break;
+            default:
+                console.log('No role assigned.')
+        }
+        
         console.log(createdData)
     })
 
