@@ -51,8 +51,8 @@ const SignupCompleted: React.FC<any> = (props) => {
         const { role } = roleState
 
         if (role === 'fan') {
-            const { name, email, location, interests, profilePic,
-            userId, selfieImg, locationImg, identityImg, birthYear } = submitFanData
+            const { name, email, location, interests, birthYear,
+            userId, selfieImg, locationImg, identityImg } = submitFanData
 
             dispatch(modifyFanData({ ...submitFanData, submited: true }))
 
@@ -64,7 +64,6 @@ const SignupCompleted: React.FC<any> = (props) => {
                         location,
                         birthYear,
                         interests,
-                        profilePic,
                         userId,
                         selfieImg,
                         locationImg,
@@ -75,7 +74,7 @@ const SignupCompleted: React.FC<any> = (props) => {
         }
 
         else if (role === 'business') {
-            const { name, email, location, profilePic, description,
+            const { name, email, location, description,
             userId, selfieImg, identityImg, categories } = submitBusinessData
 
             dispatch(modifyBusinessData({ ...submitBusinessData, submited: true }))
@@ -89,7 +88,6 @@ const SignupCompleted: React.FC<any> = (props) => {
                         location,
                         description,
                         categories,
-                        profilePic,
                         userId,
                         selfieImg,
                         identityImg
@@ -99,7 +97,7 @@ const SignupCompleted: React.FC<any> = (props) => {
         }
 
         else if (role === 'celebrity') {
-            const { name, email, location, interests, profilePic, nickname, biography,
+            const { name, email, location, interests, nickname, biography,
             userId, selfieImg, locationImg, identityImg, birthYear, associatedBrands,
             gender, description, media, categories, languages, } = submitCelebrityData
 
@@ -121,7 +119,6 @@ const SignupCompleted: React.FC<any> = (props) => {
                         languages,
                         birthYear,
                         interests,
-                        profilePic,
                         userId,
                         selfieImg,
                         locationImg,
@@ -146,8 +143,6 @@ const SignupCompleted: React.FC<any> = (props) => {
             default:
                 console.log('No role assigned.')
         }
-
-        console.log(createdData)
     })
 
     return (

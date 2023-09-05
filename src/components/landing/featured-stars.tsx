@@ -11,7 +11,9 @@ export type StarType = {
     name: string,
     description: string,
     rating: number,
-    profilePic: string,
+    associatedUser: {
+        profilePic: string,
+    }
     workList: {
         price: number
     }[]
@@ -30,7 +32,9 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
             name,
             description,
             rating,
-            profilePic,
+            associatedUser {
+                profilePic
+            }
             workList {
                 price
             }
@@ -113,7 +117,7 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
                         hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300 z-50' />
 
                             <Link href={`/browse/${c.id}`}>
-                                <img src={c.profilePic} className='w-full object-cover rounded-2xl 
+                                <img src={c.associatedUser.profilePic} className='w-full object-cover rounded-2xl 
                                 featured-img group-hover:scale-105 transition-all duration-300 select-none' alt={c.name} />
 
                                 <div className='flex flex-col sm:flex-row sm:items-end 2xl:items-center mt-[15px]'>

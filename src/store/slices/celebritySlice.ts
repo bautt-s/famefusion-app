@@ -19,7 +19,6 @@ export interface celebrityInterface {
         selfieImg: string | null,
         locationImg: string | null,
         identityImg: string | null,
-        profilePic: string | null,
         userId: string,
         submited: boolean
     }
@@ -43,7 +42,6 @@ const initialState: celebrityInterface = {
         selfieImg: null,
         locationImg: null,
         identityImg: null,
-        profilePic: null,
         userId: '',
         submited: false
     }

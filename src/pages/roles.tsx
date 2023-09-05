@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { modifyFanData } from "@/store/slices/fanSlice";
 import { modifyBusinessData } from "@/store/slices/businessSlice";
 import { modifyCelebrityData } from "@/store/slices/celebritySlice";
+import { useRouter } from "next/router";
 
 const Roles = () => {
+    const router = useRouter()
     const dispatch = useDispatch()
     const { user }: { user: User } = useKindeAuth();
 
@@ -36,6 +38,15 @@ const Roles = () => {
     query getUserByEmail($email: String) {
         getUserByEmail(email: $email) {
             id
+            associatedFan {
+                name
+            }
+            associatedBusiness {
+                name
+            }
+            associatedCelebrity {
+                name
+            }
         }
     }`
 
@@ -54,7 +65,8 @@ const Roles = () => {
             variables: {
                 user: {
                     name: user?.name,
-                    email: user?.email
+                    email: user?.email,
+                    profilePic: user?.picture || undefined
                 }
             }
         });
@@ -89,6 +101,11 @@ const Roles = () => {
 
     useEffect(() => {
         if (!loadingUser && dataUser?.getUserByEmail === null) createUser()
+        
+        if (dataUser?.associatedFan || dataUser?.associatedBusiness || dataUser?.associatedCelebrity)
+        router.push('/')
+
+        console.log(dataUser)
     }, [loadingUser])
     
     return (

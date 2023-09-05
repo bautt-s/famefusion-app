@@ -1,14 +1,26 @@
 "use client";
 
-import {useKindeAuth} from "@kinde-oss/kinde-auth-nextjs";
-import { FaArrowRightToBracket } from 'react-icons/fa6'
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { CiSearch } from 'react-icons/ci'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { GoBell } from "react-icons/go";
+import { gql, useQuery } from "@apollo/client";
 
 const NavSection: React.FC = () => {
-    const { user, isAuthenticated, isLoading } = useKindeAuth();
+    const { user, isAuthenticated } = useKindeAuth();
+    const [userTab, setUserTab] = useState(false)
+
+    const USER = gql`
+    query getUserByEmail($email: String) {
+        getUserByEmail(email: $email) {
+            name
+            profilePic
+        }
+    }`
+
+    const { data, loading } = useQuery<any>(USER, { variables: { email: user?.email } });
 
     const [menu, setMenu] = useState(false)
     const handleMenu = () => setMenu(!menu)
@@ -82,13 +94,40 @@ const NavSection: React.FC = () => {
                         </a>
                     </div>
                     :
-                    <div>
-                        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                        <a href='/api/auth/logout' className='bg-[#1E1F1E] hover:bg-[#2b2b2b] active:bg-[#313131] text-white 
-                    lg:px-[20px] 2xl:px-[20px] rounded-xl akatab py-[8px] font-[500] transition-colors duration-300 flex flex-row items-center'>
-                            Sign Out
-                            <FaArrowRightToBracket className="ml-[10px] mt-[2px]" />
-                        </a>
+                    <div className="flex flex-row items-center gap-x-[20px]">
+                        <button>
+                            <GoBell className='text-3xl' />
+                        </button>
+
+                        <div className="relative akatab text-[#1f1f1f]">
+                            <img src={data?.getUserByEmail?.profilePic} onClick={() => setUserTab(!userTab)}
+                                className="w-[40px] h-[40px] rounded-full border border-gray-400 cursor-pointer" />
+
+                            <div className={`bg-white flex-col items-center p-[25px] w-[220px] absolute top-[60px] right-[50%] 
+                            translate-x-[50%] rounded-2xl shadow-[0px_0px_9px_3px_rgba(0,0,0,0.15)] ${userTab ? 'flex' : 'hidden'}`}>
+                                <img src={data?.getUserByEmail?.profilePic}
+                                className="w-[60px] h-[60px] rounded-full border border-gray-400" />
+
+                                <h4 className="font-[600] mt-[20px] mb-[10px] text-center">{data?.getUserByEmail?.name}</h4>
+
+                                <div className="flex flex-col text-sm w-full items-start">
+                                    <button className="py-[12px] hover:underline">Profile</button>
+
+                                    <ul className="flex flex-col items-start border-y border-gray-200 w-full">
+                                        <button className="py-[12px] hover:underline">Messages</button>
+                                        <button className="py-[12px] hover:underline">Experiences</button>
+                                        <button className="py-[12px] hover:underline">Balance & Payments</button>
+                                        <button className="py-[12px] hover:underline">Wishlist</button>
+                                    </ul>
+
+                                    <ul className="flex flex-col items-start">
+                                        <button className="py-[12px] hover:underline">Settings</button>
+                                        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                                        <a href='/api/auth/logout' className="py-[12px] hover:underline text-[#D20505]">Log out</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>

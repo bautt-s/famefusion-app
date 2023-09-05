@@ -11,7 +11,6 @@ export interface businessInterface {
         categories: string[],
         selfieImg: string | null,
         identityImg: string | null,
-        profilePic: string | null,
         userId: string,
         submited: boolean
     }
@@ -27,7 +26,6 @@ const initialState: businessInterface = {
         categories: [],
         selfieImg: null,
         identityImg: null,
-        profilePic: null,
         userId: '',
         submited: false
     }
