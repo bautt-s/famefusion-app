@@ -1,3 +1,7 @@
+// used for default user profile pic
+export const defaultImg = 
+'https://sites.nicholas.duke.edu/clarklab/files/2011/01/default_profile-d80441a6f25a9a0aac354978c65c8fa9.jpg'
+
 // used for benefits slides on landing page
 export const benefitsSlides = [
     {

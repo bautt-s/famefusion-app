@@ -1,8 +1,8 @@
 import { FaArrowRightLong } from "react-icons/fa6"
 import Link from "next/link"
-import NavSection from "@/components/landing/nav"
 import FooterSection from "@/components/landing/footer"
 import Head from "next/head"
+import NavSection from "@/components/landing/nav"
 
 const Error404 = () => {
     return (

@@ -92,7 +92,7 @@ function Profile() {
     const router = useRouter()
     const { id } = router.query
 
-    const { loading, error, data } = useQuery<celebrityId>(PROFILE, { variables: { id } });
+    const { loading, data } = useQuery<celebrityId>(PROFILE, { variables: { id } });
 
     if (loading) return (
         <div className="flex w-full h-screen justify-center items-center">
@@ -107,6 +107,7 @@ function Profile() {
             </Head>
 
             <NavSection />
+
             <MainView data={data} />
             <HowSection />
 

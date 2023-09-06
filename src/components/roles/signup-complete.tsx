@@ -45,7 +45,7 @@ const SignupCompleted: React.FC<any> = (props) => {
         else return CREATE_BUSINESS
     }
 
-    const [createRole, { data: createdData }] = useMutation(getMutation());
+    const [createRole] = useMutation(getMutation());
 
     const handleCreate = () => {
         const { role } = roleState

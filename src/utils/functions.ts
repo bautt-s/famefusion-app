@@ -71,3 +71,11 @@ export const capitalizeWords = (inputString: string) => {
 
     return words.join(' ');
 }
+
+// used in fan profile basic info section
+export const compareObjects = (obj1: any, obj2: any) => {
+    const stringObj1 = JSON.stringify(obj1)
+    const stringObj2 = JSON.stringify(obj2)
+
+    return stringObj1 === stringObj2
+}

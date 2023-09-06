@@ -1,3 +1,5 @@
+import { useRouter } from "next/router"
+
 type ChooseRoleType = {
     name: string | null,
     roleState: {
@@ -11,9 +13,11 @@ type ChooseRoleType = {
 
 const ChooseRole: React.FC<ChooseRoleType> = (props) => {
     const { name, roleState, setRoleState } = props
+    const router = useRouter()
 
     const handleRole = () => {
         if (roleState.option) setRoleState({ ...roleState, role: roleState.option, mainScreen: false })
+        router.push(`/roles?choosen=${roleState.option}`)
     }
 
     return (

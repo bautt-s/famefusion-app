@@ -1,5 +1,4 @@
 import FooterSection from "@/components/landing/footer"
-import NavSection from "@/components/landing/nav"
 import Spinner from "@/components/spinner"
 import { gql, useQuery } from "@apollo/client"
 import Head from "next/head"
@@ -8,6 +7,7 @@ import BookingHeader from '@/components/booking/header'
 import { BsCheckLg } from "react-icons/bs"
 import { IoMdClose } from "react-icons/io"
 import BookingCollabs from "@/components/booking/more-collabs"
+import NavSection from "@/components/landing/nav"
 
 export interface workInterface {
     getWorkById: {

@@ -1,5 +1,4 @@
 import FooterSection from "@/components/landing/footer";
-import NavSection from "@/components/landing/nav";
 import BusSignup from "@/components/roles/bus-signup";
 import CelSignup from "@/components/roles/cel-signup";
 import FanSignup from "@/components/roles/fan-signup";
@@ -15,6 +14,8 @@ import { modifyFanData } from "@/store/slices/fanSlice";
 import { modifyBusinessData } from "@/store/slices/businessSlice";
 import { modifyCelebrityData } from "@/store/slices/celebritySlice";
 import { useRouter } from "next/router";
+import Spinner from "@/components/spinner";
+import NavSection from "@/components/landing/nav";
 
 const Roles = () => {
     const router = useRouter()
@@ -24,7 +25,7 @@ const Roles = () => {
     const fanData = useSelector((state: RootState) => state.fan.fanData)
     const businessData = useSelector((state: RootState) => state.business.businessData)
     const celebrityData = useSelector((state: RootState) => state.celebrity.celebrityData)
-    
+
     const [userId, setUserId] = useState<string>('')
 
     const [roleState, setRoleState] = useState({
@@ -39,12 +40,15 @@ const Roles = () => {
         getUserByEmail(email: $email) {
             id
             associatedFan {
+                id  
                 name
             }
             associatedBusiness {
+                id
                 name
             }
             associatedCelebrity {
+                id
                 name
             }
         }
@@ -78,21 +82,21 @@ const Roles = () => {
 
     useEffect(() => {
         if (fanData?.userId?.length === 0 && user) dispatch(modifyFanData({
-            ...fanData, 
+            ...fanData,
             userId,
             name: user.name || '',
             email: user.email || '',
         }))
 
         if (businessData?.userId?.length === 0 && user) dispatch(modifyBusinessData({
-            ...businessData, 
+            ...businessData,
             userId,
             name: user.name || '',
             email: user.email || '',
         }))
 
         if (celebrityData?.userId?.length === 0 && user) dispatch(modifyCelebrityData({
-            ...celebrityData, 
+            ...celebrityData,
             userId,
             name: user.name || '',
             email: user.email || '',
@@ -101,13 +105,20 @@ const Roles = () => {
 
     useEffect(() => {
         if (!loadingUser && dataUser?.getUserByEmail === null) createUser()
-        
-        if (dataUser?.associatedFan || dataUser?.associatedBusiness || dataUser?.associatedCelebrity)
-        router.push('/')
 
-        console.log(dataUser)
+        if (dataUser?.getUserByEmail?.associatedFan ||
+            dataUser?.getUserByEmail?.associatedBusiness ||
+            dataUser?.getUserByEmail?.associatedCelebrity) {
+            if (!router.query.choosen) router.push('/')
+        }
     }, [loadingUser])
-    
+
+    if (!dataUser?.getUserByEmail) return (
+        <div className="flex w-full h-screen justify-center items-center">
+            <Spinner />
+        </div>
+    )
+
     return (
         <div className="min-h-screen flex flex-col">
             <Head>
