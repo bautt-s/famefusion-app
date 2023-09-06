@@ -48,7 +48,7 @@ const FanProfile: React.FC = () => {
     const router = useRouter()
     const { id } = router.query
 
-    const { loading, data } = useQuery<any>(PROFILE, { variables: { id } });
+    const { loading, data, refetch } = useQuery<any>(PROFILE, { variables: { id } });
 
     const [selectedSection, setSelectedSection] = useState(sections[0])
     const [selectedPart, setSelectedPart] = useState(parts[0])
@@ -65,7 +65,7 @@ const FanProfile: React.FC = () => {
             <Spinner />
         </div>
     )
-
+        console.log(data?.getFanById)
     return (
         <div>
             <NavSection />
@@ -108,7 +108,8 @@ const FanProfile: React.FC = () => {
                     </ul>
 
                     <div className="w-full h-[500px]">
-                        <BasicInfo data={data} updateFan={updateFan} updateUser={updateUser} />
+                        <BasicInfo data={data} updateFan={updateFan} 
+                        updateUser={updateUser} refetch={refetch} />
                     </div>
                 </div>
             </div>

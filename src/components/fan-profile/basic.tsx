@@ -6,9 +6,9 @@ import { compareObjects } from "@/utils/functions"
 import { defaultImg } from "@/utils/hardcode"
 
 const BasicInfo: React.FC<any> = (props) => {
-    const { data, updateFan, updateUser } = props
+    const { data, updateFan, updateUser, refetch } = props
 
-    const defaultValues = {
+    const [defaultValues, setDefaultValues] = useState({
         name: data?.getFanById?.name,
         email: data?.getFanById?.email,
         location: data?.getFanById?.location,
@@ -17,7 +17,7 @@ const BasicInfo: React.FC<any> = (props) => {
             startDate: data?.getFanById?.birthYear,
             endDate: data?.getFanById?.birthYear
         }
-    }
+    })
 
     const [basicInfo, setBasicInfo] = useState(defaultValues)
     const [profilePic, setProfilePic] = useState([])
@@ -31,7 +31,7 @@ const BasicInfo: React.FC<any> = (props) => {
         setBasicInfo({ ...basicInfo, profilePic: defaultImg })
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
         updateFan({
@@ -58,6 +58,9 @@ const BasicInfo: React.FC<any> = (props) => {
                 }
             })
         }
+
+        await refetch()
+        setDefaultValues(basicInfo)
     }
 
     const handleCancel = () => {
@@ -82,10 +85,11 @@ const BasicInfo: React.FC<any> = (props) => {
                         {({
                             imageList,
                             onImageUpload,
+                            onImageUpdate
                         }) => (
                             <button className="flex flex-row items-center gap-x-[15px] border border-black duration-300
                             rounded-xl py-[7px] pl-[20px] pr-[30px] justify-center mt-[20px] hover:bg-gray-100 transition-all"
-                                onClick={onImageUpload}>
+                            onClick={!imageList[0] ? onImageUpload : () => onImageUpdate(0)}>
                                 <LuUpload className="text-xl" />
                                 <span className="font-[500]">Upload</span>
                             </button>
@@ -112,7 +116,7 @@ const BasicInfo: React.FC<any> = (props) => {
                             <span className="text-[#1f1f1f] font-[600]">Date of Birth
                                 <strong className="text-[#FB5870] ml-1">*</strong></span>
 
-                            <div className='border-[1px] border-[#a1a1a1] rounded-lg bg-none'>
+                            <div className='border-[1px] border-[#a1a1a1] rounded-lg bg-gray-100 text-gray-500'>
                                 <Datepicker
                                     primaryColor={"rose"}
                                     placeholder='Your birthdate'
@@ -121,6 +125,7 @@ const BasicInfo: React.FC<any> = (props) => {
                                     value={basicInfo.birthYear}
                                     onChange={(newValue: any) => setBasicInfo({ ...basicInfo, birthYear: newValue })}
                                     popoverDirection='down'
+                                    disabled
                                 />
                             </div>
                         </div>
