@@ -14,7 +14,7 @@ const ProofButton: React.FC<any> = (props) => {
             multiple
             value={identity ? data.identity : data.address}
             onChange={onChange}
-            maxNumber={5}
+            maxNumber={1}
         >
             {({
                 imageList,

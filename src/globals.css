@@ -298,7 +298,7 @@ body {
 
 /* Handle on hover */
 .thin-scroll::-webkit-scrollbar-thumb:hover {
-    background: #1d97e2;
+    background: #FB5870;
 }
 
 .radio-collab {

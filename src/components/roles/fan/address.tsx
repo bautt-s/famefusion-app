@@ -7,7 +7,7 @@ const FanAddress: React.FC<any> = (props) => {
     const [countries, setCountries] = useState<any>([]);
 
     const [selectedCountry, setSelectedCountry] =
-        useState<{ value: string, label: string }>({ value: '', label: '' });
+    useState<{ value: string, label: string }>({ value: '', label: '' });
 
     useEffect(() => {
         fetch(

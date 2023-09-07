@@ -79,3 +79,29 @@ export const compareObjects = (obj1: any, obj2: any) => {
 
     return stringObj1 === stringObj2
 }
+
+// used to edit fan profile interests
+export const arraysEqual = (arr1: string[], arr2: string[]): boolean => {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    const set1 = new Set(arr1);
+    const set2 = new Set(arr2);
+
+    // Convert sets to arrays before iterating
+    const array1 = Array.from(set1);
+    const array2 = Array.from(set2);
+
+    for (const item of array1) {
+        if (!array2.includes(item)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+
+

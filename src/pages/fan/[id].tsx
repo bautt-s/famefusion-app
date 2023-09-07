@@ -1,4 +1,6 @@
 import BasicInfo from "@/components/fan-profile/basic"
+import InterestsInfo from "@/components/fan-profile/interests"
+import VerificationInfo from "@/components/fan-profile/verification"
 import FooterSection from "@/components/landing/footer"
 import NavSection from "@/components/landing/nav"
 import Spinner from "@/components/spinner"
@@ -23,6 +25,10 @@ query getFanById($id: String) {
         interests
         identityVerified
         locationVerified
+        locationImg
+        identityImg
+        selfieImg
+        selfieVerified
         userId
         user {
             profilePic
@@ -65,7 +71,7 @@ const FanProfile: React.FC = () => {
             <Spinner />
         </div>
     )
-        console.log(data?.getFanById)
+
     return (
         <div>
             <NavSection />
@@ -107,9 +113,13 @@ const FanProfile: React.FC = () => {
                         )}
                     </ul>
 
-                    <div className="w-full h-[500px]">
+                    <div className="w-full">
                         <BasicInfo data={data} updateFan={updateFan} 
                         updateUser={updateUser} refetch={refetch} />
+
+                        <InterestsInfo data={data} updateFan={updateFan} refetch={refetch} />
+
+                        <VerificationInfo data={data} updateFan={updateFan} />
                     </div>
                 </div>
             </div>

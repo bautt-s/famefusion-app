@@ -19,8 +19,8 @@ const NavSignedIn: React.FC<any> = (props) => {
 
                 <div className={`bg-white flex-col items-center p-[25px] w-[220px] absolute top-[60px] right-[50%] 
                 translate-x-[50%] rounded-2xl shadow-[0px_0px_9px_3px_rgba(0,0,0,0.15)] ${userTab ? 'flex' : 'hidden'}`}>
-                    <img src={loading ? data?.getUserByEmail?.profilePic : defaultImg}
-                    className="w-[60px] h-[60px] rounded-full border border-gray-400" />
+                    <img src={!loading ? data?.getUserByEmail?.profilePic : defaultImg}
+                    className="w-[60px] h-[60px] rounded-full border border-gray-400 object-cover" />
 
                     <h4 className="font-[600] mt-[20px] mb-[10px] text-center">{data?.getUserByEmail?.name}</h4>
 
