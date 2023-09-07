@@ -32,10 +32,6 @@ const AddressInfo: React.FC<any> = (props) => {
         setVerifiedImages({ ...verifiedImages, address: tempImages.address })
     }
 
-    const handleCancel = () => {
-        tempImages.address = []
-    }
-
     const onChange = (imageList: ImageListType) => {
         setTempImages({ ...tempImages, address: imageList as never[] });
     }

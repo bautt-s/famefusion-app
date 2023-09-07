@@ -74,6 +74,10 @@ const FanProfile: React.FC = () => {
 
     return (
         <div>
+            <Head>
+                <title>FameFusion | {data?.getFanById?.name}</title>
+            </Head>
+
             <NavSection />
 
             <div className="pt-[160px] akatab">

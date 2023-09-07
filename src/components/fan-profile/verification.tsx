@@ -1,19 +1,22 @@
 import { IoMdClose } from "react-icons/io";
 import { BsCheckLg } from "react-icons/bs";
 import { useState } from "react";
-import AddressInfo from "./adressModal";
+import AddressInfo from "../modals/adressModal";
+import IdentityInfo from "../modals/identityModal";
 
 const VerificationInfo: React.FC<any> = (props) => {
     const { data, updateFan } = props
 
     const [verifiedImages, setVerifiedImages] = useState({
         identity: [],
-        address: []
+        address: [],
+        selfie: []
     })
 
     const [tempImages, setTempImages] = useState({
         identity: [],
-        address: []
+        address: [],
+        selfie: []
     })
 
     const [openModals, setOpenModals] = useState({
@@ -51,8 +54,9 @@ const VerificationInfo: React.FC<any> = (props) => {
                         {data?.getFanById?.identityVerified ? 'Identity verified' : 'Not provided'}
                     </span>
 
-                    {!data?.getFanById?.locationVerified && 
-                    <button className="w-fit underline underline-offset-4 mt-3">Add</button>}
+                    {((!(data?.getFanById?.identityImg && data?.getFanById?.selfieImg)) || (!(verifiedImages.selfie.length && verifiedImages.identity.length))) && 
+                    <button onClick={() => setOpenModals({ ...openModals, identity: true })} 
+                    className="w-fit underline underline-offset-4 mt-3">Add</button>}
                 </div>
 
                 <div className="flex flex-col gap-y-1">
@@ -68,10 +72,11 @@ const VerificationInfo: React.FC<any> = (props) => {
                         {handleAddress()}
                     </span>
 
+                    {!data?.getFanById?.locationImg || !verifiedImages.address && 
                     <button onClick={() => setOpenModals({ ...openModals, address: true })} 
                     className="w-fit underline underline-offset-4 mt-3">
                         Add
-                    </button>
+                    </button>}
                 </div>
 
                 <div className="flex flex-col gap-y-1">
@@ -88,6 +93,10 @@ const VerificationInfo: React.FC<any> = (props) => {
             </div>
 
             {openModals.address && <AddressInfo open={setOpenModals} verifiedImages={verifiedImages}
+            setVerifiedImages={setVerifiedImages} updateFan={updateFan} tempImages={tempImages}
+            setTempImages={setTempImages} id={data?.getFanById?.id} />}
+
+            {openModals.identity && <IdentityInfo open={setOpenModals} verifiedImages={verifiedImages}
             setVerifiedImages={setVerifiedImages} updateFan={updateFan} tempImages={tempImages}
             setTempImages={setTempImages} id={data?.getFanById?.id} />}
         </div>
