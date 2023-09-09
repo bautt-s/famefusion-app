@@ -24,13 +24,14 @@ const IdentityInfo: React.FC<any> = (props) => {
             variables: {
                 fan: {
                     id,
-                    locationImg: tempImages.address[0].dataURL
+                    selfieImg: tempImages.selfie[0].dataURL,
+                    identityImg: tempImages.identity[0].dataURL
                 }
             }
 
         })
 
-        setVerifiedImages({ ...verifiedImages, address: tempImages.address })
+        setVerifiedImages({ ...verifiedImages, selfie: tempImages.selfie, identity: tempImages.identity })
     }
 
     const onChangeIdentity = (imageList: ImageListType) => {
@@ -39,6 +40,10 @@ const IdentityInfo: React.FC<any> = (props) => {
 
     const onChangeSelfie = (imageList: ImageListType) => {
         setTempImages({ ...tempImages, selfie: imageList as never[] });
+    }
+
+    const handleCancel = () => {
+        setTempImages({ ...verifiedImages, selfie: [], identity: [] })
     }
 
     useEffect(() => {
@@ -111,8 +116,8 @@ const IdentityInfo: React.FC<any> = (props) => {
                                         Choose or drop a file
                                     </button>
 
-                                    {imageList[0] && <span className="mt-4 text-sm text-[#646868]">
-                                        {imageList[0].file?.name}
+                                    {tempImages.identity[0] && <span className="mt-4 text-sm text-[#646868]">
+                                        {tempImages.identity[0].file?.name}
                                     </span>}
                                 </div>
                             )}
@@ -148,7 +153,9 @@ const IdentityInfo: React.FC<any> = (props) => {
                                         Take a photo
                                     </button>
 
-                                    {imageList[0] && <span className="mt-4 text-sm text-[#646868]">{imageList[0].file?.name}</span>}
+                                    {tempImages.selfie[0] && <span className="mt-4 text-sm text-[#646868]">
+                                        {tempImages.selfie[0].file?.name}
+                                    </span>}
                                 </div>
                             )}
                         </ImageUploading>
@@ -165,8 +172,8 @@ const IdentityInfo: React.FC<any> = (props) => {
                             Save Changes
                         </button>
 
-                        {(tempImages.address[0] && tempImages.selfie[0]) &&
-                            <button className="text-[#D14157] underline" onClick={() => null}>
+                        {(tempImages.identity[0] || tempImages.selfie[0]) &&
+                            <button className="text-[#D14157] underline" onClick={handleCancel}>
                                 Cancel
                             </button>}
                     </div>

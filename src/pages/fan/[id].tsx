@@ -1,5 +1,6 @@
 import BasicInfo from "@/components/fan-profile/basic"
 import InterestsInfo from "@/components/fan-profile/interests"
+import SocialInfo from "@/components/fan-profile/social-links"
 import VerificationInfo from "@/components/fan-profile/verification"
 import FooterSection from "@/components/landing/footer"
 import NavSection from "@/components/landing/nav"
@@ -80,7 +81,7 @@ const FanProfile: React.FC = () => {
 
             <NavSection />
 
-            <div className="pt-[160px] akatab">
+            <div className="pt-[160px] pb-[80px] akatab">
                 <div className="flex flex-col justify-center w-full bg-[#F7F8FC] h-[240px] sm:h-[120px] xl:h-[100px] relative 
                 px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] mb-[80px]">
                     <ul className="flex flex-row flex-wrap gap-[20px] 2xl:gap-[25px] w-full sm:w-auto lg:w-[700px] xl:w-auto">
@@ -124,6 +125,8 @@ const FanProfile: React.FC = () => {
                         <InterestsInfo data={data} updateFan={updateFan} refetch={refetch} />
 
                         <VerificationInfo data={data} updateFan={updateFan} />
+
+                        <SocialInfo />
                     </div>
                 </div>
             </div>

@@ -36,6 +36,27 @@ const VerificationInfo: React.FC<any> = (props) => {
         return res
     }
 
+    const handleIdentity = () => {
+        let res = 'Not provided'
+
+        if ((!data?.getFanById.selfieImg && data?.getFanById.identityImg) || 
+        (!verifiedImages.selfie[0] && verifiedImages.identity[0]))
+        res = 'Missing selfie verification'
+
+        if ((data?.getFanById.selfieImg && !data?.getFanById.identityImg) || 
+        (verifiedImages.selfie[0] && !verifiedImages.identity[0]))
+        res = 'Missing document verification'
+
+        if ((!data?.getFanById.selfieImg && !data?.getFanById.identityImg) || 
+        (verifiedImages.selfie[0] && verifiedImages.identity[0]))
+        res = 'Waiting for verification'
+
+        if (data?.getFanById?.selfieVerified && data?.getFanById?.identityVerified) 
+        res = 'Identity verified'
+
+        return res
+    }
+
     return (
         <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]">
             <h1 className="text-2xl font-[600]">Verification</h1>
@@ -51,7 +72,7 @@ const VerificationInfo: React.FC<any> = (props) => {
                     </div>
 
                     <span className="text-[#646868] text-sm">
-                        {data?.getFanById?.identityVerified ? 'Identity verified' : 'Not provided'}
+                        {handleIdentity()}
                     </span>
 
                     {((!(data?.getFanById?.identityImg && data?.getFanById?.selfieImg)) || (!(verifiedImages.selfie.length && verifiedImages.identity.length))) && 
@@ -72,7 +93,7 @@ const VerificationInfo: React.FC<any> = (props) => {
                         {handleAddress()}
                     </span>
 
-                    {!data?.getFanById?.locationImg || !verifiedImages.address && 
+                    {((!data?.getFanById?.locationImg) || (!verifiedImages.address)) && 
                     <button onClick={() => setOpenModals({ ...openModals, address: true })} 
                     className="w-fit underline underline-offset-4 mt-3">
                         Add
