@@ -1,8 +1,8 @@
 import { IoMdClose } from "react-icons/io";
 import { BsCheckLg } from "react-icons/bs";
 import { useState } from "react";
-import AddressInfo from "../modals/adressModal";
-import IdentityInfo from "../modals/identityModal";
+import AddressInfo from "../../modals/adressModal";
+import IdentityInfo from "../../modals/identityModal";
 
 const VerificationInfo: React.FC<any> = (props) => {
     const { data, updateFan } = props
@@ -58,7 +58,7 @@ const VerificationInfo: React.FC<any> = (props) => {
     }
 
     return (
-        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]">
+        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]" id='verification'>
             <h1 className="text-2xl font-[600]">Verification</h1>
 
             <div className="grid grid-cols-3 gap-x-[] mt-[35px]">

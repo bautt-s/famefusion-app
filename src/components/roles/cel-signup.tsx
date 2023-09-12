@@ -205,6 +205,12 @@ const CelSignup: React.FC<any> = (props) => {
                 media: userData.images.map((i: { dataURL: string, file: any }) => i.dataURL),
                 languages: userData.languages,
                 associatedBrands: userData.products,
+                websiteLink: userData.social.website.length > 0 ? userData.social.website : undefined,
+                instagramLink: userData.social.instagram.length > 0 ? userData.social.instagram : undefined,
+                facebookLink: userData.social.facebook.length > 0 ? userData.social.facebook : undefined,
+                tiktokLink: userData.social.tiktok.length > 0 ? userData.social.tiktok : undefined,
+                youtubeLink: userData.social.youtube.length > 0 ? userData.social.youtube : undefined,
+                twitterLink: userData.social.twitter.length > 0 ? userData.social.twitter : undefined,
                 selfieImg: userData.selfie.length > 0 ? userData.selfie.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
                 identityImg: userData.identity.length > 0 ? userData.identity.map((i: { dataURL: string, file: any }) => i.dataURL)[0] : null,
             }

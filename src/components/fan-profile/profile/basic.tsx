@@ -68,7 +68,7 @@ const BasicInfo: React.FC<any> = (props) => {
     }
 
     return (
-        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl">
+        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='basic'>
             <h1 className="text-2xl font-[600]">Basic Information</h1>
 
             <div className="flex flex-row mt-[25px] gap-x-[60px]">

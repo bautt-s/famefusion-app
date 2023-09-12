@@ -47,7 +47,7 @@ const NavSection: React.FC = () => {
         xl:px-[120px] 2xl:px-[200px] flex flex-row items-center h-[90px] py-[25px] ${prevScrollPos ? 'border-gray-300' : 'border-white'}`}>
             <div className='flex flex-row items-center'>
                 <Link href='/'>
-                    <img src='/logo.png' className='lg:w-[140px] lg:h-auto xl:w-[170px] xl:h-[25px]' alt={'FameFusion Logo'} />
+                    <img src='/LOGO_FAMEFUSION.png' className='w-[150px] h-auto relative top-2' alt={'FameFusion Logo'} />
                 </Link>
 
                 <ul className="hidden lg:flex flex-row lg:text-sm xl:text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 

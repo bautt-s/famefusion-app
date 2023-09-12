@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { GoPencil } from "react-icons/go"
-import FanInterests from "../modals/fan-interests"
+import FanInterests from "../../modals/fan-interests"
 import { capitalizeWords } from "@/utils/functions"
 
 const InterestsInfo: React.FC<any> = (props) => {
@@ -14,7 +14,7 @@ const InterestsInfo: React.FC<any> = (props) => {
     })
 
     return (
-        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]">
+        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]" id='interests'>
             <h1 className="text-2xl font-[600] mb-[25px]">Interests</h1>
 
             <span>Find common ground with celebrities by adding interests to your profile.</span>

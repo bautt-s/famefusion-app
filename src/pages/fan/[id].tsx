@@ -1,7 +1,4 @@
-import BasicInfo from "@/components/fan-profile/basic"
-import InterestsInfo from "@/components/fan-profile/interests"
-import SocialInfo from "@/components/fan-profile/social-links"
-import VerificationInfo from "@/components/fan-profile/verification"
+import ProfileFanSection from "@/components/fan-profile/profile"
 import FooterSection from "@/components/landing/footer"
 import NavSection from "@/components/landing/nav"
 import Spinner from "@/components/spinner"
@@ -12,8 +9,6 @@ import { useState } from "react"
 
 const sections = ['Profile', 'Messages', 'Experiences',
     'Balance & Payments', 'Wishlist', 'Settings']
-
-const parts = ['Basic Information', 'Interests', 'Verification', 'Social Media']
 
 const PROFILE = gql`
 query getFanById($id: String) {
@@ -31,6 +26,12 @@ query getFanById($id: String) {
         selfieImg
         selfieVerified
         userId
+        websiteLink
+        instagramLink
+        facebookLink
+        youtubeLink
+        tiktokLink
+        twitterLink
         user {
             profilePic
         }
@@ -58,7 +59,6 @@ const FanProfile: React.FC = () => {
     const { loading, data, refetch } = useQuery<any>(PROFILE, { variables: { id } });
 
     const [selectedSection, setSelectedSection] = useState(sections[0])
-    const [selectedPart, setSelectedPart] = useState(parts[0])
 
     const [updateFan] = useMutation(UPDATE_FAN);
     const [updateUser] = useMutation(UPDATE_USER);
@@ -109,26 +109,9 @@ const FanProfile: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-row px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] gap-x-[25px]">
-                    <ul className="shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl w-[300px] py-[15px] h-fit">
-                        {parts.map((item, index) => 
-                            <li onClick={() => setSelectedPart(item)} key={index} className={`pl-[25px] py-[10px]
-                            ${selectedPart === item ? 'text-[#FB5870] font-[600] border-[#FB5870]' : 'border-white'} 
-                            border-l-[2px]  cursor-pointer`}>{item}</li>
-                        )}
-                    </ul>
-
-                    <div className="w-full">
-                        <BasicInfo data={data} updateFan={updateFan} 
-                        updateUser={updateUser} refetch={refetch} />
-
-                        <InterestsInfo data={data} updateFan={updateFan} refetch={refetch} />
-
-                        <VerificationInfo data={data} updateFan={updateFan} />
-
-                        <SocialInfo />
-                    </div>
-                </div>
+                {selectedSection === 'Profile' &&
+                <ProfileFanSection data={data} updateFan={updateFan}
+                updateUser={updateUser} refetch={refetch} />}
             </div>
 
             <FooterSection />

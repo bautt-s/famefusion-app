@@ -99,7 +99,8 @@ const SignupCompleted: React.FC<any> = (props) => {
         else if (role === 'celebrity') {
             const { name, email, location, interests, nickname, biography,
             userId, selfieImg, locationImg, identityImg, birthYear, associatedBrands,
-            gender, description, media, categories, languages, } = submitCelebrityData
+            gender, description, media, categories, languages, websiteLink,
+            instagramLink, tiktokLink, facebookLink, youtubeLink, twitterLink } = submitCelebrityData
 
             dispatch(modifyCelebrityData({ ...submitCelebrityData, submited: true }))
 
@@ -122,7 +123,13 @@ const SignupCompleted: React.FC<any> = (props) => {
                         userId,
                         selfieImg,
                         locationImg,
-                        identityImg
+                        identityImg,
+                        websiteLink,
+                        instagramLink,
+                        twitterLink,
+                        facebookLink,
+                        youtubeLink,
+                        tiktokLink,
                     }
                 }
             })

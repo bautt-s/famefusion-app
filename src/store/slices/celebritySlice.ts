@@ -20,6 +20,12 @@ export interface celebrityInterface {
         locationImg: string | null,
         identityImg: string | null,
         userId: string,
+        websiteLink: string | undefined,
+        instagramLink: string | undefined,
+        tiktokLink: string | undefined,
+        facebookLink: string | undefined,
+        youtubeLink: string | undefined,
+        twitterLink: string | undefined,
         submited: boolean
     }
 }
@@ -43,6 +49,12 @@ const initialState: celebrityInterface = {
         locationImg: null,
         identityImg: null,
         userId: '',
+        websiteLink: undefined,
+        instagramLink: undefined,
+        tiktokLink: undefined,
+        facebookLink: undefined,
+        youtubeLink: undefined,
+        twitterLink: undefined,
         submited: false
     }
 }
