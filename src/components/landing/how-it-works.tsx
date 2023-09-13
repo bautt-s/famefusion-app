@@ -1,6 +1,6 @@
 import GlassIcon from "@/svgs/Glass"
-import CheckIcon from "@/svgs/Check"
 import FlameIcon from "@/svgs/Flame"
+import { PiCheckFatLight } from "react-icons/pi"
 
 const how = [
     {
@@ -9,7 +9,6 @@ const how = [
         description: 'Browse our diverse database of celebrities and choose who you want to meet.'
     },
     {
-        icon: <CheckIcon className='border-[1px] border-black p-[25px] rounded-full w-fit' />,
         title: 'Submit Your Request',
         description: 'Share the purpose and preferences of your meeting through our platform.'
     },
@@ -42,8 +41,8 @@ const HowSection: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col items-center text-center pt-[35px] pb-[30px] w-full bg-[#FCF6F6] rounded-tl-[50px] rounded-br-[50px] z-40 group">
-                    <div className="group-hover:scale-105 transition-all duration-300">
-                        {how[1].icon}
+                    <div className="border-[1px] border-black p-[25px] rounded-full group-hover:scale-105 transition-all duration-300">
+                        <PiCheckFatLight className='text-3xl' />
                     </div>
 
                     <h4 className="text-xl xl:text-2xl font-[600] mt-[25px]">{how[1].title}</h4>
