@@ -7,21 +7,70 @@ import ExperiencesPanel from "./experiences";
 import AboutPanel from "./about";
 import ProfileSidebar from "./side-bar";
 import Link from "next/link";
+import { gql, useMutation } from "@apollo/client";
+import { useDispatch, useSelector } from "react-redux";
+import { mutateLike } from "@/store/slices/likesSlice";
+import { RootState } from "@/store/store";
+
+const ADD_LIKE = gql`
+    mutation addToWishlist($ids: WishlistInput) {
+        addToWishlist(ids: $ids) {
+            id
+        }
+    }`
+
+const REMOVE_LIKE = gql`
+    mutation removeFromWishlist($ids: WishlistInput) {
+        removeFromWishlist(ids: $ids) {
+            id
+        }
+    }`
 
 type WorkListType = celebrityId['getCelebrityById']['workList'];
 
-const MainView: React.FC<{data: celebrityId | undefined}> = (props) => {
-    const { data } = props
+const MainView: React.FC<any> = (props) => {
+    const { data, id } = props
+    const dispatch = useDispatch()
+    const fanID = useSelector((state: RootState) => state.fan.id)
+
     const sectionsList = ['About', 'Experiences', 'Business Opportunities', 'Availability', 'Reviews']
 
     const [section, setSection] = useState(sectionsList[0])
     const [collaborations, setCollaborations] = useState<WorkListType>([])
     const [experiences, setExperiences] = useState<WorkListType>([])
 
+    const [isLiked, setLiked] = useState(false)
+
+    const [addLike] = useMutation(ADD_LIKE);
+    const [removeLike] = useMutation(REMOVE_LIKE);
+
+    const handleLike = () => {
+        setLiked(!isLiked)
+
+        if (!isLiked) addLike({
+            variables: {
+                ids: {
+                    id: fanID,
+                    celId: id
+                }
+            }
+        })
+        else removeLike({
+            variables: {
+                ids: {
+                    id: fanID,
+                    celId: id
+                }
+            }
+        })
+
+        dispatch(mutateLike(data?.getCelebrityById))
+    }
+
     useEffect(() => {
         if (data) {
-            setCollaborations(data?.getCelebrityById?.workList.filter(w => w.collaboration))
-            setExperiences(data?.getCelebrityById?.workList.filter(w => !w.collaboration))
+            setCollaborations(data?.getCelebrityById?.workList.filter((w: any) => w.collaboration))
+            setExperiences(data?.getCelebrityById?.workList.filter((w: any) => !w.collaboration))
         }
     }, [data])
 
@@ -55,7 +104,7 @@ const MainView: React.FC<{data: celebrityId | undefined}> = (props) => {
 
             <div className="flex flex-row w-full mt-[45px]">
                 <ProfileSidebar name={data?.getCelebrityById?.name} description={data?.getCelebrityById?.description} rating={data?.getCelebrityById?.rating} 
-                profilePic={data?.getCelebrityById?.profilePic} age={data?.getCelebrityById?.age} gender={data?.getCelebrityById?.gender} 
+                profilePic={data?.getCelebrityById?.associatedUser?.profilePic} birthYear={data?.getCelebrityById?.birthYear} gender={data?.getCelebrityById?.gender} 
                 languages={data?.getCelebrityById?.languages} location={data?.getCelebrityById?.location} workList={data?.getCelebrityById?.workList} />
 
                 <div className="flex flex-col ml-[35px] grow">
@@ -71,7 +120,7 @@ const MainView: React.FC<{data: celebrityId | undefined}> = (props) => {
 
                     {section === 'About' &&
                         <AboutPanel name={data?.getCelebrityById?.name} media={data?.getCelebrityById?.media} associatedBrands={data?.getCelebrityById?.associatedBrands}
-                            biography={data?.getCelebrityById?.biography} interests={data?.getCelebrityById?.interests} video={data?.getCelebrityById?.video} />}
+                            biography={data?.getCelebrityById?.biography} interests={data?.getCelebrityById?.interests} handleLike={handleLike} isLiked={isLiked} />}
 
                     {section === 'Experiences' &&
                         <ExperiencesPanel experiences={experiences} />}

@@ -102,6 +102,26 @@ export const arraysEqual = (arr1: string[], arr2: string[]): boolean => {
     return true;
 }
 
+// used to calculate age based on a date
+export function calculateAge(birthDate: Date) {
+    const today = new Date();
+    const birthYear = birthDate.getFullYear();
+    const birthMonth = birthDate.getMonth();
+    const birthDay = birthDate.getDate();
 
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const currentDay = today.getDate();
 
+    let age = currentYear - birthYear;
 
+    // Check if the birthday for this year has occurred
+    if (
+        currentMonth < birthMonth ||
+        (currentMonth === birthMonth && currentDay < birthDay)
+    ) {
+        age--;
+    }
+
+    return age;
+}

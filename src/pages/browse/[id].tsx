@@ -14,15 +14,13 @@ export type celebrityId = {
         biography: string
         description: string
         rating: number
-        profilePic: string
         languages: string[]
-        age: number
+        birthYear: string
         gender: string
         location: string
         media: string[]
         associatedBrands: string[]
         interests: string[]
-        video: string
 
         workList: {
             title: string
@@ -43,6 +41,10 @@ export type celebrityId = {
                 name: string
             }
         }[]
+
+        associatedUser: {
+            profilePic: string
+        }
     }
 }
 
@@ -55,15 +57,13 @@ function Profile() {
             biography,
             description,
             rating,
-            profilePic,
             languages,
-            age,
             gender,
             location,
             media,
             associatedBrands,
             interests,
-            video
+            birthYear,
 
             workList {
                 id
@@ -85,6 +85,10 @@ function Profile() {
                 author {
                     name
                 }
+            }
+
+            associatedUser {
+                profilePic
             }
         }
     }`
@@ -108,7 +112,7 @@ function Profile() {
 
             <NavSection />
 
-            <MainView data={data} />
+            <MainView data={data} id={id} />
             <HowSection />
 
             <div className="mt-[-25px]">

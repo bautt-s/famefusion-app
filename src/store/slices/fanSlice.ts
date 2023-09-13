@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface fanInterface {
+    id: string | string[] | undefined,
     fanData: {
         name: string,
         email: string,
@@ -17,6 +18,7 @@ export interface fanInterface {
 }
 
 const initialState: fanInterface = {
+    id: '',
     fanData: {
         name: '',
         email: '',
@@ -37,10 +39,14 @@ export const fanSlice = createSlice({
     reducers: {
         modifyFanData: (state, action: PayloadAction<fanInterface['fanData']>) => {
             state.fanData = action.payload
-        }
+        },
+
+        modifyId: (state, action: PayloadAction<string | string[] | undefined>) => {
+            state.id = action.payload
+        }, 
     },
 })
 
-export const { modifyFanData } = fanSlice.actions
+export const { modifyFanData, modifyId } = fanSlice.actions
 
 export default fanSlice.reducer

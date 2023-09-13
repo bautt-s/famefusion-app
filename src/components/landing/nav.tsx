@@ -7,8 +7,12 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { gql, useQuery } from "@apollo/client";
 import NavSignedIn from "./nav-signed-in";
+import { useDispatch } from "react-redux";
+import { modifyId } from "@/store/slices/fanSlice";
+import { addArray } from "@/store/slices/likesSlice";
 
 const NavSection: React.FC = () => {
+    const dispatch = useDispatch()
     const { user, isAuthenticated } = useKindeAuth();
 
     const USER = gql`
@@ -19,6 +23,19 @@ const NavSection: React.FC = () => {
             profilePic
             associatedFan {
                 id
+                savedCelebrities {
+                    id,
+                    name,
+                    description,
+                    rating,
+                    associatedUser {
+                        profilePic
+                    }
+                    workList {
+                        price
+                    }
+                    savedIDs
+                }
             }
         }
     }`
@@ -35,6 +52,13 @@ const NavSection: React.FC = () => {
         const currentScrollPos = window.scrollY
         setPrevScrollPos(currentScrollPos)
     }
+
+    useEffect(() => {
+        if (data) {
+            dispatch(modifyId(data?.getUserByEmail?.associatedFan?.id))
+            dispatch(addArray(data?.getUserByEmail?.associatedFan?.savedCelebrities))
+        }
+    }, [loading])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);

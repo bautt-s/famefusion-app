@@ -1,13 +1,12 @@
-import { GoChevronLeft, GoChevronRight, GoHeartFill } from 'react-icons/go'
-import { BsStarFill } from 'react-icons/bs'
+import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { useQuery, gql } from "@apollo/client";
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import FeaturedCard from './featured-card';
 
 type FeaturedProps = { title: string }
 
 export type StarType = {
-    id: number,
+    id: string,
     name: string,
     description: string,
     rating: number,
@@ -22,7 +21,6 @@ export type StarType = {
 const loadingArray = new Array(5).fill('loading')
 
 const FeaturedSection: React.FC<FeaturedProps> = (props) => {
-
     const { title } = props
 
     const FEATURED = gql`
@@ -38,6 +36,7 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
             workList {
                 price
             }
+            savedIDs
         }
     }`
 
@@ -99,7 +98,7 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
                 <div className='grid grid-cols-2 gap-y-[80px] lg:flex flex-row mt-[45px] gap-[25px] lg:h-[600px] w-full'>
                     {loadingArray.slice(0, limit).map((item, index) => 
                         <div key={index} className='w-full'>
-                            <div className='w-full h-[200px] bg-gray-500 animate-pulse rounded-lg'></div>
+                            <div className='w-full h-[200px] bg-gray-500 animate-pulse rounded-2xl'></div>
                             <div className='w-[150px] h-[15px] bg-gray-500 animate-pulse mt-[15px] rounded-full'></div>
                             <div className='w-full h-[10px] bg-gray-500 animate-pulse mt-[15px] rounded-full'></div>
                             <div className='w-full h-[10px] bg-gray-500 animate-pulse mt-[5px] rounded-full'></div>
@@ -112,32 +111,7 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
             {(!loading && !error) &&
                 <div className='grid grid-cols-2 gap-y-[80px] lg:flex flex-row mt-[45px] gap-[25px] lg:h-[600px]'>
                     {featured?.map((c: StarType, index: number) =>
-                        <div key={index} className='akatab relative w-full group'>
-                            <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
-                        hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300 z-50' />
-
-                            <Link href={`/browse/${c.id}`}>
-                                <img src={c.associatedUser.profilePic} className='w-full object-cover rounded-2xl 
-                                featured-img group-hover:scale-105 transition-all duration-300 select-none' alt={c.name} />
-
-                                <div className='flex flex-col sm:flex-row sm:items-end 2xl:items-center mt-[15px]'>
-                                    <h4 className='text-2xl font-[600] max-w-[3ch] sm:max-w-none lg:max-w-[7ch] 2xl:max-w-none'>{c.name}</h4>
-
-                                    <div className='flex flex-row items-center sm:ml-auto'>
-                                        <BsStarFill className='text-sm' />
-                                        <span className='ml-[10px] mt-[2px]'>{c.rating}</span>
-                                    </div>
-                                </div>
-
-                                <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px]'>
-                                    {c.description.length > 44 ? c.description.slice(0, 44) + '...' : c.description}
-                                </p>
-
-                                <span className='font-[600] text-lg lg:absolute lg:bottom-[210px] 2xl:bottom-[27%]'>
-                                    {c?.workList[0]?.price ? `From €${c?.workList[0]?.price}` : 'Learn more'}
-                                </span>
-                            </Link>
-                        </div>
+                        <FeaturedCard key={index} c={c} />
                     )}
                 </div>}
         </section>

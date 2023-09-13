@@ -3,9 +3,10 @@ import { MdVerified } from 'react-icons/md'
 import { PiInstagramLogo, PiFacebookLogo, PiTwitterLogo } from 'react-icons/pi'
 import { BsTiktok } from 'react-icons/bs'
 import { BiInfoCircle } from 'react-icons/bi'
+import { calculateAge } from '@/utils/functions'
 
 const ProfileSidebar: React.FC<any> = (props) => {
-    const { name, description, rating, age, profilePic, gender, languages, location, workList } = props
+    const { name, description, rating, profilePic, gender, languages, location, workList, birthYear } = props
 
     return (
         <div className="w-[550px] xl:w-[500px] 2xl:w-[335px] flex flex-col shadow-xl rounded-b-[25px] self-start">
@@ -29,7 +30,7 @@ const ProfileSidebar: React.FC<any> = (props) => {
                     </span>
 
                     <span className='text-[#646868]'>
-                        <strong className='text-[#1f1f1f] font-[600]'>Age: </strong>{age + ' years'}
+                        <strong className='text-[#1f1f1f] font-[600]'>Age: </strong>{calculateAge(new Date(birthYear)) + ' years'}
                     </span>
 
                     <span className='text-[#646868]'>

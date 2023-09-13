@@ -1,4 +1,5 @@
 import ProfileFanSection from "@/components/fan-profile/profile"
+import WishlistFanSection from "@/components/fan-profile/wishlist"
 import FooterSection from "@/components/landing/footer"
 import NavSection from "@/components/landing/nav"
 import Spinner from "@/components/spinner"
@@ -58,7 +59,7 @@ const FanProfile: React.FC = () => {
 
     const { loading, data, refetch } = useQuery<any>(PROFILE, { variables: { id } });
 
-    const [selectedSection, setSelectedSection] = useState(sections[0])
+    const [selectedSection, setSelectedSection] = useState(sections[4])
 
     const [updateFan] = useMutation(UPDATE_FAN);
     const [updateUser] = useMutation(UPDATE_USER);
@@ -110,8 +111,11 @@ const FanProfile: React.FC = () => {
                 </div>
 
                 {selectedSection === 'Profile' &&
-                <ProfileFanSection data={data} updateFan={updateFan}
-                updateUser={updateUser} refetch={refetch} />}
+                    <ProfileFanSection data={data} updateFan={updateFan}
+                        updateUser={updateUser} refetch={refetch} />}
+
+                {selectedSection === 'Wishlist' &&
+                    <WishlistFanSection />}
             </div>
 
             <FooterSection />

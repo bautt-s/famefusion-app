@@ -7,6 +7,7 @@ import { useQuery, gql } from "@apollo/client";
 import Link from 'next/link'
 import { StarType } from '../landing/featured-stars'
 import { filterItems } from '@/utils/hardcode'
+import FeaturedCard from '../landing/featured-card'
 
 const loadingArray = new Array(8).fill('loading')
 
@@ -200,32 +201,7 @@ const MainBrowse: React.FC<FilterProps> = (props) => {
                         (data?.getFilteredCelebrities !== null ?
                             <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[20px] gap-y-[60px] w-full transition-all duration-300'>
                                 {data?.getFilteredCelebrities?.map((c: StarType, index: number) =>
-                                    <div key={index} className='akatab relative w-full group'>
-                                        <GoHeartFill className='absolute top-0 right-0 text-2xl text-[#B1B4B4] cursor-pointer
-                                hover:text-[#FB5870] heart-shadow mt-[10px] mr-[10px] transition-colors duration-300 z-50' />
-
-                                        <Link href={`/browse/${c.id}`}>
-                                            <img src={c.associatedUser.profilePic} className='w-full object-cover rounded-2xl object-top 
-                                    featured-img group-hover:scale-105 transition-all duration-300 select-none' alt={c.name} />
-
-                                            <div className='flex flex-col sm:flex-row sm:items-center mt-[15px]'>
-                                                <h4 className='text-2xl font-[600]'>{c?.name}</h4>
-
-                                                <div className='flex flex-row items-center sm:ml-auto'>
-                                                    <BsStarFill className='text-sm' />
-                                                    <span className='ml-[10px] mt-[2px]'>{c?.rating}</span>
-                                                </div>
-                                            </div>
-
-                                            <p className='text-lg leading-[25px] my-[15px] text-[#646868] min-h-[50px] text-left'>
-                                                {c?.description.length > 62 ? c?.description.slice(0, 62) + '...' : c?.description}
-                                            </p>
-
-                                            <span className='font-[600] text-lg '>
-                                                {c?.workList[0]?.price ? `From €${c?.workList[0]?.price}` : 'Learn more'}
-                                            </span>
-                                        </Link>
-                                    </div>
+                                    <FeaturedCard key={index} c={c} />
                                 )}
                             </div>
                         :
