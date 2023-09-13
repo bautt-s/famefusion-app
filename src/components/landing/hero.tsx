@@ -3,7 +3,7 @@ import { FaArrowRightLong } from 'react-icons/fa6'
 
 const HeroSection: React.FC = () => {
     return (
-        <section className="w-full flex flex-row px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] py-[100px] mt-[80px]">
+        <section className="w-full flex flex-row px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] pt-[80px] pb-[40px] mt-[60px]">
             <div className='flex flex-col w-full md:w-fit items-center md:items-start'>
                 <h1 className='text-5xl 2xl:text-6xl outfit sm:max-w-[9ch] md:max-w-[10ch] tracking-tight
                 lg:max-w-[9ch] text-[#1f1f1f] font-[600] leading-[60px] text-center md:text-left'>
