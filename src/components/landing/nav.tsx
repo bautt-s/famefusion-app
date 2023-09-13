@@ -54,7 +54,7 @@ const NavSection: React.FC = () => {
     }
 
     useEffect(() => {
-        if (data) {
+        if (data?.getUserByEmail?.associatedFan) {
             dispatch(modifyId(data?.getUserByEmail?.associatedFan?.id))
             dispatch(addArray(data?.getUserByEmail?.associatedFan?.savedCelebrities))
         }

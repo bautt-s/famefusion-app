@@ -113,7 +113,7 @@ const Roles = () => {
         }
     }, [loadingUser])
 
-    if (!dataUser?.getUserByEmail) return (
+    if (!dataUser?.getUserByEmail && !createdUserData) return (
         <div className="flex w-full h-screen justify-center items-center">
             <Spinner />
         </div>
