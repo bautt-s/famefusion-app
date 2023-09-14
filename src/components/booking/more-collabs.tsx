@@ -33,8 +33,6 @@ const BookingCollabs: React.FC<{ name: any, workList: any }> = (props) => {
                 })
             }
         } else {
-            const limit = Math.ceil(workList?.length / cardsShowed)
-
             if (showCollabs.index - 1 !== 0) {
                 const newIndex = showCollabs.index - 1
 
@@ -65,7 +63,7 @@ const BookingCollabs: React.FC<{ name: any, workList: any }> = (props) => {
             </div>
 
             <div className="flex flex-row gap-x-[25px] mt-[15px]">
-                {showCollabs.show.map((item: any, index: number) =>
+                {showCollabs?.show?.map((item: any, index: number) =>
                     <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
                         <div className='flex flex-row items-start'>
                             <h5 className='font-[600] text-lg h-[55px]'>{item.title}</h5>

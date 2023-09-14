@@ -116,7 +116,7 @@ function Profile() {
             <HowSection />
 
             <div className="mt-[-25px]">
-                <FeaturedSection title='You might also like' />
+                <FeaturedSection title='You might also like' id={id} />
             </div>
 
             <FooterSection />

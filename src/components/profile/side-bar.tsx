@@ -9,7 +9,7 @@ const ProfileSidebar: React.FC<any> = (props) => {
     const { name, description, rating, profilePic, gender, languages, location, workList, birthYear } = props
 
     return (
-        <div className="w-[550px] xl:w-[500px] 2xl:w-[335px] flex flex-col shadow-xl rounded-b-[25px] self-start">
+        <div className="w-[300px] flex flex-col shadow-xl rounded-b-[25px] self-start">
             <img src={profilePic} className="w-full h-[400px] object-top object-cover rounded-t-[25px]" />
 
             <div className='flex flex-col px-[25px] py-[32px] akatab rounded-b-[25px] border'>

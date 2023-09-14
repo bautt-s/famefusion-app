@@ -26,7 +26,7 @@ const AvailabilityPanel: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col w-full h-2/3 mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
+        <div className="flex flex-col akatab">
             <div className='flex flex-row border w-fit rounded-2xl'>
                 <div className='flex flex-col pl-[15px] py-[10px] pr-[60px] rounded-2xl'>
                     <span className='text-[#979B9B] text-sm'>Start date</span>
@@ -39,7 +39,7 @@ const AvailabilityPanel: React.FC = () => {
                 </div>
             </div>
 
-            <div className='flex flex-row mt-[25px] justify-center'>
+            <div className='flex flex-row mt-[25px] justify-center w-0 min-w-full'>
                 <DatePicker
                     wrapperClassName="datePicker"
                     calendarClassName="calendarPicker"

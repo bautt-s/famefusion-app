@@ -1,4 +1,4 @@
-import { GoHeart, GoShare } from 'react-icons/go'
+import { GoHeart, GoHeartFill, GoShare } from 'react-icons/go'
 import { MdOutlineVerifiedUser } from 'react-icons/md'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
@@ -11,8 +11,8 @@ import Link from "next/link"
 import { categories } from '@/utils/hardcode'
 import { capitalizeArray } from '@/utils/functions'
 
-const BookingHeader: React.FC<{data: any}> = (props) => {
-    const { data } = props
+const BookingHeader: React.FC<any> = (props) => {
+    const { data, handleLike, isLiked, likeLoaded } = props
 
     const [value, setValue] = useState({
         startDate: null,
@@ -66,8 +66,14 @@ const BookingHeader: React.FC<{data: any}> = (props) => {
                     <div className="flex flex-row">
                         <h1 className="font-[700] text-4xl outfit text-[#1F1F1F]">{data?.getWorkById?.title}</h1>
 
-                        <div className="flex flex-row items-center text-xl gap-[15px] ml-[25px]">
-                            <GoHeart />
+                        <div className={`flex flex-row items-center text-xl gap-[15px] ml-[25px] 
+                        ${!likeLoaded ? 'opacity-0' : 'opacity-100'} transition-all duration-300`}>
+                            <button onClick={handleLike} disabled={!likeLoaded}>
+                                {isLiked ?
+                                    <GoHeartFill className='text-[#FB5870]' /> :
+                                    <GoHeart />}
+                            </button>
+
                             <GoShare />
                         </div>
                     </div>
@@ -123,7 +129,7 @@ const BookingHeader: React.FC<{data: any}> = (props) => {
                             value={value}
                             onChange={handleValueChange}
                             popoverDirection='down'
-                            
+
                         />
                     </div>
 

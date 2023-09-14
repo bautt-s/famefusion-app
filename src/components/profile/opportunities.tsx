@@ -1,52 +1,53 @@
 import { useEffect, useState } from 'react'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
-import { LuClock } from 'react-icons/lu'
 import { workInterface } from './experiences'
 import CustomCollabModal from '../modals/custom-collab'
 import Icon404 from '@/svgs/Icon404'
-import Link from 'next/link'
-import ModalDetail from '../booking/detail-modal'
+import ExperienceCard from './experience-card'
+
+let screenWidth = 0
+if (typeof window !== 'undefined') screenWidth = window.innerWidth
+
+const cardsShowed = screenWidth > 1280 ? 3 : 2
+const offlineShowed = cardsShowed - 1
 
 const OpportunitiesPanel: React.FC<any> = (props) => {
-    const [open, setOpen] = useState(false)
-    const [detailId, setDetailId] = useState('')
-
     const [customCollab, setCustomCollab] = useState(false)
     const [offlineCollabs, setOfflineCollabs] = useState<workInterface[]>([])
     const [onlineCollabs, setOnlineCollabs] = useState<workInterface[]>([])
 
     const [showOffline, setShowOffline] = useState({
         index: 1,
-        show: offlineCollabs?.slice(0, 2)
+        show: offlineCollabs?.slice(0, offlineShowed)
     })
 
     const [showOnline, setShowOnline] = useState({
         index: 1,
-        show: onlineCollabs?.slice(0, 3)
+        show: onlineCollabs?.slice(0, cardsShowed)
     })
 
     const handlePage = (mode: string, sense: string) => {
         if (sense === 'asc') {
             if (mode === 'online') {
-                const limit = Math.ceil(onlineCollabs?.length / 3)
+                const limit = Math.ceil(onlineCollabs?.length / cardsShowed)
 
                 if (showOnline.index !== limit) {
                     const newIndex = showOnline.index + 1
 
                     setShowOnline({
                         index: newIndex,
-                        show: offlineCollabs?.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: offlineCollabs?.slice((newIndex - 1) * cardsShowed, newIndex * cardsShowed)
                     })
                 }
             } else {
-                const limit = Math.ceil(offlineCollabs?.length / 2)
+                const limit = Math.ceil(offlineCollabs?.length / offlineShowed)
 
                 if (showOffline.index !== limit) {
                     const newIndex = showOffline.index + 1
 
                     setShowOffline({
                         index: newIndex,
-                        show: offlineCollabs?.slice((newIndex - 1) * 2, newIndex * 2)
+                        show: offlineCollabs?.slice((newIndex - 1) * offlineShowed, newIndex * offlineShowed)
                     })
                 }
             }
@@ -57,7 +58,7 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
 
                     setShowOnline({
                         index: newIndex,
-                        show: onlineCollabs?.slice((newIndex - 1) * 3, newIndex * 3)
+                        show: onlineCollabs?.slice((newIndex - 1) * cardsShowed, newIndex * cardsShowed)
                     })
                 }
             } else {
@@ -66,16 +67,11 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
 
                     setShowOffline({
                         index: newIndex,
-                        show: offlineCollabs?.slice((newIndex - 1) * 2, newIndex * 2)
+                        show: offlineCollabs?.slice((newIndex - 1) *offlineShowed, newIndex * offlineShowed)
                     })
                 }
             }
         }
-    }
-
-    const handleDetail = (id: string) => {
-        setDetailId(id)
-        setOpen(true)
     }
 
     useEffect(() => {
@@ -86,18 +82,18 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
     useEffect(() => {
         setShowOffline({
             index: 1,
-            show: offlineCollabs?.slice(0, 2)
+            show: offlineCollabs?.slice(0, offlineShowed)
         })
 
         setShowOnline({
             index: 1,
-            show: onlineCollabs?.slice(0, 3)
+            show: onlineCollabs?.slice(0, cardsShowed)
         })
     }, [offlineCollabs])
 
     return (
-        <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
-            <div className="flex-col">
+        <div className="flex flex-col akatab h-full">
+            <div className="flex flex-col mb-[40px]">
                 <h2 className="text-xl font-[600]">Offline Collaborations</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
@@ -106,7 +102,7 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                     {(offlineCollabs?.length !== 0) &&
                         <div className="flex flex-row items-center ml-auto">
                             <span>
-                                {showOffline.index + ' / ' + Math.ceil(offlineCollabs?.length / 3)}
+                                {showOffline.index + ' / ' + Math.ceil(offlineCollabs?.length / offlineShowed)}
                             </span>
 
                             <div className='flex flex-row gap-[15px] ml-[15px]'>
@@ -123,35 +119,9 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                         </div>}
                 </div>
 
-                <div className='flex flex-row gap-x-[25px] mt-[25px]'>
+                <div className='flex flex-row gap-x-[15px] mt-[25px]'>
                     {offlineCollabs?.length ? showOffline.show?.map((offExp: workInterface, index: number) =>
-                        <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
-                            <div className='flex flex-row items-center'>
-                                <h5 className='font-[600] text-lg'>{offExp.title}</h5>
-                                <span className='font-[600] ml-auto text-lg'>€{offExp.price}</span>
-                            </div>
-
-                            <p className='mt-[15px] max-w-[22ch] text-lg'>{offExp.description}</p>
-
-                            <div className='flex flex-row items-center mt-[15px] text-lg'>
-                                <LuClock className='text-2xl' />
-                                <span className='ml-[10px]'>
-                                    <strong className='mr-[5px]'>Duration:</strong> {offExp.duration}
-                                </span>
-                            </div>
-
-                            <div className='flex flex-row items-center mt-[25px]'>
-                                <span onClick={() => handleDetail(offExp?.id)}
-                                    className='cursor-pointer underline underline-offset-4 text-lg'>
-                                    Details
-                                </span>
-
-                                <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
-                                hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
-                                    <Link href={`/booking/${offExp?.id}`}>Choose</Link>
-                                </button>
-                            </div>
-                        </div>
+                        <ExperienceCard key={index} exp={offExp} />
                     ) :
                         <div className='w-full pt-[60px] pb-[120px] flex flex-col items-center gap-[15px]'>
                             <Icon404 className='flex mx-auto' />
@@ -176,7 +146,7 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                 </div>
             </div>
 
-            <div className={`flex-col ${onlineCollabs?.length !== 0 && 'mt-auto'}`}>
+            <div className={`flex flex-col`}>
                 <h2 className="text-xl font-[600]">Online Collaborations</h2>
 
                 <div className="flex flex-row items-center mt-[5px]">
@@ -202,36 +172,10 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
                         </div>}
                 </div>
 
-                <div className='flex flex-row gap-x-[25px] mt-[25px]'>
+                <div className='flex flex-row gap-x-[15px] mt-[25px]'>
                     {onlineCollabs?.length ?
                         showOnline.show?.map((onlExp: workInterface, index: number) =>
-                            <div key={index} className='border-[#CBCDCD] border-[1px] rounded-[25px] px-[20px] py-[25px] w-full max-w-[350px]'>
-                                <div className='flex flex-row items-center'>
-                                    <h5 className='font-[600] text-lg'>{onlExp.title}</h5>
-                                    <span className='font-[600] ml-auto text-lg'>€{onlExp.price}</span>
-                                </div>
-
-                                <p className='mt-[15px] max-w-[22ch] text-lg'>{onlExp.description}</p>
-
-                                <div className='flex flex-row items-center mt-[15px] text-lg'>
-                                    <LuClock className='text-2xl' />
-                                    <span className='ml-[10px]'>
-                                        <strong className='mr-[5px]'>Duration:</strong> {onlExp.duration}
-                                    </span>
-                                </div>
-
-                                <div className='flex flex-row items-center mt-[25px]'>
-                                    <span onClick={() => handleDetail(onlExp?.id)}
-                                        className='cursor-pointer underline underline-offset-4 text-lg'>
-                                        Details
-                                    </span>
-
-                                    <button className='bg-[#FB5870] text-white font-[500] py-[8px] px-[35px] rounded-xl
-                                hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 ml-auto text-lg'>
-                                        <Link href={`/booking/${onlExp?.id}`}>Choose</Link>
-                                    </button>
-                                </div>
-                            </div>
+                        <ExperienceCard key={index} exp={onlExp} />
                         ) :
                         <div className='w-full pt-[60px] flex flex-col items-center gap-[15px]'>
                             <Icon404 className='flex mx-auto' />
@@ -242,7 +186,6 @@ const OpportunitiesPanel: React.FC<any> = (props) => {
             </div>
 
             {customCollab && <CustomCollabModal setOpen={setCustomCollab} />}
-            {open && <ModalDetail id={detailId} setOpen={setOpen} />}
         </div>
     )
 }

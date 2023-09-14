@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { TfiClose } from "react-icons/tfi"
 import Spinner from "../spinner";
 import { workInterface } from "@/pages/booking/[id]";
@@ -7,17 +7,14 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { RxPerson } from "react-icons/rx";
-import { GoHeart, GoShare } from "react-icons/go";
+import { GoHeart, GoHeartFill, GoShare } from "react-icons/go";
 import { IoMdClose } from "react-icons/io";
 import { BsCheckLg } from "react-icons/bs";
 import Link from "next/link";
 import { categories } from "@/utils/hardcode";
 import { capitalizeArray } from "@/utils/functions";
 
-const ModalDetail: React.FC<{ id: string, setOpen: Function }> = (props) => {
-    const { id, setOpen } = props
-
-    const EXPERIENCE = gql`
+const EXPERIENCE = gql`
     query getWorkById($id: String) {
         getWorkById(id: $id) {
             title,
@@ -49,7 +46,10 @@ const ModalDetail: React.FC<{ id: string, setOpen: Function }> = (props) => {
         }
     }`
 
-    const { loading, error, data } = useQuery<workInterface>(EXPERIENCE, { variables: { id } });
+const ModalDetail: React.FC<any> = (props) => {
+    const { id, setOpen, handleLike, likeLoaded, isLiked } = props
+
+    const { loading, data } = useQuery<workInterface>(EXPERIENCE, { variables: { id } });
 
     if (loading) return (
         <div className='w-screen h-screen fixed top-0 left-0 flex items-center justify-center z-[9998]'>
@@ -76,8 +76,14 @@ const ModalDetail: React.FC<{ id: string, setOpen: Function }> = (props) => {
                 <div className="flex flex-row">
                     <h1 className="font-[700] text-4xl outfit text-[#1F1F1F]">{data?.getWorkById?.title}</h1>
 
-                    <div className="flex flex-row items-center text-xl gap-[15px] ml-[25px]">
-                        <GoHeart />
+                    <div className={`flex flex-row items-center text-xl gap-[15px] ml-[25px] 
+                        ${!likeLoaded ? 'opacity-0' : 'opacity-100'} transition-all duration-300`}>
+                        <button onClick={handleLike} disabled={!likeLoaded}>
+                            {isLiked ?
+                                <GoHeartFill className='text-[#FB5870]' /> :
+                                <GoHeart />}
+                        </button>
+
                         <GoShare />
                     </div>
 

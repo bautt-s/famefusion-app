@@ -10,6 +10,7 @@ import NavSignedIn from "./nav-signed-in";
 import { useDispatch } from "react-redux";
 import { modifyId } from "@/store/slices/fanSlice";
 import { addArray } from "@/store/slices/likesSlice";
+import { addArrayExp } from "@/store/slices/experiencesSlice";
 
 const NavSection: React.FC = () => {
     const dispatch = useDispatch()
@@ -36,6 +37,16 @@ const NavSection: React.FC = () => {
                     }
                     savedIDs
                 }
+                savedExperiences {
+                    id
+                    title
+                    price
+                    type
+                    description
+                    duration
+                    online
+                    collaboration
+                }
             }
         }
     }`
@@ -57,6 +68,7 @@ const NavSection: React.FC = () => {
         if (data?.getUserByEmail?.associatedFan) {
             dispatch(modifyId(data?.getUserByEmail?.associatedFan?.id))
             dispatch(addArray(data?.getUserByEmail?.associatedFan?.savedCelebrities))
+            dispatch(addArrayExp(data?.getUserByEmail?.associatedFan?.savedExperiences))
         }
     }, [loading])
 

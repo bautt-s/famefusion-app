@@ -3,8 +3,6 @@ import { useQuery, gql } from "@apollo/client";
 import { useEffect, useState } from 'react'
 import FeaturedCard from './featured-card';
 
-type FeaturedProps = { title: string }
-
 export type StarType = {
     id: string,
     name: string,
@@ -20,8 +18,8 @@ export type StarType = {
 
 const loadingArray = new Array(5).fill('loading')
 
-const FeaturedSection: React.FC<FeaturedProps> = (props) => {
-    const { title } = props
+const FeaturedSection: React.FC<any> = (props) => {
+    const { title, id } = props
 
     const FEATURED = gql`
     query getCelebrities {
@@ -59,7 +57,9 @@ const FeaturedSection: React.FC<FeaturedProps> = (props) => {
     }
 
     useEffect(() => {
-        setFeatured(data?.getAllCelebrities?.slice(limit - starsShowed, limit))
+        setFeatured(data?.getAllCelebrities?.
+            filter((c: any) => c?.id !== id).
+            slice(limit - starsShowed, limit))
     }, [limit, starsShowed, data])
     
     return (

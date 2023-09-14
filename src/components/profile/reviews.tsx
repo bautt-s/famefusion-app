@@ -18,14 +18,14 @@ const ReviewsPanel: React.FC<any> = (props) => {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab gap-y-[25px]">
+        <div className="flex flex-col akatab gap-y-[25px]">
             {reviews.length ?
                 reviews?.slice(-2).map((r: reviewInterface, index: number) =>
                     <div key={index} className={`flex flex-col rounded-[25px] p-[32px] ${index % 2 === 0 ? 'bg-[#F7F8FC]' : 'bg-[#EEF3FE]'}`}>
                         <h5 className="text-xl font-[600]">{r.title}</h5>
                         <span className="text-[#646868]">{r.date}</span>
 
-                        <p className="my-[25px] max-w-[80ch] text-justify">{r.description}</p>
+                        <p className="my-[25px] w-0 min-w-full text-justify">{r.description}</p>
 
                         {(r.images?.length !== 0) &&
                             <div className='flex flex-row gap-[25px]'>

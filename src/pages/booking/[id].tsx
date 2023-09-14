@@ -1,6 +1,6 @@
 import FooterSection from "@/components/landing/footer"
 import Spinner from "@/components/spinner"
-import { gql, useQuery } from "@apollo/client"
+import { gql, useMutation, useQuery } from "@apollo/client"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import BookingHeader from '@/components/booking/header'
@@ -8,9 +8,14 @@ import { BsCheckLg } from "react-icons/bs"
 import { IoMdClose } from "react-icons/io"
 import BookingCollabs from "@/components/booking/more-collabs"
 import NavSection from "@/components/landing/nav"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+import { useEffect, useState } from "react"
+import { mutateExperience } from "@/store/slices/experiencesSlice"
 
 export interface workInterface {
     getWorkById: {
+        id: string,
         title: string
         type: string
         price: number
@@ -39,13 +44,35 @@ export interface workInterface {
     }
 }
 
+const ADD_LIKE = gql`
+    mutation addToExperiences($ids: ExperiencesInput) {
+        addToExperiences(ids: $ids) {
+            id
+        }
+    }`
+
+const REMOVE_LIKE = gql`
+    mutation removeFromExperiences($ids: ExperiencesInput) {
+        removeFromExperiences(ids: $ids) {
+            id
+        }
+    }`
+
 const ExperienceDetail: React.FC = () => {
     const router = useRouter()
     const { id } = router.query
+    const dispatch = useDispatch()
+
+    const fanID = useSelector((state: RootState) => state.fan.id)
+    const likedIDs = useSelector((state: RootState) => state.experiences.likedIDs)
+    const loadedLikes = useSelector((state: RootState) => state.experiences.loadedExperiences)
+
+    const [isLiked, setLiked] = useState(false)
 
     const EXPERIENCE = gql`
     query getWorkById($id: String) {
         getWorkById(id: $id) {
+            id,
             title,
             type,
             price,
@@ -75,7 +102,42 @@ const ExperienceDetail: React.FC = () => {
         }
     }`
 
-    const { loading, error, data } = useQuery<workInterface>(EXPERIENCE, { variables: { id } });
+    const { loading, data } = useQuery<workInterface>(EXPERIENCE, { variables: { id } })
+
+    const [addLike] = useMutation(ADD_LIKE)
+    const [removeLike] = useMutation(REMOVE_LIKE)
+    const [likeLoaded, setLikeLoaded] = useState(false)
+
+    const handleLike = () => {
+        setLiked(!isLiked)
+
+        if (!isLiked) addLike({
+            variables: {
+                ids: {
+                    id: fanID,
+                    workId: id
+                }
+            }
+        })
+        else removeLike({
+            variables: {
+                ids: {
+                    id: fanID,
+                    workId: id
+                }
+            }
+        })
+
+        dispatch(mutateExperience(data?.getWorkById))
+    }
+
+    useEffect(() => {
+        if (likedIDs.filter(likedId => likedId === id).length > 0) setLiked(true)
+        else setLiked(false)
+        console.log(likedIDs)
+        if (loadedLikes) setLikeLoaded(true)
+    }, [likedIDs])
+
 
     if (loading) return (
         <div className="flex w-full h-screen justify-center items-center">
@@ -96,7 +158,8 @@ const ExperienceDetail: React.FC = () => {
             <NavSection />
 
             <div className="px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px] pb-[120px]">
-                <BookingHeader data={data} />
+                <BookingHeader data={data} handleLike={handleLike} 
+                isLiked={isLiked} likeLoaded={likeLoaded} />
 
                 <div className="flex flex-col gap-y-[45px] mt-[45px]">
                     <div className="flex flex-col">

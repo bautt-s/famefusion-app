@@ -103,9 +103,9 @@ const MainView: React.FC<any> = (props) => {
             </div>
 
             <div className="flex flex-row w-full mt-[45px]">
-                <ProfileSidebar name={data?.getCelebrityById?.name} description={data?.getCelebrityById?.description} rating={data?.getCelebrityById?.rating} 
-                profilePic={data?.getCelebrityById?.associatedUser?.profilePic} birthYear={data?.getCelebrityById?.birthYear} gender={data?.getCelebrityById?.gender} 
-                languages={data?.getCelebrityById?.languages} location={data?.getCelebrityById?.location} workList={data?.getCelebrityById?.workList} />
+                <ProfileSidebar name={data?.getCelebrityById?.name} description={data?.getCelebrityById?.description} rating={data?.getCelebrityById?.rating}
+                    profilePic={data?.getCelebrityById?.associatedUser?.profilePic} birthYear={data?.getCelebrityById?.birthYear} gender={data?.getCelebrityById?.gender}
+                    languages={data?.getCelebrityById?.languages} location={data?.getCelebrityById?.location} workList={data?.getCelebrityById?.workList} />
 
                 <div className="flex flex-col ml-[35px] grow">
                     <ul className="flex flex-row flex-wrap gap-[25px]">
@@ -118,21 +118,23 @@ const MainView: React.FC<any> = (props) => {
                         )}
                     </ul>
 
-                    {section === 'About' &&
-                        <AboutPanel name={data?.getCelebrityById?.name} media={data?.getCelebrityById?.media} associatedBrands={data?.getCelebrityById?.associatedBrands}
-                            biography={data?.getCelebrityById?.biography} interests={data?.getCelebrityById?.interests} handleLike={handleLike} isLiked={isLiked} />}
+                    <div className="w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px]">
+                        {section === 'About' &&
+                            <AboutPanel name={data?.getCelebrityById?.name} media={data?.getCelebrityById?.media} associatedBrands={data?.getCelebrityById?.associatedBrands}
+                                biography={data?.getCelebrityById?.biography} interests={data?.getCelebrityById?.interests} handleLike={handleLike} isLiked={isLiked} />}
 
-                    {section === 'Experiences' &&
-                        <ExperiencesPanel experiences={experiences} />}
+                        {section === 'Experiences' &&
+                            <ExperiencesPanel experiences={experiences} />}
 
-                    {section === 'Business Opportunities' &&
-                        <OpportunitiesPanel collaborations={collaborations} />}
+                        {section === 'Business Opportunities' &&
+                            <OpportunitiesPanel collaborations={collaborations} />}
 
-                    {section === 'Availability' &&
-                        <AvailabilityPanel />}
+                        {section === 'Availability' &&
+                            <AvailabilityPanel />}
 
-                    {section === 'Reviews' &&
-                        <ReviewsPanel reviews={data?.getCelebrityById?.reviewList} rating={data?.getCelebrityById?.rating} />}
+                        {section === 'Reviews' &&
+                            <ReviewsPanel reviews={data?.getCelebrityById?.reviewList} rating={data?.getCelebrityById?.rating} />}
+                    </div>
                 </div>
             </div>
 

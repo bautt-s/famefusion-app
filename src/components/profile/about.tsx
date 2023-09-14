@@ -15,7 +15,7 @@ const AboutPanel: React.FC<any> = (props) => {
     const { name, media, associatedBrands, biography, interests, handleLike, isLiked } = props
 
     return (
-        <div className="flex flex-col w-full h-full mt-[45px] rounded-[25px] shadow-xl border py-[32px] px-[25px] akatab">
+        <div className="flex flex-col akatab">
             <div className="flex flex-col lg:flex-row items-center">
                 <h1 className="font-[700] text-4xl">{name}</h1>
 
@@ -65,7 +65,7 @@ const AboutPanel: React.FC<any> = (props) => {
             </div>
 
             <div className='flex flex-col mt-[15px]'>
-                <p className='max-w-[100ch] text-justify'>{biography}</p>
+                <p className='min-w-full w-0 text-justify text-base'>{biography}</p>
 
                 <span className='mt-[25px] text-xl font-[600]'>Social Followers</span>
                 {/*<div className='grid grid-cols-2 xl:grid-cols-3'>
