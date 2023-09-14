@@ -53,7 +53,7 @@ const ReviewsPanel: React.FC<any> = (props) => {
                 ) :
                 <div className='w-full pt-[60px] pb-[120px] flex flex-col items-center gap-[15px]'>
                     <Reviews404 className='flex mx-auto' />
-                    <span>Celebrity doesn&apos;t have any offline experiences yet</span>
+                    <span>Celebrity doesn&apos;t have any reviews yet</span>
                 </div>
             }
 

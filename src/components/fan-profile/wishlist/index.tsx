@@ -1,5 +1,5 @@
 import FeaturedCard from "@/components/landing/featured-card"
-import ExperienceCard from "@/components/profile/experience-card"
+import ExperienceCard from "@/components/cel-profile/experience-card"
 import { RootState } from "@/store/store"
 import Link from "next/link"
 import { useState } from "react"

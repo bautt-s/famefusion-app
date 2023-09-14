@@ -2,7 +2,7 @@ import FeaturedSection from "@/components/landing/featured-stars";
 import FooterSection from "@/components/landing/footer";
 import HowSection from "@/components/landing/how-it-works";
 import NavSection from "@/components/landing/nav";
-import MainView from "@/components/profile/main-view";
+import MainView from "@/components/cel-profile/main-view";
 import Spinner from "@/components/spinner";
 import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";

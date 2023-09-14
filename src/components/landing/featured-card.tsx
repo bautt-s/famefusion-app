@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { BsStarFill } from "react-icons/bs"
 import { GoHeartFill } from "react-icons/go"
 import { useDispatch, useSelector } from "react-redux"
+import LoginModal from "../modals/login-modal"
 
 const ADD_LIKE = gql`
     mutation addToWishlist($ids: WishlistInput) {
@@ -26,6 +27,8 @@ const FeaturedCard: React.FC<any> = (props) => {
     const { c } = props
     const dispatch = useDispatch()
     const { isAuthenticated } = useKindeAuth();
+
+    const [loginModal, setLoginModal] = useState(false)
 
     const fanID = useSelector((state: RootState) => state.fan.id)
     const likedIDs = useSelector((state: RootState) => state.likes.likedIDs)
@@ -67,7 +70,7 @@ const FeaturedCard: React.FC<any> = (props) => {
         if (loadedLikes) setLikeLoaded(true)
     }, [likedIDs])
     
-    if (!likeLoaded) return (
+    if (!likeLoaded && isAuthenticated) return (
         <div className='w-full'>
             <div className='w-full h-[200px] bg-gray-500 animate-pulse rounded-2xl'></div>
             <div className='w-[150px] h-[15px] bg-gray-500 animate-pulse mt-[15px] rounded-full'></div>
@@ -79,13 +82,13 @@ const FeaturedCard: React.FC<any> = (props) => {
 
     return (
         <div className='akatab relative w-full group'>
-            {isAuthenticated &&
-            <div className="absolute top-0 right-0  mt-[10px] mr-[10px]" onClick={handleLike}>
+            <div className="absolute top-0 right-0  mt-[10px] mr-[10px]" 
+            onClick={isAuthenticated ? handleLike : () => setLoginModal(true)}>
                 <GoHeartFill className={`text-xl ${isLiked ? 'text-[#FB5870]' : 'text-[#B1B4B4]'} mr-[2px]
                 hover:text-[#FB5870] transition-colors duration-300 z-50 cursor-pointer absolute top-0 right-0 mt-[2px]`} />
 
                 <GoHeartFill className='text-[24px] text-white absolute top-0 right-0 scale-y-[1.05] z-[49]' />
-            </div>}
+            </div>
             
 
             <Link href={`/browse/${c?.id}`}>
@@ -109,6 +112,8 @@ const FeaturedCard: React.FC<any> = (props) => {
                     {c?.workList[0]?.price ? `From €${c?.workList[0]?.price}` : 'Learn more'}
                 </span>
             </Link>
+
+            {loginModal && <LoginModal setOpen={setLoginModal} />}
         </div>
     )
 }

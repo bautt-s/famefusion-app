@@ -1,6 +1,9 @@
 import { GoChevronLeft, GoChevronRight, GoHeart, GoHeartFill, GoShare } from 'react-icons/go'
 import { PiInstagramLogo, PiFacebookLogo, PiTwitterLogo } from 'react-icons/pi'
 import { BsTiktok } from 'react-icons/bs'
+import { useState } from 'react'
+import LoginModal from '../modals/login-modal'
+import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs'
 
 let screenWidth = 0
 if (typeof window !== 'undefined') screenWidth = window.innerWidth
@@ -14,6 +17,9 @@ else imgsShowed = 1
 const AboutPanel: React.FC<any> = (props) => {
     const { name, media, associatedBrands, biography, interests, handleLike, isLiked } = props
 
+    const { isAuthenticated } = useKindeAuth();
+    const [loginModal, setLoginModal] = useState(false)    
+
     return (
         <div className="flex flex-col akatab">
             <div className="flex flex-col lg:flex-row items-center">
@@ -25,8 +31,9 @@ const AboutPanel: React.FC<any> = (props) => {
                         <span className='text-lg underline underline-offset-4'>Share</span>
                     </div>
 
-                    <button className='flex flex-row items-center gap-[10px]' onClick={handleLike}>
-                        {isLiked ?
+                    <button className='flex flex-row items-center gap-[10px]' 
+                    onClick={isAuthenticated ? handleLike : () => setLoginModal(true)}>
+                        {!isLiked ?
                         <GoHeart className='text-2xl' /> :
                         <GoHeartFill className='text-2xl text-[#FB5870]' />}
 
@@ -39,7 +46,7 @@ const AboutPanel: React.FC<any> = (props) => {
             2xl:grid-cols-[2fr_1fr_1fr_1fr] md:gap-[15px] 2xl:gap-[25px] w-full mt-[25px] justify-center h-[350px]'>
                 {media?.slice(0, imgsShowed).map((item: string, index: number) =>
                     <div style={{backgroundImage: `url(${item})`, backgroundSize: 'cover', backgroundPosition: 'center'}} 
-                    className='max-w-full rounded-[25px] bg-black' key={index}></div>
+                    className='max-w-full rounded-[25px] bg-gray-300' key={index}></div>
                 )}
             </div>
 
@@ -110,6 +117,8 @@ const AboutPanel: React.FC<any> = (props) => {
                     )}
                 </ul>
             </div>
+
+            {loginModal && <LoginModal setOpen={setLoginModal} />}
         </div>
     )
 }

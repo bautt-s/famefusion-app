@@ -10,9 +10,14 @@ import { useState } from 'react'
 import Link from "next/link"
 import { categories } from '@/utils/hardcode'
 import { capitalizeArray } from '@/utils/functions'
+import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs'
+import LoginModal from '../modals/login-modal'
 
 const BookingHeader: React.FC<any> = (props) => {
     const { data, handleLike, isLiked, likeLoaded } = props
+    const { isAuthenticated } = useKindeAuth()
+
+    const [loginModal, setLoginModal] = useState(false)
 
     const [value, setValue] = useState({
         startDate: null,
@@ -68,7 +73,8 @@ const BookingHeader: React.FC<any> = (props) => {
 
                         <div className={`flex flex-row items-center text-xl gap-[15px] ml-[25px] 
                         ${!likeLoaded ? 'opacity-0' : 'opacity-100'} transition-all duration-300`}>
-                            <button onClick={handleLike} disabled={!likeLoaded}>
+                            <button disabled={!likeLoaded} 
+                            onClick={isAuthenticated ? handleLike : () => setLoginModal(true)}>
                                 {isLiked ?
                                     <GoHeartFill className='text-[#FB5870]' /> :
                                     <GoHeart />}
@@ -143,6 +149,8 @@ const BookingHeader: React.FC<any> = (props) => {
                     </span>
                 </div>
             </div>
+
+            {loginModal && <LoginModal setOpen={setLoginModal} />}
         </section>
     )
 }

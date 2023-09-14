@@ -39,7 +39,7 @@ const FooterSection: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-2 lg:gap-[80px] xl:gap-[100px] mt-[35px] lg:mt-0 lg:ml-auto'>
+                    <div className='grid grid-cols-2 lg:gap-[80px] xl:gap-[100px] mt-[35px] lg:mt-0 lg:ml-auto z-[2]'>
                         {navColumns.map((col, index) =>
                             <div key={index} >
                                 <h5 className='font-[600]'>{col.title}</h5>
@@ -71,7 +71,7 @@ const FooterSection: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='relative bottom-[180px] lg:bottom-[40px]'>
+                <div className='relative bottom-[180px] lg:bottom-[40px] z-[1]'>
                     <div className='w-[25%] h-[60px] bg-white rounded-r-full'></div>
                     <div className='w-[40%] h-[60px] bg-white rounded-l-full ml-auto'></div>
                 </div>
