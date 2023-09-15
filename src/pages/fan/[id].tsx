@@ -1,3 +1,4 @@
+import SettingsFanSection from "@/components/fan-profile/fan-settings"
 import ProfileFanSection from "@/components/fan-profile/profile"
 import WishlistFanSection from "@/components/fan-profile/wishlist"
 import FooterSection from "@/components/landing/footer"
@@ -116,6 +117,9 @@ const FanProfile: React.FC = () => {
 
                 {selectedSection === 'Wishlist' &&
                     <WishlistFanSection />}
+
+                {selectedSection === 'Settings' &&
+                    <SettingsFanSection />}
             </div>
 
             <FooterSection />

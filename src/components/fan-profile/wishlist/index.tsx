@@ -36,7 +36,7 @@ const WishlistFanSection: React.FC = () => {
 
             <div className="w-full">
                 <div className="flex flex-col py-[40px] px-[60px] 
-                shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='saved'>
+                shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='celebrities'>
                     <h1 className="outfit font-[600] text-2xl mb-[35px]">Saved Celebrities</h1>
 
                     {likedStars.length > 0 ?
@@ -58,7 +58,7 @@ const WishlistFanSection: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col py-[40px] px-[60px] mt-[40px]
-                shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='saved'>
+                shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='experiences'>
                     <h1 className="outfit font-[600] text-2xl mb-[35px]">Saved Experiences</h1>
 
                     {likedExperiences.length > 0 ?

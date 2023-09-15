@@ -27,8 +27,6 @@ const LoginModal: React.FC<any> = (props) => {
                         Sign Up
                     </a>
                 </div>
-
-
             </div>
         </div>
     )
