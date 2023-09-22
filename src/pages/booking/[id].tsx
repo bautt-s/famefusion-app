@@ -81,6 +81,8 @@ const ExperienceDetail: React.FC = () => {
             online,
             collaboration,
             createdAt,
+            productId,
+            priceId,
 
             celebrity {
                 id
@@ -134,7 +136,7 @@ const ExperienceDetail: React.FC = () => {
     useEffect(() => {
         if (likedIDs.filter(likedId => likedId === id).length > 0) setLiked(true)
         else setLiked(false)
-        console.log(likedIDs)
+
         if (loadedLikes) setLikeLoaded(true)
     }, [likedIDs])
 

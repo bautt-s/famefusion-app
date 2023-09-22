@@ -3,6 +3,7 @@ import SearchbarSection from "@/components/browse/searchbar";
 import FooterSection from "@/components/landing/footer";
 import NavSection from "@/components/landing/nav";
 import Head from "next/head";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 function Browse() {

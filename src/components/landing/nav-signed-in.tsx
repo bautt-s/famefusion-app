@@ -20,23 +20,31 @@ const NavSignedIn: React.FC<any> = (props) => {
                 <div className={`bg-white flex-col items-center p-[25px] w-[220px] absolute top-[60px] right-[50%] 
                 translate-x-[50%] rounded-2xl shadow-[0px_0px_9px_3px_rgba(0,0,0,0.15)] ${userTab ? 'flex' : 'hidden'}`}>
                     <img src={!loading ? data?.getUserByEmail?.profilePic : defaultImg}
-                    className="w-[60px] h-[60px] rounded-full border border-gray-400 object-cover" />
+                        className="w-[60px] h-[60px] rounded-full border border-gray-400 object-cover" />
 
                     <h4 className="font-[600] mt-[20px] mb-[10px] text-center">{data?.getUserByEmail?.name}</h4>
 
                     <div className="flex flex-col text-sm w-full items-start">
-                        <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}`} 
-                        className="py-[12px] hover:underline">Profile</Link>
+                        <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=0`}
+                            className="py-[12px] hover:underline">Profile</Link>
 
                         <ul className="flex flex-col items-start border-y border-gray-200 w-full">
-                            <button className="py-[12px] hover:underline">Messages</button>
-                            <button className="py-[12px] hover:underline">Experiences</button>
-                            <button className="py-[12px] hover:underline">Balance & Payments</button>
-                            <button className="py-[12px] hover:underline">Wishlist</button>
+                            <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=1`}
+                                className="py-[12px] hover:underline">Messages</Link>
+
+                            <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=2`}
+                                className="py-[12px] hover:underline">Experiences</Link>
+
+                            <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=3`}
+                                className="py-[12px] hover:underline">Balance & Payments</Link>
+
+                            <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=4`}
+                                className="py-[12px] hover:underline">Wishlist</Link>
                         </ul>
 
                         <ul className="flex flex-col items-start">
-                            <button className="py-[12px] hover:underline">Settings</button>
+                            <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=5`}
+                                className="py-[12px] hover:underline">Settings</Link>
                             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                             <a href='/api/auth/logout' className="py-[12px] hover:underline text-[#D20505]">Log out</a>
                         </ul>

@@ -11,8 +11,10 @@ import { useDispatch } from "react-redux";
 import { modifyId } from "@/store/slices/fanSlice";
 import { addArray } from "@/store/slices/likesSlice";
 import { addArrayExp } from "@/store/slices/experiencesSlice";
+import { useRouter } from "next/router";
 
 const NavSection: React.FC = () => {
+    const router = useRouter()
     const dispatch = useDispatch()
     const { user, isAuthenticated } = useKindeAuth();
 
@@ -58,10 +60,16 @@ const NavSection: React.FC = () => {
     
     // state and function made to show border on bottom scroll
     const [prevScrollPos, setPrevScrollPos] = useState(0)
+    const [search, setSearch] = useState('')
 
     const handleScroll = () => {
         const currentScrollPos = window.scrollY
         setPrevScrollPos(currentScrollPos)
+    }
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault()
+        router.push(`/browse?search=${search}`)
     }
 
     useEffect(() => {
@@ -103,12 +111,14 @@ const NavSection: React.FC = () => {
             </div>
 
             <div className='hidden flex-row ml-auto lg:gap-[10px] xl:gap-[20px] 2xl:gap-[25px] items-center lg:flex'>
-                <div className='bg-white border-[#bec2c2] border-[1px] flex flex-row items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] rounded-xl py-[8px]'>
+                <div className={`bg-white border-[#bec2c2] ${router.pathname === '/browse' ? 'hidden' : 'flex'}
+                items-center lg:px-[5px] xl:px-[10px] 2xl:px-[15px] border-[1px] flex-row rounded-xl py-[8px]`}>
                     <CiSearch className='text-2xl text-[#505252]' />
 
-                    <form>
+                    <form onSubmit={handleSearch}>
                         <input type="text" placeholder="Search" className="bg-white ml-[15px] lg:w-[80px] 2xl:w-[100px] 
-                        2xl:focus:w-[200px] transition-all duration-500 akatab outline-none searchbar" />
+                        2xl:focus:w-[200px] transition-all duration-500 akatab outline-none searchbar"
+                        value={search} onChange={(e) => setSearch(e.target.value)} />
                     </form>
                 </div>
 

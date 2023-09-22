@@ -1,14 +1,23 @@
+import { useSearchParams } from "next/navigation"
 import { FilterProps } from "./main-browse"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const SearchbarSection: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
-    const [search, setSearch] = useState('')
+    
+    const searchQuery = useSearchParams()
+    const searchQueryValue = searchQuery.get('search')
 
+    const [search, setSearch] = useState('')
+    
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
         setSelectedFilters({ ...selectedFilters, name: search })
     }
+
+    useEffect(() => {
+        if (searchQueryValue) setSearch(searchQueryValue)
+    }, [searchQueryValue])
 
     return (
         <div className="flex flex-col items-center mt-[140px] pb-[100px] lg:pb-[60px]">

@@ -7,7 +7,8 @@ import Spinner from "@/components/spinner"
 import { gql, useMutation, useQuery } from "@apollo/client"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useSearchParams } from 'next/navigation'
 
 const sections = ['Profile', 'Messages', 'Experiences',
     'Balance & Payments', 'Wishlist', 'Settings']
@@ -58,12 +59,19 @@ const FanProfile: React.FC = () => {
     const router = useRouter()
     const { id } = router.query
 
+    const searchParams = useSearchParams()
+    const s = searchParams.get('section')
+
     const { loading, data, refetch } = useQuery<any>(PROFILE, { variables: { id } });
 
-    const [selectedSection, setSelectedSection] = useState(sections[4])
+    const [selectedSection, setSelectedSection] = useState(sections[0])
 
     const [updateFan] = useMutation(UPDATE_FAN);
     const [updateUser] = useMutation(UPDATE_USER);
+
+    useEffect(() => {
+        if (s) setSelectedSection(sections[parseInt(s)])
+    }, [s])
 
     if (loading) return (
         <div className="flex w-full h-screen justify-center items-center">

@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
 import Filters from './filters/filters'
-import { GoHeartFill } from 'react-icons/go'
-import { BsStarFill } from 'react-icons/bs'
 import FilterTag from './filters/filter-tag'
 import { useQuery, gql } from "@apollo/client";
-import Link from 'next/link'
 import { StarType } from '../landing/featured-stars'
 import { filterItems } from '@/utils/hardcode'
 import FeaturedCard from '../landing/featured-card'
+import { useSearchParams } from 'next/navigation';
 
 const loadingArray = new Array(8).fill('loading')
 
@@ -40,6 +38,9 @@ export type FilterProps = {
 
 const MainBrowse: React.FC<FilterProps> = (props) => {
     const { selectedFilters, setSelectedFilters } = props
+
+    const searchQuery = useSearchParams()
+    const searchQueryValue = searchQuery.get('search')
 
     const BROWSE = gql`
     query getFilteredCelebrities($filterObj: DataFilter) {
@@ -93,6 +94,11 @@ const MainBrowse: React.FC<FilterProps> = (props) => {
         selectedFilters.opportunities?.length || selectedFilters.price?.range ||
         selectedFilters.availability?.startDate || selectedFilters.availability?.endDate ||
         selectedFilters.location?.length
+
+    useEffect(() => {
+        if (searchQueryValue) setSelectedFilters({ ...selectedFilters, name: searchQueryValue })
+        refetch()
+    }, [searchQueryValue, loading])
 
     useEffect(() => {
         setSelectedFilters({

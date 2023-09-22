@@ -27,6 +27,7 @@ const Roles = () => {
     const celebrityData = useSelector((state: RootState) => state.celebrity.celebrityData)
 
     const [userId, setUserId] = useState<string>('')
+    const [displaySpinner, setDisplaySpinner] = useState(true)
 
     const [roleState, setRoleState] = useState({
         role: '',
@@ -110,10 +111,11 @@ const Roles = () => {
             dataUser?.getUserByEmail?.associatedBusiness ||
             dataUser?.getUserByEmail?.associatedCelebrity) {
             if (!router.query.choosen) router.push('/')
+            else setDisplaySpinner(false)
         }
     }, [loadingUser])
 
-    if (!dataUser?.getUserByEmail && !createdUserData) return (
+    if ((!dataUser?.getUserByEmail && !createdUserData) || displaySpinner) return (
         <div className="flex w-full h-screen justify-center items-center">
             <Spinner />
         </div>

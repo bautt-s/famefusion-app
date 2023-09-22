@@ -12,6 +12,12 @@ import { categories } from '@/utils/hardcode'
 import { capitalizeArray } from '@/utils/functions'
 import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs'
 import LoginModal from '../modals/login-modal'
+import { gql, useLazyQuery } from '@apollo/client'
+
+const CHECKOUT = gql`
+query createCheckoutSession($price: String) {
+    createCheckoutSession(price: $price)
+    }`
 
 const BookingHeader: React.FC<any> = (props) => {
     const { data, handleLike, isLiked, likeLoaded } = props
@@ -27,6 +33,19 @@ const BookingHeader: React.FC<any> = (props) => {
     const handleValueChange = (newValue: any) => {
         setValue(newValue);
     }
+
+    const [startCheckout, { data: dataCheckout, loading, error }] = useLazyQuery(CHECKOUT, {
+        onCompleted: (queryData) => {
+            let data = JSON.parse(queryData.createCheckoutSession)
+            let checkoutUrl = data.url
+
+            if (window) window.location.assign(checkoutUrl)
+        },
+
+        variables: {
+            price: data?.getWorkById?.priceId
+        }
+    })
 
     return (
         <section className="pt-[120px]">
@@ -73,8 +92,8 @@ const BookingHeader: React.FC<any> = (props) => {
 
                         <div className={`flex flex-row items-center text-xl gap-[15px] ml-[25px] 
                         ${!likeLoaded ? 'opacity-0' : 'opacity-100'} transition-all duration-300`}>
-                            <button disabled={!likeLoaded} 
-                            onClick={isAuthenticated ? handleLike : () => setLoginModal(true)}>
+                            <button disabled={!likeLoaded}
+                                onClick={isAuthenticated ? handleLike : () => setLoginModal(true)}>
                                 {isLiked ?
                                     <GoHeartFill className='text-[#FB5870]' /> :
                                     <GoHeart />}
@@ -140,7 +159,8 @@ const BookingHeader: React.FC<any> = (props) => {
                     </div>
 
                     <button className='bg-[#FB5870] text-white font-[500] py-[12px] rounded-xl
-                      hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 px-[80px]'>
+                      hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 px-[80px]'
+                      onClick={() => startCheckout()}>
                         Book Experience
                     </button>
 
