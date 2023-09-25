@@ -13,15 +13,26 @@ import { capitalizeArray } from '@/utils/functions'
 import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs'
 import LoginModal from '../modals/login-modal'
 import { gql, useLazyQuery } from '@apollo/client'
+import { useDispatch } from 'react-redux'
+import { modifyBookedExp } from '@/store/slices/bookingSlice'
+import { workInterface } from '@/pages/booking/[id]'
 
 const CHECKOUT = gql`
 query createCheckoutSession($price: String) {
     createCheckoutSession(price: $price)
     }`
 
-const BookingHeader: React.FC<any> = (props) => {
+type BookingType = {
+    data: workInterface | undefined,
+    handleLike: Function,
+    isLiked: boolean,
+    likeLoaded: boolean,
+}
+
+const BookingHeader: React.FC<BookingType> = (props) => {
     const { data, handleLike, isLiked, likeLoaded } = props
     const { isAuthenticated } = useKindeAuth()
+    const dispatch = useDispatch()
 
     const [loginModal, setLoginModal] = useState(false)
 
@@ -34,7 +45,7 @@ const BookingHeader: React.FC<any> = (props) => {
         setValue(newValue);
     }
 
-    const [startCheckout, { data: dataCheckout, loading, error }] = useLazyQuery(CHECKOUT, {
+    const [startCheckout] = useLazyQuery(CHECKOUT, {
         onCompleted: (queryData) => {
             let data = JSON.parse(queryData.createCheckoutSession)
             let checkoutUrl = data.url
@@ -46,6 +57,24 @@ const BookingHeader: React.FC<any> = (props) => {
             price: data?.getWorkById?.priceId
         }
     })
+
+    const bookExperience = () => {
+        if (data) {
+            const bookedExp = {
+                id: data?.getWorkById?.id,
+                title: data?.getWorkById?.title,
+                location: data?.getWorkById?.celebrity?.location,
+                date: value.startDate,
+                time: 1200,
+                price: data?.getWorkById?.price,
+                celebrity: data?.getWorkById?.celebrity?.name,
+            }
+
+            dispatch(modifyBookedExp({ bookedExp }))
+        }
+        
+        startCheckout()
+    }
 
     return (
         <section className="pt-[120px]">
@@ -93,7 +122,7 @@ const BookingHeader: React.FC<any> = (props) => {
                         <div className={`flex flex-row items-center text-xl gap-[15px] ml-[25px] 
                         ${!likeLoaded ? 'opacity-0' : 'opacity-100'} transition-all duration-300`}>
                             <button disabled={!likeLoaded}
-                                onClick={isAuthenticated ? handleLike : () => setLoginModal(true)}>
+                                onClick={isAuthenticated ? () => handleLike() : () => setLoginModal(true)}>
                                 {isLiked ?
                                     <GoHeartFill className='text-[#FB5870]' /> :
                                     <GoHeart />}
@@ -160,7 +189,7 @@ const BookingHeader: React.FC<any> = (props) => {
 
                     <button className='bg-[#FB5870] text-white font-[500] py-[12px] rounded-xl
                       hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 px-[80px]'
-                      onClick={() => startCheckout()}>
+                        onClick={bookExperience}>
                         Book Experience
                     </button>
 

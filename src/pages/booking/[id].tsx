@@ -23,6 +23,8 @@ export interface workInterface {
         duration: string
         online: boolean
         collaboration: boolean
+        priceId: string
+        productId: string
         createdAt: Date
         celebrity: {
             id: string
