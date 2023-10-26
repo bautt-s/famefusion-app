@@ -125,3 +125,24 @@ export function calculateAge(birthDate: Date) {
 
     return age;
 }
+
+export function dateToWeekday(inputDateStr: string) {
+    const inputDate = new Date(inputDateStr);
+
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const dayOfWeek = dayNames[inputDate.getDay()];
+    const month = monthNames[inputDate.getMonth()];
+    const dayOfMonth = inputDate.getDate();
+
+    const formattedDate = `${dayOfWeek}, ${month} ${dayOfMonth}`;
+
+    return formattedDate;
+}
+
+export function formatPrice(number: number) {
+    if (typeof number !== 'number') return NaN
+    
+    return number.toFixed(2);
+}

@@ -65,7 +65,7 @@ const ExperienceDetail: React.FC = () => {
     const { id } = router.query
     const dispatch = useDispatch()
 
-    const fanID = useSelector((state: RootState) => state.fan.id)
+    const fanID = useSelector((state: RootState) => state?.fan.id)
     const likedIDs = useSelector((state: RootState) => state.experiences.likedIDs)
     const loadedLikes = useSelector((state: RootState) => state.experiences.loadedExperiences)
 

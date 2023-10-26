@@ -4,7 +4,7 @@ import businessReducer from './slices/businessSlice'
 import celebrityReducer from './slices/celebritySlice'
 import likesReducer from './slices/likesSlice'
 import experiencesReducer from './slices/experiencesSlice'
-import bookingReducer from './slices/bookingSlice'
+import commonsReducer from './slices/commonsSlice'
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +13,7 @@ export const store = configureStore({
         celebrity: celebrityReducer,
         likes: likesReducer,
         experiences: experiencesReducer,
-        booking: bookingReducer
+        commons: commonsReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

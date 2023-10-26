@@ -17,6 +17,18 @@ import FanIdentity from "./fan/identity";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { modifyCelebrityData } from "@/store/slices/celebritySlice";
+import { useRouter } from "next/router";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { User, useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+
+const USER = gql`
+    query getUserByEmail($email: String) {
+        getUserByEmail(email: $email) {
+            id
+            name
+            email
+        }
+    }`
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -32,6 +44,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const CelSignup: React.FC<any> = (props) => {
     const dispatch = useDispatch()
+    const router = useRouter()
+
+    const { user }: { user: User } = useKindeAuth();
+    const { data, loading } = useQuery(USER, { variables: { email: user?.email } })
+
     const { roleState, setRoleState } = props
     const celebrityData = useSelector((state: RootState) => state.celebrity.celebrityData)
 
@@ -106,85 +123,85 @@ const CelSignup: React.FC<any> = (props) => {
 
     const handleNext = () => {
         if (userData.stage === 1 && temp.location.length > 0)
-        setUserData({ ...userData, stage: 2, location: temp.location, warning: '' })
+            setUserData({ ...userData, stage: 2, location: temp.location, warning: '' })
 
         else if (userData.stage === 2 && temp.alias.length > 0)
-        setUserData({ ...userData, stage: 3, alias: temp.alias, warning: '' })
+            setUserData({ ...userData, stage: 3, alias: temp.alias, warning: '' })
 
         else if (userData.stage === 3 && temp.summary.length > 0)
-        setUserData({ ...userData, stage: 4, summary: temp.summary, warning: '' })
+            setUserData({ ...userData, stage: 4, summary: temp.summary, warning: '' })
 
         else if (userData.stage === 4 && temp.description.length > 0)
-        setUserData({ ...userData, stage: 5, description: temp.description, warning: '' })
+            setUserData({ ...userData, stage: 5, description: temp.description, warning: '' })
 
         else if (userData.stage === 5 && temp.products.length > 0)
-        setUserData({ ...userData, stage: 6, products: temp.products, warning: '' })
+            setUserData({ ...userData, stage: 6, products: temp.products, warning: '' })
 
         else if (userData.stage === 6 && temp.categories.length >= 3 && temp.categories.length <= 6)
-        setUserData({ ...userData, stage: 7, categories: temp.categories, warning: '' })
+            setUserData({ ...userData, stage: 7, categories: temp.categories, warning: '' })
 
         else if (userData.stage === 7 && temp.birthYear.startDate)
-        setUserData({ ...userData, stage: 8, birthYear: temp.birthYear.startDate, warning: '' })
+            setUserData({ ...userData, stage: 8, birthYear: temp.birthYear.startDate, warning: '' })
 
         else if (userData.stage === 8)
-        setUserData({ ...userData, stage: 9, gender: temp.gender, warning: '' })
+            setUserData({ ...userData, stage: 9, gender: temp.gender, warning: '' })
 
         else if (userData.stage === 9 && temp.languages.length > 0)
-        setUserData({ ...userData, stage: 10, languages: temp.languages, warning: '' })
+            setUserData({ ...userData, stage: 10, languages: temp.languages, warning: '' })
 
         else if (userData.stage === 10 && temp.interests.length >= 3 && temp.interests.length <= 6)
-        setUserData({ ...userData, stage: 11, interests: temp.interests, warning: '' })
+            setUserData({ ...userData, stage: 11, interests: temp.interests, warning: '' })
 
         else if (userData.stage === 11)
-        setUserData({ ...userData, stage: 12, social: temp.social, warning: '' })
+            setUserData({ ...userData, stage: 12, social: temp.social, warning: '' })
 
         else if (userData.stage === 12)
-        setUserData({ ...userData, stage: 13, images: temp.images, warning: '' })
+            setUserData({ ...userData, stage: 13, images: temp.images, warning: '' })
 
         else if (userData.stage === 13 && temp.address.length > 0)
-        setUserData({ ...userData, stage: 14, address: temp.address, warning: '' })
+            setUserData({ ...userData, stage: 14, address: temp.address, warning: '' })
 
         else if (userData.stage === 14 && temp.identity.length > 0 && temp.selfie.length > 0)
-        setUserData({ ...userData, stage: 15, identity: temp.identity, selfie: temp.selfie, warning: '' })
-        
+            setUserData({ ...userData, stage: 15, identity: temp.identity, selfie: temp.selfie, warning: '' })
+
         // warning set list
         else if (userData.stage === 1 && temp.location.length < 1)
-        setUserData({ ...userData, warning: 'You must insert a location.' })
+            setUserData({ ...userData, warning: 'You must insert a location.' })
 
         else if (userData.stage === 2 && temp.alias.length < 1)
-        setUserData({ ...userData, warning: 'You must provide a name.' })
+            setUserData({ ...userData, warning: 'You must provide a name.' })
 
         else if (userData.stage === 3 && temp.summary.length < 1)
-        setUserData({ ...userData, warning: 'You must provide a summary.' })
+            setUserData({ ...userData, warning: 'You must provide a summary.' })
 
         else if (userData.stage === 4 && temp.description.length < 1)
-        setUserData({ ...userData, warning: 'You must provide a description.' })
+            setUserData({ ...userData, warning: 'You must provide a description.' })
 
         else if (userData.stage === 5 && temp.products.length < 1)
-        setUserData({ ...userData, warning: 'You must provide at least one project or product.' })
+            setUserData({ ...userData, warning: 'You must provide at least one project or product.' })
 
         else if (userData.stage === 6 && (temp.categories.length < 3 || temp.categories.length > 6))
-        setUserData({ ...userData, warning: 'You must provide 3 to 6 categories.' })
+            setUserData({ ...userData, warning: 'You must provide 3 to 6 categories.' })
 
         else if (userData.stage === 7 && !temp.birthYear.startDate)
-        setUserData({ ...userData, warning: 'You must provide a date.' })
+            setUserData({ ...userData, warning: 'You must provide a date.' })
 
         else if (userData.stage === 8 && temp.gender === '')
-        setUserData({ ...userData, warning: 'You must provide a gender.' })
+            setUserData({ ...userData, warning: 'You must provide a gender.' })
 
         else if (userData.stage === 9 && temp.languages.length < 1)
-        setUserData({ ...userData, warning: 'You must provide at least one language.' })
+            setUserData({ ...userData, warning: 'You must provide at least one language.' })
 
         else if (userData.stage === 10 && (temp.interests.length < 3 || temp.interests.length > 6))
-        setUserData({ ...userData, warning: 'You must provide 3 to 6 interests.' })
+            setUserData({ ...userData, warning: 'You must provide 3 to 6 interests.' })
 
         else if (userData.stage === 13 && temp.address.length === 0)
-        setUserData({ ...userData, warning: 'You must provide address verification.' })
+            setUserData({ ...userData, warning: 'You must provide address verification.' })
 
         else if (userData.stage === 14 && temp.identity.length === 0 && temp.selfie.length === 0)
-        setUserData({ ...userData, warning: 'You must provide identity verification.' })
+            setUserData({ ...userData, warning: 'You must provide identity verification.' })
     }
-    console.log(userData.gender)
+
     useEffect(() => {
         if (window) window.scrollTo(0, 0)
 
@@ -204,6 +221,7 @@ const CelSignup: React.FC<any> = (props) => {
                 interests: userData.interests,
                 media: userData.images.map((i: { dataURL: string, file: any }) => i.dataURL),
                 languages: userData.languages,
+                gender: userData.gender,
                 associatedBrands: userData.products,
                 websiteLink: userData.social.website.length > 0 ? userData.social.website : undefined,
                 instagramLink: userData.social.instagram.length > 0 ? userData.social.instagram : undefined,
@@ -220,6 +238,19 @@ const CelSignup: React.FC<any> = (props) => {
 
         else setProgress(percentage)
     }, [userData.stage])
+
+    useEffect(() => {
+        if (router.query.choosen === 'celebrity') {
+            if (!loading) {
+                dispatch(modifyCelebrityData({
+                    ...celebrityData, 
+                    name: data?.getUserByEmail?.name,
+                    email: data?.getUserByEmail?.email,
+                    userId: data?.getUserByEmail?.id 
+                }))
+            }
+        }
+    }, [user])
 
     return (
         <div className="flex flex-col pt-[140px] pb-[60px] akatab px-[40px] lg:px-[60px] xl:px-[120px] 2xl:px-[200px]">

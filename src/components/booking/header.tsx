@@ -13,26 +13,23 @@ import { capitalizeArray } from '@/utils/functions'
 import { useKindeAuth } from '@kinde-oss/kinde-auth-nextjs'
 import LoginModal from '../modals/login-modal'
 import { gql, useLazyQuery } from '@apollo/client'
-import { useDispatch } from 'react-redux'
-import { modifyBookedExp } from '@/store/slices/bookingSlice'
 import { workInterface } from '@/pages/booking/[id]'
 
 const CHECKOUT = gql`
-query createCheckoutSession($price: String) {
-    createCheckoutSession(price: $price)
-    }`
+query createCheckoutSession($checkout: CheckoutInput) {
+    createCheckoutSession(checkout: $checkout)
+}`
 
 type BookingType = {
     data: workInterface | undefined,
     handleLike: Function,
     isLiked: boolean,
     likeLoaded: boolean,
-}
+}   
 
 const BookingHeader: React.FC<BookingType> = (props) => {
     const { data, handleLike, isLiked, likeLoaded } = props
-    const { isAuthenticated } = useKindeAuth()
-    const dispatch = useDispatch()
+    const { isAuthenticated, user } = useKindeAuth()
 
     const [loginModal, setLoginModal] = useState(false)
 
@@ -46,34 +43,30 @@ const BookingHeader: React.FC<BookingType> = (props) => {
     }
 
     const [startCheckout] = useLazyQuery(CHECKOUT, {
+        variables: {
+            checkout: {
+                id: data?.getWorkById?.celebrity?.id,
+                workId: data?.getWorkById?.id,
+                price: data?.getWorkById?.priceId,
+                date: value.startDate,
+                title: data?.getWorkById?.title,
+                cel: data?.getWorkById?.celebrity?.name,
+                location: data?.getWorkById?.celebrity?.location,
+                totalPrice: data?.getWorkById?.price,
+                email: user?.email
+            }
+        },
+
         onCompleted: (queryData) => {
             let data = JSON.parse(queryData.createCheckoutSession)
             let checkoutUrl = data.url
 
             if (window) window.location.assign(checkoutUrl)
-        },
-
-        variables: {
-            price: data?.getWorkById?.priceId
         }
     })
 
-    const bookExperience = () => {
-        if (data) {
-            const bookedExp = {
-                id: data?.getWorkById?.id,
-                title: data?.getWorkById?.title,
-                location: data?.getWorkById?.celebrity?.location,
-                date: value.startDate,
-                time: 1200,
-                price: data?.getWorkById?.price,
-                celebrity: data?.getWorkById?.celebrity?.name,
-            }
-
-            dispatch(modifyBookedExp({ bookedExp }))
-        }
-        
-        startCheckout()
+    const bookExperience = async () => {
+        await startCheckout()
     }
 
     return (
@@ -186,6 +179,13 @@ const BookingHeader: React.FC<BookingType> = (props) => {
 
                         />
                     </div>
+
+                    <select disabled={value.startDate === null}
+                    className='border-[2px] border-gray-300 py-[10px] rounded-lg text-sm px-[15px] mb-[25px]'>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
 
                     <button className='bg-[#FB5870] text-white font-[500] py-[12px] rounded-xl
                       hover:bg-[#eb5269] active:bg-[#e64c63] transition-colors duration-300 px-[80px]'

@@ -6,17 +6,20 @@ import { BiMenuAltRight } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { gql, useQuery } from "@apollo/client";
-import NavSignedIn from "./nav-signed-in";
-import { useDispatch } from "react-redux";
+import FanSignedIn from "./fan-signed-in";
+import { useDispatch, useSelector } from "react-redux";
 import { modifyId } from "@/store/slices/fanSlice";
 import { addArray } from "@/store/slices/likesSlice";
 import { addArrayExp } from "@/store/slices/experiencesSlice";
 import { useRouter } from "next/router";
+import { RootState } from "@/store/store";
+import CelSignedIn from "./cel-signed-in";
 
 const NavSection: React.FC = () => {
     const router = useRouter()
     const dispatch = useDispatch()
     const { user, isAuthenticated } = useKindeAuth();
+    const loggedRole = useSelector((state: RootState) => state.commons.role) 
 
     const USER = gql`
     query getUserByEmail($email: String) {
@@ -50,6 +53,10 @@ const NavSection: React.FC = () => {
                     collaboration
                 }
             }
+
+            associatedCelebrity {
+                id
+            }
         }
     }`
 
@@ -70,6 +77,12 @@ const NavSection: React.FC = () => {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
         router.push(`/browse?search=${search}`)
+    }
+
+    const signedInMenu = () => {
+        if (loggedRole === 1) return <CelSignedIn data={data} loading={loading} />
+
+        return <FanSignedIn data={data} loading={loading} />
     }
 
     useEffect(() => {
@@ -97,16 +110,19 @@ const NavSection: React.FC = () => {
                 <ul className="hidden lg:flex flex-row lg:text-sm xl:text-base akatab font-[500] lg:gap-[15px] xl:gap-[25px] 
                 2xl:gap-[35px] mt-[5px] lg:ml-[25px] xl:ml-[40px] ml-[65px] nav-items">
                     <Link className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
-                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
-                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer" href='/browse'>Browse celebrity</Link>
+                    after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                    after:transition-transform after:ease-in-out after:duration-300 cursor-pointer" href='/browse'>Browse celebrity</Link>
 
                     <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
-                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
-                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">For business</div>
+                    after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                    after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">For business</div>
 
-                    <div className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
-                        after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
-                        after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">Join as talent</div>
+                    {!data?.getUserByEmail?.associatedCelebrity && 
+                    <Link className="relative after:absolute after:bg-[#FB5870] after:bottom-0 after:left-0 after:h-[2px] 
+                    after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 
+                    after:transition-transform after:ease-in-out after:duration-300 cursor-pointer" href='/roles?choosen=celebrity'>
+                        Join as talent
+                    </Link>}
                 </ul>
             </div>
 
@@ -138,7 +154,7 @@ const NavSection: React.FC = () => {
                         </a>
                     </div>
                     :
-                    <NavSignedIn data={data} loading={loading} />
+                    signedInMenu()
                 }
             </div>
 
@@ -163,7 +179,7 @@ const NavSection: React.FC = () => {
                         <ul className='akatab text-white text-lg text-center'>
                             <Link href='/browse'>Browse celebrity</Link>
                             <li className='mt-[20px]'>For business</li>
-                            <li className='mt-[20px]'>Join as talent</li>
+                            <Link href='/roles?choosen=celebrity' className='mt-[20px]'>Join as talent</Link>
                         </ul>
 
                         <Link href='/sign-in' className='bg-[#FB5870] text-white px-[35px] rounded-xl akatab py-[8px] font-[500] w-fit mt-[60px]'>

@@ -7,7 +7,7 @@ import { LuUpload } from "react-icons/lu";
 import { LiaPortraitSolid } from "react-icons/lia";
 
 const IdentityInfo: React.FC<any> = (props) => {
-    const { open, verifiedImages, setVerifiedImages, updateFan, tempImages, setTempImages, id } = props
+    const { open, verifiedImages, setVerifiedImages, updateFan, tempImages, setTempImages, id, celebrity } = props
 
     const [countries, setCountries] = useState<any>([]);
 
@@ -21,7 +21,15 @@ const IdentityInfo: React.FC<any> = (props) => {
 
     const handleSubmit = () => {
         updateFan({
-            variables: {
+            variables: celebrity ? 
+            {
+                celebrity: {
+                    id,
+                    selfieImg: tempImages.selfie[0].dataURL,
+                    identityImg: tempImages.identity[0].dataURL
+                }
+            } : 
+            {
                 fan: {
                     id,
                     selfieImg: tempImages.selfie[0].dataURL,

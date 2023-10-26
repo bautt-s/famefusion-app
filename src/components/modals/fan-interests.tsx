@@ -4,7 +4,7 @@ import { useState } from "react"
 import { TfiClose } from "react-icons/tfi"
 
 const FanInterests: React.FC<any> = (props) => {
-    const { tempInterests, setTempInterests, setEdit, updateFan, refetch, id } = props
+    const { tempInterests, setTempInterests, setEdit, updateFan, refetch, id, celebrity } = props
     const { selectedInterests, defaultInterests } = tempInterests
 
     const handleChange = (item: string) => {
@@ -19,12 +19,19 @@ const FanInterests: React.FC<any> = (props) => {
 
     const handleSubmit = async () => {
         updateFan({
-            variables: {
-                fan: {
-                    id,
-                    interests: selectedInterests,
+            variables: celebrity ?
+                {
+                    celebrity: {
+                        id,
+                        interests: selectedInterests,
+                    }
+                } :
+                {
+                    fan: {
+                        id,
+                        interests: selectedInterests,
+                    }
                 }
-            }
         })
 
         await refetch()
@@ -63,8 +70,8 @@ const FanInterests: React.FC<any> = (props) => {
                     <div className="flex flex-row items-center gap-x-[40px] mt-[40px]">
                         <button type='submit' className={`font-[500] border border-[#FB5870] transition-colors 
                         duration-300 px-[30px] py-[10px] rounded-xl ${arraysEqual(defaultInterests, selectedInterests) ?
-                        'bg-none text-[#dd6073] cursor-not-allowed opacity-90' :
-                        'bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white'}`} onClick={handleSubmit}>
+                                'bg-none text-[#dd6073] cursor-not-allowed opacity-90' :
+                                'bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white'}`} onClick={handleSubmit}>
                             Save Changes
                         </button>
 

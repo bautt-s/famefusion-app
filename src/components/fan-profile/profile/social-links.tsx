@@ -36,7 +36,27 @@ const SocialInfo: React.FC<any> = (props) => {
             [social]: ''
         })
 
-        handleSubmit(social)
+        updateFan({
+            variables: {
+                fan: {
+                    id: data?.getFanById?.id,
+                    [social]: ''
+                }
+            }
+        })
+
+        toast.success('Social link saved.', {
+            position: 'bottom-left',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            closeButton: false,
+            theme: "light",
+            bodyClassName: 'text-black akatab'
+        })
     }
 
     const handleSubmit = (key: string) => {
@@ -149,7 +169,7 @@ const SocialInfo: React.FC<any> = (props) => {
                 </div>
             </div>
 
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     )
 }

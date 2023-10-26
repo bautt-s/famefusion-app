@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from "next/link"
 import { defaultImg } from "@/utils/hardcode"
 
-const NavSignedIn: React.FC<any> = (props) => {
+const FanSignedIn: React.FC<any> = (props) => {
     const { data, loading } = props
     const [userTab, setUserTab] = useState(false)
 
@@ -44,7 +44,10 @@ const NavSignedIn: React.FC<any> = (props) => {
 
                         <ul className="flex flex-col items-start">
                             <Link href={`/fan/${data?.getUserByEmail?.associatedFan?.id}?section=5`}
-                                className="py-[12px] hover:underline">Settings</Link>
+                            className="py-[12px] hover:underline">Settings</Link>
+
+                            <span className="py-[12px] hover:underline">Switch to celebrity</span>
+
                             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                             <a href='/api/auth/logout' className="py-[12px] hover:underline text-[#D20505]">Log out</a>
                         </ul>
@@ -55,4 +58,4 @@ const NavSignedIn: React.FC<any> = (props) => {
     )
 }
 
-export default NavSignedIn
+export default FanSignedIn

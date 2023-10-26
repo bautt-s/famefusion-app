@@ -6,7 +6,7 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import { LuUpload } from "react-icons/lu";
 
 const AddressInfo: React.FC<any> = (props) => {
-    const { open, verifiedImages, setVerifiedImages, updateFan, tempImages, setTempImages, id } = props
+    const { open, verifiedImages, setVerifiedImages, updateFan, tempImages, setTempImages, id, celebrity } = props
 
     const [countries, setCountries] = useState<any>([]);
 
@@ -20,7 +20,14 @@ const AddressInfo: React.FC<any> = (props) => {
 
     const handleSubmit = () => {
         updateFan({
-            variables: {
+            variables: celebrity ? 
+            {
+                celebrity: {
+                    id,
+                    locationImg: tempImages.address[0].dataURL
+                }
+            } : 
+            {
                 fan: {
                     id,
                     locationImg: tempImages.address[0].dataURL

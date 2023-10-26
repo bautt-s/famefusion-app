@@ -16,6 +16,7 @@ import { modifyCelebrityData } from "@/store/slices/celebritySlice";
 import { useRouter } from "next/router";
 import Spinner from "@/components/spinner";
 import NavSection from "@/components/landing/nav";
+import { swapRole } from "@/store/slices/commonsSlice";
 
 const Roles = () => {
     const router = useRouter()
@@ -110,11 +111,23 @@ const Roles = () => {
         if (dataUser?.getUserByEmail?.associatedFan ||
             dataUser?.getUserByEmail?.associatedBusiness ||
             dataUser?.getUserByEmail?.associatedCelebrity) {
-            if (!router.query.choosen) router.push('/')
-            else setDisplaySpinner(false)
-        }
-    }, [loadingUser])
+                if (dataUser?.getUserByEmail?.associatedCelebrity && !dataUser?.getUserByEmail?.associatedFan)
+                dispatch(swapRole(1))
 
+                else if (dataUser?.getUserByEmail?.associatedFan)
+                dispatch(swapRole(0))
+
+                if (!router.query.choosen) router.push('/')
+                else setDisplaySpinner(false)
+        } else setDisplaySpinner(false)
+
+        if (router.query.choosen === 'celebrity') setRoleState({
+            ...roleState,
+            role: 'celebrity',
+            mainScreen: false
+        })
+    }, [loadingUser])
+    
     if ((!dataUser?.getUserByEmail && !createdUserData) || displaySpinner) return (
         <div className="flex w-full h-screen justify-center items-center">
             <Spinner />

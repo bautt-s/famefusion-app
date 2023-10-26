@@ -1,4 +1,3 @@
-import { getBearerToken } from "@/utils/getBearerToken";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { BsCheckLg } from "react-icons/bs"
 import { CiFacebook } from "react-icons/ci"
