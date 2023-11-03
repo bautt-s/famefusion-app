@@ -143,6 +143,22 @@ export function dateToWeekday(inputDateStr: string) {
 
 export function formatPrice(number: number) {
     if (typeof number !== 'number') return NaN
-    
+
     return number.toFixed(2);
 }
+
+export function deleteFromIndex(arr: any[], index: number) {
+    const newArr = arr
+    newArr[index] = undefined
+    return newArr
+}
+
+export function extractDataUrls(uploaded: any[]) {
+    return uploaded.map((item) => {
+      if (item !== undefined && item !== null && typeof item === 'object' && item.dataURL) {
+        return 'UPDATE-CEL-' + item.dataURL;
+      } else {
+        return item;
+      }
+    });
+  }

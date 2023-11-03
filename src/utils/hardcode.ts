@@ -47,7 +47,7 @@ export const allCategories = ['lifestyle', 'fashion', 'beauty', 'travel', 'healt
     'automotive & transportation', 'technology', 'other', 'sports', 'comedy']
 
 // genders used in celebrity signup
-export const genders = ['female', 'male', 'transgender', 'non-binary', 'other']
+export const genders = ['male', 'female', 'transgender', 'non-binary', 'other']
 
 // used to check for valid URL input
 export const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}([\/\w\.-]*)*\/?$/

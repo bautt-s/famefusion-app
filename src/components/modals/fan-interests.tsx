@@ -42,8 +42,6 @@ const FanInterests: React.FC<any> = (props) => {
         setTempInterests({ ...tempInterests, selectedInterests: defaultInterests })
     }
 
-    console.log(defaultInterests)
-    console.log(selectedInterests)
     return (
         <div className='w-screen h-screen fixed top-0 left-0 flex items-center justify-center z-[9998]'>
             <div className="w-full h-full bg-[#0000004f] absolute" onClick={() => setEdit(false)}></div>

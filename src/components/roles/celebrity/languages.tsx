@@ -51,7 +51,7 @@ const CelLanguages: React.FC<any> = (props) => {
 
             <button onClick={handleLanguage} className={`flex flex-row items-center
              gap-x-[10px] border rounded-lg pl-[15px] pr-[25px] py-[10px] mt-[25px]  
-            ${(data.products.length < 4) ? 'border-black' : 'text-gray-500 border-gray-500 cursor-no-drop'}`}>
+            ${(data.languages.length < 4) ? 'border-black' : 'text-gray-500 border-gray-500 cursor-no-drop'}`}>
                 <AiOutlinePlus className='text-xl' />
                 <span>Add language</span>
             </button>

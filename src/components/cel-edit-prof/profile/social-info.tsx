@@ -18,25 +18,25 @@ type SocialType = {
     [key: string]: string,
 }
 
-const SocialInfo: React.FC<any> = (props) => {
-    const { data, updateFan } = props
+const CelSocialInfo: React.FC<any> = (props) => {
+    const { data, updateCel } = props
 
     const [socialLinks, setSocialLinks] = useState<SocialType>({
-        websiteLink: data?.getFanById?.websiteLink || '',
-        instagramLink: data?.getFanById?.instagramLink || '',
-        tiktokLink: data?.getFanById?.tiktokLink || '',
-        youtubeLink: data?.getFanById?.youtubeLink || '',
-        twitterLink: data?.getFanById?.twitterLink || '',
-        facebookLink: data?.getFanById?.facebookLink || '',
+        websiteLink: data?.getCelebrityById?.websiteLink || '',
+        instagramLink: data?.getCelebrityById?.instagramLink || '',
+        tiktokLink: data?.getCelebrityById?.tiktokLink || '',
+        youtubeLink: data?.getCelebrityById?.youtubeLink || '',
+        twitterLink: data?.getCelebrityById?.twitterLink || '',
+        facebookLink: data?.getCelebrityById?.facebookLink || '',
     })
 
     const [prevLinks, setPrevLinks] = useState<SocialType>({
-        websiteLink: data?.getFanById?.websiteLink || '',
-        instagramLink: data?.getFanById?.instagramLink || '',
-        tiktokLink: data?.getFanById?.tiktokLink || '',
-        youtubeLink: data?.getFanById?.youtubeLink || '',
-        twitterLink: data?.getFanById?.twitterLink || '',
-        facebookLink: data?.getFanById?.facebookLink || '',
+        websiteLink: data?.getCelebrityById?.websiteLink || '',
+        instagramLink: data?.getCelebrityById?.instagramLink || '',
+        tiktokLink: data?.getCelebrityById?.tiktokLink || '',
+        youtubeLink: data?.getCelebrityById?.youtubeLink || '',
+        twitterLink: data?.getCelebrityById?.twitterLink || '',
+        facebookLink: data?.getCelebrityById?.facebookLink || '',
     })
 
     const handleReset = (social: string) => {
@@ -45,10 +45,10 @@ const SocialInfo: React.FC<any> = (props) => {
             [social]: ''
         })
 
-        updateFan({
+        updateCel({
             variables: {
-                fan: {
-                    id: data?.getFanById?.id,
+                celebrity: {
+                    id: data?.getCelebrityById?.id,
                     [social]: ''
                 }
             }
@@ -76,10 +76,10 @@ const SocialInfo: React.FC<any> = (props) => {
     const handleSubmit = (key: string) => {
         if (socialLinks[key] !== prevLinks[key]) {
             if (urlRegex.test(socialLinks[key]) || socialLinks[key].length === 0) {
-                updateFan({
+                updateCel({
                     variables: {
-                        fan: {
-                            id: data?.getFanById?.id,
+                        celebrity: {
+                            id: data?.getCelebrityById?.id,
                             [key]: socialLinks[key]
                         }
                     }
@@ -114,7 +114,7 @@ const SocialInfo: React.FC<any> = (props) => {
     }
 
     return (
-        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]" id='social'>
+        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl mt-[40px]" id='social-media'>
             <h1 className="text-2xl font-[600] mb-[25px]">Social Media</h1>
 
             <div className="grid grid-rows-3 grid-flow-col mt-[10px] gap-y-[15px] gap-x-[80px] w-fit pb-5">
@@ -190,4 +190,4 @@ const SocialInfo: React.FC<any> = (props) => {
     )
 }
 
-export default SocialInfo
+export default CelSocialInfo

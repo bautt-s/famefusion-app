@@ -153,7 +153,8 @@ const BasicInfo: React.FC<any> = (props) => {
                         <button type='submit' className={`font-[500] border border-[#FB5870] transition-colors 
                         duration-300 px-[30px] py-[10px] rounded-xl ${compareObjects(defaultValues, basicInfo) ?
                                 'bg-none text-[#dd6073] cursor-not-allowed opacity-90' :
-                                'bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white'}`}>
+                                'bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white'}`}
+                                disabled={compareObjects(defaultValues, basicInfo)}>
                             Save Changes
                         </button>
 

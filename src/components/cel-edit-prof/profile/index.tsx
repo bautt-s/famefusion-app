@@ -3,12 +3,16 @@ import CelBasicInfo from "./basic"
 import Link from "next/link"
 import CelInterestsInfo from "./interests"
 import CelVerificationInfo from "./verification"
+import CelSocialInfo from "./social-info"
+import CelPersonalInfo from "./personal-info"
+import CelProfessionalInfo from "./professional-info"
+import CelImages from "./images"
 
 const parts = ['Basic Information', 'Images', 'Personal Info', 'Interests',
-    'About', 'Professional Info', 'Verification', 'Social Media']
+    'Professional Info', 'Verification', 'Social Media']
 
 const ProfileCelebritySection: React.FC<any> = (props) => {
-    const { data, updateCel, updateUser, refetch } = props
+    const { data, updateCel, updateUser, refetch, updateCelData } = props
     const [selectedPart, setSelectedPart] = useState(parts[0])
 
     const handleScroll = (key: string) => {
@@ -21,7 +25,10 @@ const ProfileCelebritySection: React.FC<any> = (props) => {
         else if (key === 'Professional Info') id = 'professional-info'
         else if (key === 'Social Media') id = 'social-media'
 
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" })
+        if (key === 'Images' || key === 'Professional Info') 
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+
+        else document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" })
     }
 
     return (
@@ -44,11 +51,19 @@ const ProfileCelebritySection: React.FC<any> = (props) => {
 
             <div className="w-full">
                 <CelBasicInfo data={data} updateCel={updateCel}
-                    updateUser={updateUser} refetch={refetch} />
+                updateUser={updateUser} refetch={refetch} />
+
+                <CelImages data={data} updateCel={updateCel} refetch={refetch} updateCelData={updateCelData} />
+
+                <CelPersonalInfo data={data} updateCel={updateCel} />
 
                 <CelInterestsInfo data={data} updateCel={updateCel} refetch={refetch} />
 
+                <CelProfessionalInfo data={data} updateCel={updateCel} refetch={refetch} />
+
                 <CelVerificationInfo data={data} updateCel={updateCel} />
+
+                <CelSocialInfo data={data} updateCel={updateCel} />
             </div>
         </div>
     )

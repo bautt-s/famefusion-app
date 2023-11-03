@@ -19,7 +19,11 @@ query getCelebrityById($id: String) {
         email
         location
         birthYear
-        interests
+        description
+        biography
+        media
+        categories
+        associatedBrands
         identityVerified
         locationVerified
         locationImg
@@ -27,6 +31,8 @@ query getCelebrityById($id: String) {
         selfieImg
         selfieVerified
         userId
+        gender
+        languages
         websiteLink
         instagramLink
         facebookLink
@@ -42,7 +48,7 @@ query getCelebrityById($id: String) {
 const UPDATE_CEL = gql`
     mutation updateCelebrity($celebrity: CelebrityInput) {
         updateCelebrity(celebrity: $celebrity) {
-            id
+            media
         }
     }`
 
@@ -64,7 +70,7 @@ const CelProfile: React.FC = () => {
 
     const [selectedSection, setSelectedSection] = useState(sections[0])
 
-    const [updateCel] = useMutation(UPDATE_CEL);
+    const [updateCel, { data: updateCelData }] = useMutation(UPDATE_CEL);
     const [updateUser] = useMutation(UPDATE_USER);
 
     useEffect(() => {
@@ -74,8 +80,8 @@ const CelProfile: React.FC = () => {
     useEffect(() => {
         if (id) getCel()
     }, [id])
-    
-    if (loading) return (
+
+    if (loading || !data) return (
         <div className="flex w-full h-screen justify-center items-center">
             <Head>
                 <title>FameFusion | Loading...</title>
@@ -123,7 +129,7 @@ const CelProfile: React.FC = () => {
 
                 {selectedSection === 'Profile' &&
                     <ProfileCelebritySection data={data} updateCel={updateCel}
-                        updateUser={updateUser} refetch={refetch} />}
+                        updateUser={updateUser} refetch={refetch} updateCelData={updateCelData} />}
             </div>
 
             <FooterSection />

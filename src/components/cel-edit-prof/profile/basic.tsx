@@ -68,7 +68,7 @@ const CelBasicInfo: React.FC<any> = (props) => {
     }
 
     return (
-        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='basic'>
+        <div className="flex flex-col py-[30px] px-[60px] shadow-[0px_0px_9px_3px_rgba(0,0,0,0.1)] rounded-2xl" id='basic-info'>
             <h1 className="text-2xl font-[600]">Basic Information</h1>
 
             <div className="flex flex-row mt-[25px] gap-x-[60px]">
@@ -153,7 +153,8 @@ const CelBasicInfo: React.FC<any> = (props) => {
                         <button type='submit' className={`font-[500] border border-[#FB5870] transition-colors 
                         duration-300 px-[30px] py-[10px] rounded-xl ${compareObjects(defaultValues, basicInfo) ?
                                 'bg-none text-[#dd6073] cursor-not-allowed opacity-90' :
-                                'bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white'}`}>
+                                'bg-[#FB5870] hover:bg-[#eb5269] active:bg-[#e64c63] text-white'}`}
+                                disabled={compareObjects(defaultValues, basicInfo)}>
                             Save Changes
                         </button>
 
