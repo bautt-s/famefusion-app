@@ -7,6 +7,9 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useSearchParams } from 'next/navigation'
 import ProfileCelebritySection from "@/components/cel-edit-prof/profile"
+import SettingsCelebritySection from "@/components/cel-edit-prof/cel-settings"
+import PayoutCelebritySection from "@/components/cel-edit-prof/cel-payout"
+import ExperiencesCelebritySection from "@/components/cel-edit-prof/cel-experiences"
 
 const sections = ['Profile', 'My Activity', 'Messages',
     'Experiences', 'Prices & Payouts', 'Settings']
@@ -41,6 +44,15 @@ query getCelebrityById($id: String) {
         twitterLink
         associatedUser {
             profilePic
+        }
+        workList {
+            id
+            title
+            type
+            price
+            description
+            duration
+            collaboration
         }
     }
 }`
@@ -130,6 +142,15 @@ const CelProfile: React.FC = () => {
                 {selectedSection === 'Profile' &&
                     <ProfileCelebritySection data={data} updateCel={updateCel}
                         updateUser={updateUser} refetch={refetch} updateCelData={updateCelData} />}
+
+                {selectedSection === 'Experiences' &&
+                    <ExperiencesCelebritySection data={data} />}
+
+                {selectedSection === 'Prices & Payouts' &&
+                    <PayoutCelebritySection />}
+
+                {selectedSection === 'Settings' &&
+                    <SettingsCelebritySection />}
             </div>
 
             <FooterSection />

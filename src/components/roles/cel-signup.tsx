@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { modifyCelebrityData } from "@/store/slices/celebritySlice";
 import { useRouter } from "next/router";
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { User, useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
 const USER = gql`

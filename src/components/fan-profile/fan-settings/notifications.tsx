@@ -61,7 +61,7 @@ const SettingsNotifications: React.FC = () => {
 
             <div className="flex flex-col gap-y-[10px]">
                 <div className="flex flex-row items-center">
-                    <span className="">Announcements</span>
+                    <span>Announcements</span>
 
                     <div className='ml-auto'>
                         <FormControlLabel
@@ -72,7 +72,7 @@ const SettingsNotifications: React.FC = () => {
                 </div>
 
                 <div className="flex flex-row items-center">
-                    <span className="">FameFusion Newsletter</span>
+                    <span>FameFusion Newsletter</span>
 
                     <div className='ml-auto'>
                         <FormControlLabel
